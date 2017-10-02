@@ -1,0 +1,21 @@
+<nav class="navbar navbar-light bg-light">
+    <span class="share navbar-brand">
+        Share this:
+        {% capture absolute_url %}{{ site.url }}{{page.url | remove: 'index.html' | replace: '.html', '' }}?utm_source%3Dsocialshare%26utm_medium%3D{% endcapture %}
+        <a class="btn btn-sm btn-light" href="https://twitter.com/intent/tweet?text={{page.title | urlencode}}%20{{ absolute_url | urlencode }}twitter" target="_blank" title="Share this article on Twitter">
+            <em class="fa fa-twitter">
+                <span class="sr-only">Share on Twitter</span>
+            </em>
+        </a>
+        <a class="btn btn-sm btn-light" href="https://www.linkedin.com/shareArticle?mini=true&url={{ absolute_url | urlencode }}linked&amp;title={{ page.title | urlencode }}&amp;summary={{ page.summary | urlencode }}&amp;source=DanKlco.com" target="_blank" title="Share this article on LinkedIn">
+            <em class="fa fa-linkedin">
+                <span class="sr-only">Share on LinkedIn</span>
+            </em>
+        </a>
+        <a class="btn btn-sm btn-light" href="mailto:?subject={{ page.title | urlencode }}&amp;body=Link:%20:%20{{ absolute_url | urlencode }}email" target="_blank" title="Share this article via Email">
+            <em class="fa fa-envelope">
+                <span class="sr-only">Share via Email</span>
+            </em>
+        </a>
+    </span>
+</nav>

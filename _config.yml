@@ -21,14 +21,14 @@ social:
   facebook: AdobeCommunity
 
 # Build settings
-markdown: kramdown
+future: true
 
 collections:
+    articles:
+        output: true
+        permalink: /learn/:collection/:name
     contentblocks:
         output: false
     events:
-        layout: event
         output: true
-    heros:
-        output: false
-        layout: hero
+        permalink: /events/:name

@@ -17,6 +17,36 @@
          "name":"description",
          "type":"textarea",
          "label":"Description"
+      },
+      {
+         "name":"header",
+         "label":"Hero Header",
+         "type":"text",
+         "required":true
+      },
+      {
+         "name":"lead",
+         "type":"textarea",
+         "label":"Hero Lead",
+         "required":true
+      },
+      {
+         "name":"background_image",
+         "type":"pathfield",
+         "label":"Hero Background Image",
+         "required":true
+      },
+      {
+         "name":"cta",
+         "type":"text",
+         "label":"Hero CTA",
+         "required":true
+      },
+      {
+         "name":"link",
+         "type":"pathfield",
+         "label":"Hero CTA Link",
+         "required":true
       }
    ],
    "rte": {
