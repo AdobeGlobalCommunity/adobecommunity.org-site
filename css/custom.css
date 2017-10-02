@@ -13,6 +13,12 @@ body {
     background-position: center;
 }
 
+.background--opaque {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
 .background--dark {
     background-color: #241F20;
 }
@@ -48,11 +54,42 @@ body {
     border: 1px solid #9F0000;
 }
 
+.community-posts {
+    height:300px;
+    overflow:auto;
+}
+
 .container {
     background-color: #fff;
 }
+
 .contentblock {
     min-height: 250px;
+}
+
+.header-row {
+    position:sticky;
+    top: 0;
+    z-index: 1000;
+}
+.header-row img {
+    height: 56px;
+    float: left;
+}
+
+.header-row nav {
+    padding-left: 2em;
+}
+
+.header-row * {
+    padding-left:0;
+    padding-right:0;
+}
+
+.home-content {
+    color: #fff;
+    height: 300px;
+    padding-top: 4em;
 }
 
 .jumbotron {
@@ -67,18 +104,8 @@ body {
     padding-bottom: 2em;
 }
 
-.header-row img {
-    height: 56px;
-    float: left;
-}
-
-.header-row nav {
-    padding-left: 2em;
-}
-
-.header-row * {
-    padding-left:0;
-    padding-right:0;
+.primary-footer a {
+    color:white;
 }
 
 .separator {

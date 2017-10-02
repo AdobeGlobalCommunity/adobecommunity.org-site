@@ -2,9 +2,9 @@
 layout: default
 ---
 
-<div class="container">
-    <div class="row">
-        <div class="col-12 background--img" style="background-image: url({{page.background_image}})">
+<div class="row">
+    <div class="col-12 background--img" style="background-image: url({{page.background_image}})">
+        <div class="background--opaque">
             <div class="jumbotron">    
                 <h1 class="display-3">{{page.header}}</h1>
                 <p class="lead">
@@ -18,14 +18,19 @@ layout: default
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8">
-            {% for event in site.events limit:3 %}
+</div>
+<div class="row separator background--dark"></div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            {% for event in site.events limit:2 %}
                 {% include event-summary.html %} 
             {% endfor %}
         </div>
-        <div class="col-md-4 my-4">
-            <h3>Latest Community Posts</h3>
+    </div>
+    <div class="col-md-4 community-posts">
+        <div class="my-4">
+            <h3>Community Posts</h3>
             <hr class="my-2" />
             {% assign articles = site.articles | reverse %}
             {% for article in articles limit:3 %}
@@ -33,13 +38,13 @@ layout: default
             {% endfor %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-9">
-        </div>
-        <div class="col-md-3 background--img text-center" style="background-image: url(/images/about-img.png)">
-            <a href="/about.html" class="align-bottom btn btn-primary">
-                Learn More About Us
-            </a>
-        </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-4 home-content background--img text-center" style="background-image: url(/images/about-img.png)">
+        <a href="/about.html" class="align-bottom btn btn-primary">
+            Learn More About Us
+        </a>
     </div>
 </div>

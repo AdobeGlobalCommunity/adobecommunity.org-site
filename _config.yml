@@ -20,8 +20,9 @@ social:
   twitter: AdobeCommunity
   facebook: AdobeCommunity
 
-# Build settings
 future: true
+
+time_format: '%b %d, %Y at %I:%M %p'
 
 collections:
     articles:

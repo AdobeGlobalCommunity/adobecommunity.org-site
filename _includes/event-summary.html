@@ -1,0 +1,14 @@
+<div class="col-sm-6 background--img" style="background-image: url({{event.image}})">
+    <div class="background--opaque text-center home-content">
+        <h4>
+            {{event.title}}
+        </h4>
+        <div>
+            <span class="fa fa-time"></span> 
+            {{ event.date | date: site.time_format }}
+        </div>
+        <div class="lead my-4">
+            <a class="btn btn-primary" href="{{event.url}}">More Info</a>
+        </div>
+    </div>
+</div>
