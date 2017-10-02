@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+{% capture page_path %}/{{page.path}}{% endcapture %}
+{% for hero in site.heros %}
+    {% if hero.page == page_path %}
+        {% include hero.html %}
+    {% endif %}
+{% endfor %}
+{% for cb in site.contentblocks %}
+    {% if cb.page == page_path %}
+        {% include contentblock.html %}
+    {% endif %}
+{% endfor %}
+{{content}}

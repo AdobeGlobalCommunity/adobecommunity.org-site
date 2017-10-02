@@ -1,0 +1,27 @@
+{% if cb.content == 'right' %}
+    <div class="col-md-6 background--img" style="background-image: url({{cb.background_image}})"></div>
+    <div class="col-md-6 content text-center">
+        <h4>{{cb.header}}</h4>
+        <p class="lead">
+            {{cb.lead}}
+        </p>
+        <p class="lead">
+            <a class="btn btn-primary" href="{{cb.link}}" role="button">
+                {{cb.cta}}
+            </a>
+        </p>
+    </div>
+{% else %}
+    <div class="col-md-6 content text-center">
+        <h4>{{cb.header}}</h4>
+        <p class="lead">
+            {{cb.lead}}
+        </p>
+        <p class="lead">
+            <a class="btn btn-primary" href="{{cb.link}}" role="button">
+                {{cb.cta}}
+            </a>
+        </p>
+    </div>
+    <div class="col-md-6 background--img" style="background-image: url({{cb.background_image}})"></div>
+{% endif %}

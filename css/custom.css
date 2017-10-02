@@ -1,0 +1,52 @@
+body {
+    color: #1c1618;
+}
+
+.background--img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.background--dark {
+    background-color: #241F20;
+}
+
+.background--grey {
+    background-color: #D9DADC;
+}
+
+.background--red {
+    background-color: #D2232A;
+}
+
+.background--tan {
+    background-color: #F1F1F2;
+}
+
+.contentblock {
+    min-height: 250px;
+}
+
+.jumbotron {
+    margin-bottom: 0;
+    color: #fff;
+}
+
+.leftright .content {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.header-row {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-row * {
+    padding-left:0;
+    padding-right:0;
+}
+

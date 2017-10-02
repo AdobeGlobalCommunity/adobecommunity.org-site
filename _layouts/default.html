@@ -1,0 +1,73 @@
+{% capture absolute_url %}{{ site.url }}{{page.url | remove: 'index.html' | replace: ' ', '%20' }}{% endcapture %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
+		<link rel="stylesheet" href="/css/custom.css" />
+		<title>{{page.title}} | {{site.title}}</title>
+		{% if page.tags %}<meta content="{{page.tags | join: ', '}}" name="keywords" />{% endif %}
+		{% if page.description %}
+			<meta content="{{ page.description | strip_html | truncatewords: 50 }}" name="description" />
+			<meta name="twitter:description" content="{{ page.description | strip_html | truncatewords: 50  }}" />
+		{% else %}
+			<meta content="{{ content | strip_html | truncatewords: 50 }}" name="description" />
+			<meta name="twitter:description" content="{{ content | strip_html | truncatewords: 50  }}" /> 
+		{% endif %}
+		{% if page.author %}
+		  <meta content="{{ page.author }}" name="author" />
+		{% endif %}
+		<link rel="dns-prefetch" href="//ssl.google-analytics.com" />
+		<link rel="dns-prefetch" href="//twitter.com" />
+		<link rel="dns-prefetch" href="//platform.twitter.com" />
+		<link rel="dns-prefetch" href="//syndication.twitter.com" />
+		<link rel="dns-prefetch" href="//pbs.twimg.com" />
+		<meta name="theme-color" content="#f4f4f4" />
+		<meta property="og:site_name" content="{{site.name}}"/>
+		<meta property="og:type" content="blog"/>
+		<meta property="og:title" content="{{title}}"/>
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content="{{title}}" />
+		{% if page.thumbnail %}
+			<meta property="og:image" content="{{ site.url }}{{ page.thumbnail }}"/>
+			<meta name="twitter:image" content="{{ site.url }}{{ page.thumbnail }}"/>
+		{% else %}
+			<meta property="og:image" content="{{ site.url }}/images/logo.png"/>
+			<meta name="twitter:image" content="{{ site.url }}/images/logo.png"/>
+		{% endif %}
+		{% if page.exclude_sitemap == true %}
+			<meta property="robots" content="noindex nofollow"/>
+		{% endif %}
+		<meta property="og:url" content="{{absolute_url}}"/>
+		<link rel="canonical" href="{{ absolute_url }}" />
+		<meta name="twitter:url" content="{{ absolute_url }}" />
+		<link rel="shortcut icon" href="{{ site.url }}/favicon.ico" />
+		<link rel="alternate" type="application/rss+xml" href="{{ site.url }}/rss.xml" title="{{site.name}} RSS Feed" />
+	</head>
+	<body>
+        <div class="row header-row">
+            <div class="col-3">
+                <a href="/">
+                    <img src="/images/logo.png" class="img-fluid" alt="Adobe Global Community" />
+                </a>
+            </div>
+            <div class="col-9">
+                <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#topnav" aria-controls="topnav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+		{{content}}
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	</body>
+</html>

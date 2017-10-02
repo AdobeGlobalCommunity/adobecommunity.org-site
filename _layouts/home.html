@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+{% capture page_path %}/{{page.path}}{% endcapture %}
+{% for hero in site.heros %}
+    {% if hero.page == page_path %}
+        {% include hero.html %}
+    {% endif %}
+{% endfor %}
+<div class="row">
+    <div class="col-md-9">
+    </div>
+    <div class="col-md-3">
+        <h3>Latest Community Posts</h3>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-9">
+    </div>
+    <div class="col-md-3 background--img text-center" style="background-image: url(/images/about-img.png)">
+        <a href="/about.html" class="align-bottom btn btn-primary">
+            Learn More About Us
+        </a>
+    </div>
+</div>
