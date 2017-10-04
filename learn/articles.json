@@ -1,0 +1,17 @@
+---
+---
+
+[
+    {% for article in site.articles %}
+        {
+            "author": {{article.author | json2}},
+            "date": "{{ article.date | date_to_string }}",
+            "original": {{ article.original | json2 }},
+            "summary": {{ article.content | strip_html | truncatewords: 150 | json2 }},
+            "tags": [{% for tag in article.tags %}{{ tag | json2 }}{%unless forloop.last %}, {%endunless%}{%endfor%}],
+            "thumbnail": "{{ article.thumbnail }}",
+            "title": {{article.title | json2 }},
+            "url": "{{article.url}}"
+        }{% unless forloop.last%},{%endunless%}
+    {% endfor %}
+] 

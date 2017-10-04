@@ -27,9 +27,9 @@ time_format: '%b %d, %Y at %I:%M %p'
 collections:
     articles:
         output: true
-        permalink: /learn/:collection/:name
+        permalink: /learn/:collection/:name.html
     contentblocks:
         output: false
     events:
         output: true
-        permalink: /events/:name
+        permalink: /events/:name.html
