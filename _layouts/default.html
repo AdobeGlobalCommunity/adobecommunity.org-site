@@ -24,6 +24,9 @@
 		<link rel="dns-prefetch" href="//platform.twitter.com" />
 		<link rel="dns-prefetch" href="//syndication.twitter.com" />
 		<link rel="dns-prefetch" href="//pbs.twimg.com" />
+        <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
 		<meta name="theme-color" content="#f4f4f4" />
 		<meta property="og:site_name" content="{{site.name}}"/>
 		<meta property="og:type" content="blog"/>
@@ -43,16 +46,15 @@
 		<meta property="og:url" content="{{absolute_url}}"/>
 		<link rel="canonical" href="{{ absolute_url }}" />
 		<meta name="twitter:url" content="{{ absolute_url }}" />
-		<link rel="shortcut icon" href="{{ site.url }}/favicon.ico" />
 		<link rel="alternate" type="application/rss+xml" href="{{ site.url }}/rss.xml" title="{{site.name}} RSS Feed" />
 	</head>
-	<body>
+	<body data-path="{{page.path}}">
         <div class="header-row">
             <a href="/">
                 <img src="/images/logo.png" class="img-fluid" alt="Adobe Global Community" />
             </a>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand hidden-md-up" href="/">Adobe Global Community</a>
+                <a class="navbar-brand d-lg-none" href="/">&nbsp;</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topnav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -61,7 +63,7 @@
                 </div>
             </nav>
         </div>
-        <div class="container">
+        <div class="container {% if page.path == 'index.html' %}background--none{% endif %}">
             {{content}}
             <footer class="background--dark primary-footer row">
                 <ul class="nav">

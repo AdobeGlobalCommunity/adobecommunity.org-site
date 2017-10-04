@@ -1,0 +1,35 @@
+{
+   "title":"Content Page",
+   "description":"The following fields will be used to update a content page",
+   "fields":[
+      {
+         "name":"title",
+         "label":"Title",
+         "type":"text",
+         "required":true
+      },
+      {
+         "name":"tags",
+         "type":"repeating",
+         "label":"Keywords"
+      },
+      {
+         "name":"description",
+         "type":"textarea",
+         "label":"Description"
+      },
+      {
+         "name":"leftnav",
+         "type":"select",
+         "label":"Left Navigation",
+          "options": [
+              "nav-learn.html",
+              "nav-events.html",
+              "nav-about.html"
+          ]
+      }
+   ],
+   "rte": {
+      "document_base_url":"https://www.adobecommunity.org/"
+   }
+}

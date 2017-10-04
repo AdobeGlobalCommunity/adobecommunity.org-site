@@ -1,41 +1,38 @@
 ---
-layout: default
-base: /events/
+layout: content-page
 ---
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/events.html">Events</a></li>
-                <li class="breadcrumb-item active">{{page.title}}</li>
-            </ol>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="well">
-                        <img class="img-responsive img-thumbnail center-block" src="{{page.image}}" alt="{{page.title}}" />
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <h2>{{page.title}}</h2>
-                    {%include share.html %}
-                    <h4>Presenter</h4>
-                    {{page.presenter}}
+<div class="row">
+    <div class="col-12">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/events.html">Events</a></li>
+            <li class="breadcrumb-item active">{{page.title}}</li>
+        </ol>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="well">
+                    <img class="img-responsive img-thumbnail center-block" src="{{page.image}}" alt="{{page.title}}" />
                 </div>
             </div>
-            <div class="row separator background--dark my-4"></div>
-            <div class="row">
-                <div class="col-12">
-                    <h4>Date / Time</h4>
-                    <span class="fa fa-time"></span> 
-                    {{ page.date | date: site.time_format }}
-                    <h4>Description</h4>
-                    {{content}}
-                </div>
+            <div class="col-sm-8">
+                <h2>{{page.title}}</h2>
+                {%include share.html %}
+                <h4>Presenter</h4>
+                {{page.presenter}}
             </div>
-            <br/>
-            {% include comments.html %}
         </div>
+        <div class="row separator background--dark my-4"></div>
+        <div class="row">
+            <div class="col-12">
+                <h4>Date / Time</h4>
+                <span class="fa fa-time"></span> 
+                {{ page.date | date: site.time_format }}
+                <h4>Description</h4>
+                {{content}}
+            </div>
+        </div>
+        <br/>
+        {% include comments.html %}
     </div>
 </div>

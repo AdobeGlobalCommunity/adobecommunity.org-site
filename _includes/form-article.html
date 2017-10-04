@@ -1,0 +1,63 @@
+<form class="github-form my-4" action="#" method="get" data-analytics-id="Add Article">
+    <input name="path" type="hidden" value="_articles/" />
+    <fieldset>
+        <legend>Article Information</legend>
+        <div class="form-group">
+            <label for="title">Title <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" required="required" name="title" />
+        </div>
+        <div class="form-group">
+            <label for="content">Summary <span class="text-danger">*</span></label>
+            <textarea class="form-control" name="content"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="original">Link <span class="text-danger">*</span></label>
+            <input type="url" class="form-control" required="required" name="link" placeholder="http://" />
+        </div>
+        <div class="form-group">
+            <label for="thumbnail">Thumbnail <span class="text-danger">*</span></label>
+            <input type="url" class="form-control" required="required" name="thumbnail" placeholder="http://" />
+        </div>
+        <div class="form-group repeating-parent" data-name="links">
+            <fieldset class="d-none" disabled="disabled">
+                <div class="repeating-item repeating-template">
+                    <div class="input-group my-1">
+                        <input type="text" required="required" class="form-control" name="tags" list="tag-options" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary repeating-remove">-</button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+            <label for="tags">Tags</label>
+            <div class="repeating-container">
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="#" class="btn btn-secondary repeating-add">+</a> 
+                </div>
+            </div>
+            <datalist id="tag-options">
+            </datalist>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Your Information</legend>
+        <div class="form-group">
+            <label for="author">Your Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" required="required" name="author" />
+        </div>
+        <div class="form-group">
+            <label for="authorName">Your Email <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" required="required" name="authorEmail" />
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="form-group">
+            <input type="hidden" name="created" />
+            <input type="hidden" name="layout" value="event" />
+            <button class="btn btn-success"><span class="fa fa-plus-circle"></span> Add Article</button>
+            <a href="/learn/articles.html" class="btn btn-default">Cancel</a>
+        </div>
+    </fieldset>
+</form>

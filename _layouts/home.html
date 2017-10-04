@@ -22,13 +22,11 @@ layout: default
 <div class="row separator background--dark"></div>
 <div class="row">
     <div class="col-md-8">
-        <div class="row">
-            {% for event in site.events limit:2 %}
-                {% include event-summary.html %} 
-            {% endfor %}
-        </div>
+        {% for event in site.events limit:2 %}
+            {% include event-summary.html %} 
+        {% endfor %}
     </div>
-    <div class="col-md-4 community-posts">
+    <div class="col-md-4 my-2 community-posts background--white">
         <div class="my-4">
             <h3>Community Posts</h3>
             <hr class="my-2" />

@@ -1,2 +1,27 @@
 ---
 ---
+
+{% assign tags =  site.events | map: 'tags' | join: '  ' %}
+{% capture tags %}{{tags}}  {{ site.articles | map: 'tags' | join: '  ' }}{% endcapture %}
+{% assign tags =  tags | strip | split: '  ' | uniq %}
+[
+    {% for tag in tags %}
+        {
+            {% assign tag_pages = '' %}
+            "name": {{tag | json2 }},
+            {% for event in site.events %}
+                {% if event.tags contains tag %}
+                    {%capture tag_pages %}{{tag_pages}}  {{event.url}}{% endcapture %}
+                {% endif %}
+            {% endfor %}
+            {% for article in site.articles %}
+                {% if article.tags contains tag %}
+                    {%capture tag_pages %}{{tag_pages}}  {{article.url}}{% endcapture %}
+                {% endif %}
+            {% endfor %}
+            {% assign tag_pages = tag_pages | strip | split: '  ' %}
+            "count": {{ tag_pages | size }},
+            "urls": {{ tag_pages | json2 }}
+        }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+]

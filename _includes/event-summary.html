@@ -1,14 +1,22 @@
-<div class="col-sm-6 background--img" style="background-image: url({{event.image}})">
-    <div class="background--opaque text-center home-content">
-        <h4>
-            {{event.title}}
-        </h4>
+<div class="event-summary row my-2 mr-md-0 mr-lg-0 mr-xl-0">
+    <div class="col-sm-6 background--img" style="background-image: url({{event.image}})">
+    </div>
+    <div class="col-sm-6 background--white">
         <div>
-            <span class="fa fa-time"></span> 
-            {{ event.date | date: site.time_format }}
-        </div>
-        <div class="lead my-4">
-            <a class="btn btn-primary" href="{{event.url}}">More Info</a>
+            <div class="my-2">
+                <div class="lead">
+                    <a href="{{event.url}}">
+                        {{event.title}}
+                    </a>
+                </div>
+                <div>
+                    {{ event.date | date: site.time_format }}
+                </div>
+            </div>
+            <div class="text-small">
+                {{ event.content | strip_html | truncatewords: 20 }}
+                <a href="{{event.url}}">More</a>
+            </div>
         </div>
     </div>
 </div>
