@@ -24,6 +24,14 @@ future: true
 
 time_format: '%b %d, %Y at %I:%M %p'
 
+defaults:
+  -
+    scope:
+      path: ""
+      type: articles
+    values:
+      leftnav: nav-learn.html
+
 collections:
     articles:
         output: true
