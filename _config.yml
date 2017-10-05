@@ -30,7 +30,7 @@ defaults:
       path: ""
       type: articles
     values:
-      leftnav: nav-learn.html
+      leftnav: learn
 
 collections:
     articles:

@@ -2,23 +2,8 @@
 layout: default
 ---
 
-<div class="row">
-    <div class="col-12 background--img" style="background-image: url({{page.background_image}})">
-        <div class="background--opaque">
-            <div class="jumbotron">    
-                <h1 class="display-3">{{page.header}}</h1>
-                <p class="lead">
-                    {{page.lead}}
-                </p>
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="{{page.link}}" role="button">
-                        {{page.cta}}
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+
+{% include contentblocks/hero.html %}
 <div class="row separator background--dark"></div>
 <div class="row">
     <div class="col-md-8">

@@ -18,6 +18,7 @@
          "type":"select",
          "label":"Background",
           "options": [
+              "background--none",
               "background--white",
               "background--dark",
               "background--grey",

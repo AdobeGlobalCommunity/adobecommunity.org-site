@@ -6,7 +6,7 @@ layout: default
     {% if page.leftnav %}
         <div class="row">
             <div class="col-md-3">
-                {% include {{page.leftnav}} %}
+                {% include leftnavs/{{page.leftnav}}.html %}
             </div>
             <section class="col-md-9">
                 {{ content }}

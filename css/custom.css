@@ -104,19 +104,8 @@ body {
     border-radius: 0;
 }
 
-.leftright .content {
-    padding-top: 2em;
-    padding-bottom: 2em;
-}
-
-#topnav .nav-link:after {
-    content: '|';
-    padding-left: .5rem;
-}
-
-#topnav li:last-child .nav-link:after
-{
-  content: '';
+.leftright--image {
+    min-height:200px;
 }
 
 .padded-content {
@@ -129,4 +118,20 @@ body {
 
 .separator {
     height: 1em;
+}
+
+#topnav .nav-link:after {
+    content: '|';
+    padding-left: .5rem;
+}
+
+#topnav li:last-child .nav-link:after
+{
+  content: '';
+}
+
+@media screen and (max-width: 990px) {
+    #topnav .nav-link:after {
+        content: '';
+    }
 }

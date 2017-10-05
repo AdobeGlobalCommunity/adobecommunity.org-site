@@ -9,7 +9,7 @@
             "original": {{ article.original | json2 }},
             "summary": {{ article.content | strip_html | truncatewords: 150 | json2 }},
             "tags": [{% for tag in article.tags %}{{ tag | json2 }}{%unless forloop.last %}, {%endunless%}{%endfor%}],
-            "thumbnail": "{{ article.thumbnail }}",
+            "image": {{ article.image | json2 }},
             "title": {{article.title | json2 }},
             "url": "{{article.url}}"
         }{% unless forloop.last%},{%endunless%}
