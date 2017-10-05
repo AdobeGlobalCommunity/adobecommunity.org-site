@@ -37,18 +37,9 @@ layout: default
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-8">
-    </div>
-    <div class="col-md-4 home-content background--img text-center" style="background-image: url(/images/about-img.png)">
-        <a href="/about.html" class="align-bottom btn btn-primary">
-            Learn More About Us
-        </a>
-    </div>
-</div>
 {% capture page_path %}/{{page.path}}{% endcapture %}
 {% for cb in site.contentblocks %}
     {% if cb.page == page_path %}
-        {% include contentblock.html %}
+        {% include contentblocks/{{cb.layout}}.html %}
     {% endif %}
 {% endfor %}

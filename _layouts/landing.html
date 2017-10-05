@@ -21,7 +21,7 @@ layout: default
 {% capture page_path %}/{{page.path}}{% endcapture %}
 {% for cb in site.contentblocks %}
     {% if cb.page == page_path %}
-        {% include contentblock.html %}
+        {% include contentblocks/{{cb.layout}}.html %}
     {% endif %}
 {% endfor %}
 {{content}}
