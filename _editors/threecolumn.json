@@ -47,7 +47,7 @@
       },
       {
          "name":"link1",
-         "type":"pathfield",
+         "type":"path",
          "label":"Link 1",
          "required":true
       },
