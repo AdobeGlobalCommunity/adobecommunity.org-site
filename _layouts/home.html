@@ -46,3 +46,9 @@ layout: default
         </a>
     </div>
 </div>
+{% capture page_path %}/{{page.path}}{% endcapture %}
+{% for cb in site.contentblocks %}
+    {% if cb.page == page_path %}
+        {% include contentblock.html %}
+    {% endif %}
+{% endfor %}

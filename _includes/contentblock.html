@@ -1,7 +1,7 @@
 <div class="row contentblock {{cb.layout}} {{cb.background}}" {% if cb.background == 'background--img' %}style="background-image: url({{cb.background_image}})"{% endif %}>
     {% case cb.layout %}
         {% when 'leftright' %}
-            {% include leftright.html %}
+            {% include contentblocks/leftright.html %}
         {% else %}
             <div class="alert alert-danger" role="alert">
                 Undefined content block layout {{cb.layout}}

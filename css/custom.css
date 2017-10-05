@@ -114,6 +114,11 @@ body {
     padding-left: .5rem;
 }
 
+#topnav li:last-child .nav-link:after
+{
+  content: '';
+}
+
 .padded-content {
     padding: 4em 0;
 }

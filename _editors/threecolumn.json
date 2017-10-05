@@ -1,0 +1,118 @@
+{
+   "title":"Three Column Component",
+   "description":"The following fields will be used to update a three column component",
+   "fields":[
+      {
+         "name":"page",
+         "type":"pathfield",
+         "label":"Page",
+         "required":true
+      },
+       {
+         "name":"background",
+         "type":"select",
+         "label":"Background",
+          "options": [
+              "background--white",
+              "background--dark",
+              "background--grey",
+              "background--red",
+              "background--tan"
+          ],
+         "required":true
+      },
+      {
+         "name":"header1",
+         "label":"Header 1",
+         "type":"text",
+         "required":true
+      },
+      {
+         "name":"image1",
+         "label":"Image 1",
+         "type":"pathfield",
+         "required":true
+      },
+      {
+         "name":"text1",
+         "type":"textarea",
+         "label":"Text 1",
+         "required":true
+      },
+      {
+         "name":"cta1",
+         "type":"text",
+         "label":"CTA 1",
+         "required":true
+      },
+      {
+         "name":"link1",
+         "type":"pathfield",
+         "label":"Link 1",
+         "required":true
+      },
+      {
+         "name":"header2",
+         "label":"Header 2",
+         "type":"text",
+         "required":true
+      },
+      {
+         "name":"image2",
+         "label":"Image 2",
+         "type":"pathfield",
+         "required":true
+      },
+      {
+         "name":"text2",
+         "type":"textarea",
+         "label":"Text 2",
+         "required":true
+      },
+      {
+         "name":"cta2",
+         "type":"text",
+         "label":"CTA 2",
+         "required":true
+      },
+      {
+         "name":"link2",
+         "type":"pathfield",
+         "label":"Link 2",
+         "required":true
+      },
+      {
+         "name":"header3",
+         "label":"Header 3",
+         "type":"text",
+         "required":true
+      },
+      {
+         "name":"image3",
+         "label":"Image 3",
+         "type":"pathfield",
+         "required":true
+      },
+      {
+         "name":"text3",
+         "type":"textarea",
+         "label":"Text 3",
+         "required":true
+      },
+      {
+         "name":"cta3",
+         "type":"text",
+         "label":"CTA 3",
+         "required":true
+      },
+      {
+         "name":"link3",
+         "type":"pathfield",
+         "label":"Link 3",
+         "required":true
+      }
+   ],
+   "rte": {
+      "document_base_url":"https://www.adobecommunity.org/"
+   }
+}
