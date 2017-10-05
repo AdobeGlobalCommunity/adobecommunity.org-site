@@ -32,7 +32,7 @@
       },
       {
          "name":"background_image",
-         "type":"pathfield",
+         "type":"path",
          "label":"Hero Background Image",
          "required":true
       },
@@ -44,7 +44,7 @@
       },
       {
          "name":"link",
-         "type":"pathfield",
+         "type":"path",
          "label":"Hero CTA Link",
          "required":true
       }

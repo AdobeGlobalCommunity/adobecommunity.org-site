@@ -41,13 +41,13 @@
       },
       {
          "name":"link",
-         "type":"pathfield",
+         "type":"path",
          "label":"Link",
          "required":true
       },
       {
          "name":"page",
-         "type":"pathfield",
+         "type":"path",
          "label":"Page",
          "required":true
       }
