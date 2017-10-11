@@ -1,0 +1,71 @@
+{
+   "title":"Home Page",
+   "description":"The following fields will be used to update the page metadata",
+   "fields":[
+      {
+         "name":"title",
+         "label":"Title",
+         "type":"text",
+         "required":true
+      },
+      {
+         "name":"tags",
+         "type":"repeating",
+         "label":"Keywords"
+      },
+      {
+         "name":"type",
+         "type":"select",
+         "options": [
+             "meetup",
+             "webinar",
+             "conference"
+         ],
+         "label":"Event Type",
+         "required":true
+      },
+      {
+         "name":"presenter",
+         "type":"text",
+         "label":"Presenter"
+      },
+      {
+         "name":"cta",
+         "type":"textarea",
+         "label":"Call to Action"
+      },
+      {
+         "name":"link",
+         "label":"Link",
+         "type":"text",
+         "required":true
+      },
+      {
+         "name":"image",
+         "type":"path",
+         "label":"Image",
+         "required":true
+      },
+      {
+         "name":"date",
+         "type":"date",
+         "label":"Date",
+         "required":true
+      },
+      {
+         "name":"location_name",
+         "type":"text",
+         "label":"Location Name",
+         "required":true
+      },
+      {
+         "name":"location_link",
+         "type":"text",
+         "label":"Location Link",
+         "required":true
+      }
+   ],
+   "rte": {
+      "document_base_url":"https://www.adobecommunity.org/"
+   }
+}
