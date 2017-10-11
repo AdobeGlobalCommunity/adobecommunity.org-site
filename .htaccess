@@ -1,0 +1,39 @@
+RewriteEngine On
+
+# Redirect to https
+RewriteCond %{HTTPS} !^on$
+RewriteRule (.*) https://adobecommunity.org/$1 [R,L]
+
+# Redirect non-www to www
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+# cache images and flash content for one month
+<FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|mg3)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+
+# cache text, css, and javascript files for one week
+<FilesMatch ".(js|css|pdf|txt|woff)$">
+Header set Cache-Control "max-age=604800, public"
+</FilesMatch>
+
+# cache html and htm files for one hour
+<FilesMatch ".(html|htm|xml)$">
+Header set Cache-Control "max-age=3600, public"
+</FilesMatch>
+
+# disable directory browsing
+Options All -Indexes
+
+# set the error page
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+
+# Compress text files
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+
+# Security Protection
+Header set X-Frame-Options SAMEORIGIN
+Header set X-XSS-Protection "1; mode=block"
+Header set X-Content-Type-Options "nosniff"
