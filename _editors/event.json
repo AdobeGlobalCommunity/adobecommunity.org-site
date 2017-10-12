@@ -47,7 +47,7 @@
          "required":true
       },
       {
-         "name":"date",
+         "name":"event_date",
          "type":"date",
          "label":"Date",
          "required":true
@@ -63,6 +63,12 @@
          "type":"text",
          "label":"Location Link",
          "required":true
+      },
+      {
+         "label":"Featured",
+         "name":"featured",
+         "type":"checkbox",
+         "value": true
       }
    ],
    "rte": {

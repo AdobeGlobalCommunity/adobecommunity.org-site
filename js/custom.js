@@ -78,13 +78,38 @@
                         var $loader = $cnt.find('.ajax--loader');
                         var src = $cnt.data('src');
                         var tpl = $cnt.data('tpl');
+                        var filter = $cnt.data('filter');
                         var reverse = $cnt.data('reverse') || false;
                         var limit = $cnt.data('limit') || 2147483647;
                         $.getJSON(src, function (data) {
                             if (reverse) {
                                 data.reverse();
                             }
+                            if (filter) {
+                                data = data.filter(function (elem) {
+                                    var matches = true;
+                                    filter.forEach(function(check){
+                                        if (matches) {
+                                            var method = check.method || 'equals';
+                                            var key = check.key;
+                                            var value = check.value;
+                                            if (method === 'equals') {
+                                                if (elem[key] != check.value) {
+                                                    matches = false;
+                                                } 
+                                            } else if (method === 'equals') {
+                                                if (elem[key] != check.value) {
+                                                    matches = false;
+                                                } 
+                                            }
+                                        }
+                                    });
+                                    return matches;
+                                });
+                            }
                             data.forEach(function (el, idx) {
+                                el.index = idx;
+                                el.first = (idx === 0);
                                 if (idx < limit) {
                                     AGC.tpl(el, tpl, $cnt);
                                 }

@@ -20,8 +20,6 @@ social:
   twitter: AdobeCommunity
   facebook: AdobeCommunity
 
-future: true
-
 time_format: '%b %d, %Y at %I:%M %p'
 
 defaults:

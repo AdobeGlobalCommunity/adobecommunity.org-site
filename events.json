@@ -5,7 +5,9 @@
     {% for event in site.events %}
         {
             "cta": {{event.cta | json2}},
-            "date": "{{ event.date | date_to_xmlschema}}",
+            "date": "{{ event.event_date | date_to_xmlschema}}",
+            "dateStr": "{{ event.event_date | date: site.time_format }}",
+            "featured": {{event.featured | json2}},
             "image": {{ event.image | json2 }},
             "link": {{event.link | json2}},
             "location_name": {{ event.location_name | json2 }},

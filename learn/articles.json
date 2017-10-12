@@ -5,7 +5,8 @@
     {% for article in site.articles %}
         {
             "author": {{article.author | json2}},
-            "date": "{{ article.date | date_to_string }}",
+            "date": "{{ article.date | date_to_xmlschema }}",
+            "dateStr": "{{ article.date | date_to_string }}",
             "original": {{ article.original | json2 }},
             "summary": {{ article.content | strip_html | truncatewords: 150 | json2 }},
             "tags": [{% for tag in article.tags %}{{ tag | json2 }}{%unless forloop.last %}, {%endunless%}{%endfor%}],
