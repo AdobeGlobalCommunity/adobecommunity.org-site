@@ -6,7 +6,7 @@ layout: content-page
     <div class="col-md-8">
         <h1>{{page.title}}</h1>
         {{content}}
-        {% include {{page.form}} %}
+        {% include forms/{{page.form}}.html %}
     </div>
     <div class="col-md-4">
         <div class="alert alert-dark">
