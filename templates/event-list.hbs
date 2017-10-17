@@ -1,16 +1,17 @@
 <tr>
-    <td class="agenda-date" class="active" rowspan="1">
-        <div class="dayofmonth">26</div>
-        <div class="dayofweek">Saturday</div>
-        <div class="shortdate text-muted">July, 2014</div>
+    <td class="agenda--date" class="active" rowspan="1">
+        <div class="dayofmonth">{{date.dayofmonth}}</div>
+        <div class="dayofweek">{{date.dayofweek}}</div>
+        <div class="shortdate text-muted">{{date.month}}, {{date.year}}</div>
     </td>
-    <td class="agenda-time">
-        5:30 AM
+    <td class="agenda--time">
+        {{date.time}}
     </td>
-    <td class="agenda-events">
+    <td class="agenda--events">
         <div class="agenda-event">
-            <i class="glyphicon glyphicon-repeat text-muted" title="Repeating event"></i> 
-            Fishing
+            <a href="{{url}}">{{ title }}</a>
+            <br/>
+            <small>{{summary}}</small>
         </div>
     </td>
 </tr>
