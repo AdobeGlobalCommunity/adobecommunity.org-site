@@ -81,6 +81,17 @@
                         var filter = $cnt.data('filter');
                         var reverse = $cnt.data('reverse') || false;
                         var limit = $cnt.data('limit') || 2147483647;
+                        var filterParam = $cnt.data('filter-param');
+                        if(filter && filterParam){
+                            var url = new URL(location);
+                            var param = url.searchParams.get(filterParam);
+                            if(param){
+                                filter.push({
+                                    "key": filterParam,
+                                    "value": param
+                                })
+                            }
+                        }
                         $.getJSON(src, function (data) {
                             if (reverse) {
                                 data.reverse();
@@ -97,7 +108,7 @@
                                                 } 
                                             } else if (method === 'future') {
                                                 var date = new Date(elem[chk.key]);
-                                                if(date >= new Date()){
+                                                if(date <= new Date()){
                                                     matches = false;
                                                 }
                                             }

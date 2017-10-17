@@ -22,10 +22,5 @@ layout: default
             {% endfor %}
         </div>
     </div>
-    {% capture page_path %}/{{page.path}}{% endcapture %}
-    {% for cb in site.contentblocks %}
-        {% if cb.page == page_path %}
-            {% include contentblocks/{{cb.layout}}.html %}
-        {% endif %}
-    {% endfor %}
+    {% include contentblocks.html %}
 </div>

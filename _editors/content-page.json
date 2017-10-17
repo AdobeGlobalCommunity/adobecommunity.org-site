@@ -28,7 +28,13 @@
               "events",
               "learn"
           ]
-      }
+      },
+      {
+         "name":"dynamic",
+         "type":"checkbox",
+         "label":"Dynamic?",
+         "value": true
+      },
    ],
    "rte": {
       "document_base_url":"https://www.adobecommunity.org/"

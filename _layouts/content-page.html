@@ -10,10 +10,16 @@ layout: default
                     {% include leftnavs/{{page.leftnav}}.html %}
                 </div>
                 <section class="col-md-9">
+                    {% if page.dynamic %}
+                        {% include contentblocks.html %}
+                    {% endif %}
                     {{ content }}
                 </section>
             </div>
         {% else %}
+            {% if page.dynamic %}
+                {% include contentblocks.html %}
+            {% endif %}
             {{ content }}
         {% endif %}
     </div>

@@ -5,8 +5,8 @@
     {% for event in site.events %}
         {
             "cta": {{event.cta | json2}},
+            "event_date":"{{ event.event_date | date_to_xmlschema}}",
             "date": {
-                "datelong":"{{ event.event_date | date_to_xmlschema}}",
                 "dayofmonth": "{{ event.event_date | date: '%e'}}",
                 "dayofweek": "{{ event.event_date | date: '%A'}}",
                 "time": "{{ event.event_date | date: '%l:%M %p'}}",
@@ -23,6 +23,7 @@
             "summary": {{ event.content | strip_html | truncatewords: 150 | json2 }},
             "tags": [{% for tag in event.tags %}{{ tag | json2 }}{%unless forloop.last %}, {%endunless%}{%endfor%}],
             "title": {{event.title | json2 }},
+            "type": {{event.type | json2 }},
             "link": {{event.link | json2}},
             "url": "{{event.url}}"
         }{% unless forloop.last%},{%endunless%}
