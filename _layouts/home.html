@@ -4,27 +4,28 @@ layout: default
 
 
 {% include contentblocks/hero.html %}
-<div class="row separator background--dark"></div>
-<div class="row">
-    <div class="col-md-8">
-        {% for event in site.events limit:2 %}
-            {% include event-summary.html %} 
-        {% endfor %}
-    </div>
-    <div class="col-md-4 my-2 community-posts background--white">
-        <div class="my-4">
-            <h3>Community Posts</h3>
-            <hr class="my-2" />
-            {% assign articles = site.articles | reverse %}
-            {% for article in articles limit:3 %}
-                {% include article-summary.html %} 
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            {% for event in site.events limit:2 %}
+                {% include event-summary.html %} 
             {% endfor %}
         </div>
+        <div class="col-md-4 my-2 community-posts background--white">
+            <div class="my-4">
+                <h3>Community Posts</h3>
+                <hr class="my-2" />
+                {% assign articles = site.articles | reverse %}
+                {% for article in articles limit:3 %}
+                    {% include article-summary.html %} 
+                {% endfor %}
+            </div>
+        </div>
     </div>
+    {% capture page_path %}/{{page.path}}{% endcapture %}
+    {% for cb in site.contentblocks %}
+        {% if cb.page == page_path %}
+            {% include contentblocks/{{cb.layout}}.html %}
+        {% endif %}
+    {% endfor %}
 </div>
-{% capture page_path %}/{{page.path}}{% endcapture %}
-{% for cb in site.contentblocks %}
-    {% if cb.page == page_path %}
-        {% include contentblocks/{{cb.layout}}.html %}
-    {% endif %}
-{% endfor %}

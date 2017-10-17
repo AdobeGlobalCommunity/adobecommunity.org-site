@@ -88,19 +88,18 @@
                             if (filter) {
                                 data = data.filter(function (elem) {
                                     var matches = true;
-                                    filter.forEach(function(check){
+                                    filter.forEach(function(chk){
                                         if (matches) {
-                                            var method = check.method || 'equals';
-                                            var key = check.key;
-                                            var value = check.value;
+                                            var method = chk.method || 'equals';
                                             if (method === 'equals') {
-                                                if (elem[key] != check.value) {
+                                                if (elem[chk.key] != chk.value) {
                                                     matches = false;
                                                 } 
-                                            } else if (method === 'equals') {
-                                                if (elem[key] != check.value) {
+                                            } else if (method === 'future') {
+                                                var date = new Date(elem[chk.key]);
+                                                if(date >= new Date()){
                                                     matches = false;
-                                                } 
+                                                }
                                             }
                                         }
                                     });

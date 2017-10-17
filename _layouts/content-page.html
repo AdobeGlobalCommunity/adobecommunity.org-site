@@ -2,17 +2,19 @@
 layout: default
 ---
 
-<div class="padded-content">
-    {% if page.leftnav %}
-        <div class="row">
-            <div class="col-md-3">
-                {% include leftnavs/{{page.leftnav}}.html %}
+<div class="container">
+    <div class="padded-content">
+        {% if page.leftnav %}
+            <div class="row">
+                <div class="col-md-3">
+                    {% include leftnavs/{{page.leftnav}}.html %}
+                </div>
+                <section class="col-md-9">
+                    {{ content }}
+                </section>
             </div>
-            <section class="col-md-9">
-                {{ content }}
-            </section>
-        </div>
-    {% else %}
-        {{ content }}
-    {% endif %}
+        {% else %}
+            {{ content }}
+        {% endif %}
+    </div>
 </div>
