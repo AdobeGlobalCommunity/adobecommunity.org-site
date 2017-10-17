@@ -3,33 +3,52 @@ layout: content-page
 ---
 
 <div class="row">
-    <div class="col-12">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="well">
-                    <img class="img-responsive img-thumbnail center-block" src="{{page.image}}" alt="{{page.title}}" />
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <h2>{{page.title}}</h2>
-                {%include share.html %}
-                <h4>Event Type</h4>
-                {{page.type}}
-                <h4>Presenter</h4>
-                {{page.presenter}}
-            </div>
+    <div class="col-sm-9">
+        {% if page.image %}
+            <img class="img-fluid img-thumbnail my-4 mx-auto d-block" src="{{page.image}}" alt="{{page.title}}" />
+        {% endif %}
+        <h1>{{page.title}}</h1>
+        {% if page.presenter %}
+            <strong>Hosted by:</strong> {{page.presenter}}
+        {% endif %}
+        <div class="event--content my-4">
+            {{content}}
         </div>
-        <div class="row separator background--dark my-4"></div>
-        <div class="row">
-            <div class="col-12">
-                <h4>Date / Time</h4>
-                <span class="fa fa-time"></span> 
-                {{ page.date | date: site.time_format }}
-                <h4>Description</h4>
-                {{content}}
+        {% if page.tags %}
+            <div class="event--tags my-4">
+                {% include tags.html %}
             </div>
-        </div>
-        <br/>
+        {% endif %}
+        {%include share.html %}
         {% include comments.html %}
+    </div>
+    <div class="col-sm-3">
+        <div class="event--time my-4">
+            <h4>When</h4>
+            {{ page.date | date: site.time_format }}
+        </div>
+        <div class="event--location my-4">
+            <h4>Where</h4>
+            {% if page.location_link %}
+                <a href="{{page.location_link}}" rel="nofollow noopen" target="_blank">
+                    {{ page.location_name }}
+                </a>
+            {% else %}
+                {{ page.location_name }}
+            {% endif %}
+        </div>
+        <div class="event--location my-4">
+            <h4>Event Type</h4>
+            {{page.type | capitalize}}
+        </div>
+        <div class="event--cta my-4">
+            <a href="{{page.link}}" rel="nofollow noopen" target="_blank" class="btn btn-primary">
+                {% if page.cta %}
+                    {{page.cta}}
+                {% else %}
+                    More Info
+                {% endif %}
+            </a>
+        </div>
     </div>
 </div>

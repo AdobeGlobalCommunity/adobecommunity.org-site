@@ -7,19 +7,19 @@ layout: default
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
-            {% for event in site.events limit:2 %}
-                {% include event-summary.html %} 
-            {% endfor %}
+            <div class="ajax--load" data-src="/events.json" data-tpl="event-feature" data-filter="[{&quot;key&quot;: &quot;event_date&quot;, &quot;method&quot;: &quot;future&quot;},{&quot;key&quot;: &quot;featured&quot;, &quot;value&quot;: true}]">
+                <div class="ajax--loader text-center">
+                    <i class="my-4 fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                </div>
+            </div>
         </div>
         <div class="col-md-4 my-2 community-posts background--white">
-            <div class="my-4">
-                <h3>Community Posts</h3>
-                <hr class="my-2" />
-                {% assign articles = site.articles | reverse %}
-                {% for article in articles limit:3 %}
-                    {% include article-summary.html %} 
-                {% endfor %}
-            </div>
+            <h3>Community Posts</h3>
+            <hr class="my-2" />
+            {% assign articles = site.articles | reverse %}
+            {% for article in articles limit:3 %}
+                {% include article-summary.html %} 
+            {% endfor %}
         </div>
     </div>
     {% capture page_path %}/{{page.path}}{% endcapture %}
