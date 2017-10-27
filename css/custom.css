@@ -92,6 +92,10 @@ body {
     height: 200px;
 }
 
+fieldset {
+    margin: 2em 0;
+}
+
 .header-row {
     position:sticky;
     top: 0;
