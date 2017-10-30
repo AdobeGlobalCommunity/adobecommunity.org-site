@@ -41,4 +41,4 @@ collections:
         permalink: /events/:name.html
     groups:
         output: true
-        permalink: /groups/:name.html
+        permalink: /community/groups/:name.html
