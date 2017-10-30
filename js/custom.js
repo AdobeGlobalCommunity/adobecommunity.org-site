@@ -71,6 +71,56 @@
                     });
                 }
             },
+            groupSearch: {
+                distance: function(lat1, lon1, lat2, lon2) {
+                    var radlat1 = Math.PI * lat1/180
+                    var radlat2 = Math.PI * lat2/180
+                    var theta = lon1-lon2
+                    var radtheta = Math.PI * theta/180
+                    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                    dist = Math.acos(dist)
+                    dist = dist * 180/Math.PI
+                    dist = dist * 60 * 1.1515
+                    dist = dist * 0.8684
+                    return dist
+                },
+                init: function ($ctx) {
+                  $ctx.find('.group--location-search').each(function (idx, el) {
+                      var $form = $(el);
+                      var $ctr = $($ctx.find('.group--container'));
+                      $form.submit(function(){
+                          var address = $form.find('input[name=address]').val();
+                          $.getJSON('https://maps.googleapis.com/maps/api/geocode/json',{
+                              address: address,
+                              key: 'AIzaSyDCAVkmSzjVx5ByNRpNf2hNMk17hg-DLow'
+                          }, function(data){
+                              if (data.results.length > 0) {
+                                  var geo = data.results[0].geometry.location;
+                                  $form.find('input[name=address]').val(data.results[0].formatted_address);
+                                  $ctr.find('.group--item').each(function (idx, itm) {
+                                      var $item = $(itm);
+                                      var distance = AGC.fn.groupSearch.distance(geo.lat, geo.lng, $item.data('lat'), $item.data('lng'));
+                                      $item.find('.group--distance').html(Math.round(distance, -2));
+                                      $item.find('.group--distance-container').removeClass('d-none');
+                                      $item.attr('data-distance', distance);
+                                  });
+                                  function sorter(a, b) {
+                                      return a.getAttribute('data-distance') - b.getAttribute('data-distance');
+                                  };
+                                  var sortedDivs = $ctx.find(".group--item").toArray().sort(sorter);
+                                  $ctx.find(".group--container").empty();
+                                  $.each(sortedDivs, function (index, value) {
+                                    $('.group--container').append(value);   //adding them to the body
+                                  });
+                              } else {
+                                  AGC.ui.alert('warning','Unable to calculate distances to '+address);
+                              }
+                          });
+                         return false; 
+                      }); 
+                  });
+              }
+            },
             loader: {
                 init : function ($ctx) {
                     $ctx.find('.ajax--load').each(function (idx, el) {
@@ -243,7 +293,7 @@
             });
         },
         tpl: function (data, name, $cnt) {
-            tplcb(data, name, function(content){
+            AGC.tplcb(data, name, function(content){
                  $cnt.append(content);
             });
         },
