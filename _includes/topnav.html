@@ -1,4 +1,4 @@
-<ul class="navbar-nav mx-auto pr-5 ">
+<ul class="navbar-nav">
     {% if page.url == '/' %}
         <li class="nav-item active">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -6,15 +6,6 @@
     {% else %}
         <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
-        </li>
-    {% endif %}
-    {% if page.url == '/join.html' %}
-        <li class="nav-item active">
-                <a class="nav-link" href="/join.html">Join <span class="sr-only">(current)</span></a>
-        </li>
-    {% else %}
-        <li class="nav-item">
-                <a class="nav-link" href="/join.html">Join</a>
         </li>
     {% endif %}
     {% if page.url == '/learn.html' or page.url contains '/learn/' %}
@@ -53,4 +44,10 @@
                 <a class="nav-link" href="/about.html">About</a>
         </li>
     {% endif %}
+</ul>
+
+<ul class="nav navbar-nav flex-row ml-md-auto d-none d-md-flex">
+    <li class="nav-item">
+        <a class="btn btn btn-outline-secondary px-5" href="/join.html">Join</a>
+    </li>
 </ul>

@@ -129,6 +129,52 @@
                     });
                 }
             },
+            maps: {
+                initMaps: function(){
+                    $('.google-map').each(function(idx, el){
+                        var pins = $(el).data('pins');
+                        var template = $(el).data('template');
+                        $.getJSON(pins, function(groups){
+                            var latTotal = 0;
+                            var lngTotal = 0;
+                            var markerCount = 0;
+                            groups.forEach(function(group){
+                                latTotal += group.lat;
+                                lngTotal += group.lng;
+                                markerCount++;
+                            });
+                            var center = {
+                                lat: latTotal / markerCount,
+                                lng: lngTotal / markerCount
+                            }
+                            var map = new google.maps.Map(el, {
+                                scrollwheel: false,
+                                zoom: 2,
+                                center: center
+                            });
+                            groups.forEach(function(group){
+                                AGC.tplcb(group, template, function(content){
+                                    var marker = new google.maps.Marker({
+                                        position: {
+                                            lat: group.lat,
+                                            lng: group.lng
+                                        },
+                                        map: map
+                                    });
+                                    var infowindow = new google.maps.InfoWindow({
+                                        content: content,
+                                        maxWidth: 300
+                                    });
+                                    google.maps.event.addListener(marker, 'click', function() {
+                                        infowindow.open(map,marker);
+                                    });
+                                });
+                            });
+
+                        });
+                    });
+                }  
+            },
             repeating: {
                 repeatingAdd: function ($btn) {
                     var html = $btn.closest('.repeating-parent').find('.repeating-template').first().html();
@@ -183,7 +229,7 @@
             }
         },
         tpls: {},
-        tpl: function (data, name, $cnt) {
+        tplcb: function (data, name, cb) {
             if (AGC.tpls[name]) {
                 $cnt.append(AGC.tpls[name](data));
             }
@@ -192,8 +238,13 @@
                 cache: true,
                 success: function (hbs) {
                     AGC.tpls[name] = Handlebars.compile(hbs);
-                    $cnt.append(AGC.tpls[name](data));
+                    cb(AGC.tpls[name](data));
                 }
+            });
+        },
+        tpl: function (data, name, $cnt) {
+            tplcb(data, name, function(content){
+                 $cnt.append(content);
             });
         },
         ui: {
@@ -207,7 +258,7 @@
             }
         }
     };
-    
+    window.AGC=AGC;
     $(document).ready(function() {
         AGC.init($(document));
     });

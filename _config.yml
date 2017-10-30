@@ -39,3 +39,6 @@ collections:
     events:
         output: true
         permalink: /events/:name.html
+    groups:
+        output: true
+        permalink: /groups/:name.html
