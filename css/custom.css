@@ -86,7 +86,7 @@ body {
 }
 
 .contentblock {
-    min-height: 250px;
+    margin-top: 3rem;
 }
 
 .event-summary .col-sm-6 {

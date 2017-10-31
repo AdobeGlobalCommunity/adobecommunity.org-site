@@ -1,22 +1,20 @@
-<div class="row mt-2">
-    <div class="col-12">
-        {% if cb.title %}
-            <h3 class="my-4">
-                {{ cb.title }}
-            </h3>
-        {% endif %}
-        <form class="form-inline group--location-search">
-            <div class="form-group">
-                <label for="address" class="sr-only">Address</label>
-                <input type="text" class="form-control" name="address" />
-            </div>
-            <button type="submit" class="btn btn-primary">Find Groups</button>
-        </form>
-        <br/><hr/><br/>
-        <div class="ajax--load group--container" data-src="/groups.json" data-tpl="group-list">
-            <div class="ajax--loader text-center">  
-                <i class="my-4 fa fa-refresh fa-spin fa-3x fa-fw"></i>
-            </div>
+<div class="col-12">
+    {% if cb.title %}
+        <h3 class="my-4">
+            {{ cb.title }}
+        </h3>
+    {% endif %}
+    <form class="form-inline group--location-search">
+        <div class="form-group">
+            <label for="address" class="sr-only">Address</label>
+            <input type="text" class="form-control" name="address" />
+        </div>
+        <button type="submit" class="btn btn-primary">Find Groups</button>
+    </form>
+    <br/><hr/><br/>
+    <div class="ajax--load group--container" data-src="/groups.json" data-tpl="group-list">
+        <div class="ajax--loader text-center">  
+            <i class="my-4 fa fa-refresh fa-spin fa-3x fa-fw"></i>
         </div>
     </div>
 </div>
