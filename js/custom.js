@@ -228,7 +228,36 @@
             meetupevents: {
                 init: function ($ctx) {
                     $ctx.find('.meetup-event--container').each(function(){
-                        if()
+                        var $ctr = $(this);
+                        var meetupId = $ctr.data('meetup-id');
+                        var accessToken = localStorage.getItem('meetup_access_token',accessToken);
+                        if(false) {
+                            $.ajax({
+                                url: 'https://api.meetup.com'+meetupId+'events?&sign=true&photo-host=public&page=5',
+                                headers: {
+                                    'Authorization': 'Bearer ' + accessToken
+                                },
+                                success: function(events){
+                                    for (var idx in events) {
+                                        var event = events[idx];
+                                        var date = new Date(event.local_date);
+                                        var locale = "en-us";
+                                        event.date = {
+                                            "dayofmonth": event.getDate(),
+                                            "dayofweek": date.toLocaleString(locale, {  weekday: 'long' }),
+                                            "month": date.toLocaleString(locale, { month: "long" }),
+                                            "year": date.getYear()
+                                        };
+                                        AGC.tpl(event, 'meetup-event', $ctr);
+                                    }
+                                    $ctx.find('.meetup-event--oauth').hide();
+                                },
+                                error: function(jqXHR, textStatus, errorThrown){
+                                    console.log('Retrieved invalid response from Meetup: '+textStatus);
+                                    localStorage.removeItem('meetup_access_token');
+                                }
+                            });
+                        }
                     });
                     $ctx.find('.meetup-event--button').click(function(){
                         window.open($(this).attr('href'),'_blank','height=550,width=500,titlebar=no,toolbar=no');
