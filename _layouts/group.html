@@ -34,8 +34,8 @@ layout: content-page
         <a href="{{page.link}}" class="btn btn-secondary" target="_blank">
             Group Page
         </a>
-        <h3>Upcoming Events</h3>
-        <div class="meetup-event--container mt-4" data-meetup-id="{{page.link | remove: 'https://www.meetup.com'}}">
+        <h3 class="mt-4">Upcoming Events</h3>
+        <div class="meetup-event--container my-2" data-meetup-id="{{page.link | remove: 'https://www.meetup.com'}}">
             <div class="my-5 meetup-event--oauth text-center">
                 <a href="https://secure.meetup.com/oauth2/authorize?client_id=ehllabo2ftktd6g3cfj5b48gsr&response_type=token&redirect_uri=https://adobecommunity.org/meetup-auth.html" class="btn btn-secondary meetup-event--button">
                     Connect to Meetup for Events
