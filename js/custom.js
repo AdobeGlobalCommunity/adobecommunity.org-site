@@ -234,6 +234,8 @@
                         if (accessToken != null) {
                             $.ajax({
                                 url: 'https://api.meetup.com'+meetupId+'events?&sign=true&photo-host=public&page=5',
+                                method: 'GET',
+                                dataType: 'json',
                                 headers: {
                                     'Authorization': 'Bearer ' + accessToken
                                 },
