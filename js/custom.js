@@ -253,7 +253,7 @@
                                         count++;
                                     }
                                     if(count == 0){
-                                        $ctr.append("<h4>No upcoming events found...</h4>");
+                                        $ctr.append("<em>No upcoming events found...</em>");
                                     }
                                     $ctx.find('.meetup-event--oauth').hide();
                                 },
