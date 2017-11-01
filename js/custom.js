@@ -225,6 +225,21 @@
                     });
                 }  
             },
+            meetupevents: {
+                init: function ($ctx) {
+                    $ctx.find('.meetup-event--button').click(function(){
+                        window.open($(this).attr('href'),'_blank','height=550,width=500,titlebar=no,toolbar=no');
+                        return false;
+                    });
+                    if($('body').data('path') == 'meetup-auth.html'){
+                        const hash = '?'+window.location.hash.substring(1);
+                        const accessToken = (new URL('http://www.google.com'+hash)).searchParams['access_token'];
+                        localStorage.setItem('meetup_access_token',accessToken);
+                        window.parent.reload();
+                        window.close();
+                    }
+                }
+            },
             repeating: {
                 repeatingAdd: function ($btn) {
                     var html = $btn.closest('.repeating-parent').find('.repeating-template').first().html();
