@@ -237,6 +237,8 @@
                                 method: 'GET',
                                 dataType: 'json',
                                 success: function(events){
+                                    
+                                    var count = 0;
                                     for (var idx in events) {
                                         var event = events[idx];
                                         var date = new Date(event.local_date);
@@ -248,6 +250,10 @@
                                             "year": date.getYear()
                                         };
                                         AGC.tpl(event, 'meetup-event', $ctr);
+                                        count++;
+                                    }
+                                    if(count == 0){
+                                        $ctr.append("<h4>No upcoming events found...</h4>");
                                     }
                                     $ctx.find('.meetup-event--oauth').hide();
                                 },
