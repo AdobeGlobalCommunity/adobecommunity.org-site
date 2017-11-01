@@ -233,15 +233,9 @@
                         var accessToken = localStorage.getItem('meetup_access_token',accessToken);
                         if (accessToken != null) {
                             $.ajax({
-                                url: 'https://api.meetup.com'+meetupId+'events?photo-host=public&page=5',
+                                url: 'https://api.meetup.com'+meetupId+'events?access_token='+accessToken,
                                 method: 'GET',
                                 dataType: 'json',
-                                headers: {
-                                    'Authorization': 'Bearer ' + accessToken
-                                },
-                                data: {
-                                  access_token: accessToken
-                                },
                                 success: function(events){
                                     for (var idx in events) {
                                         var event = events[idx];
