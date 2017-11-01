@@ -239,6 +239,9 @@
                                 headers: {
                                     'Authorization': 'Bearer ' + accessToken
                                 },
+                                data: {
+                                  access_token: accessToken
+                                },
                                 success: function(events){
                                     for (var idx in events) {
                                         var event = events[idx];
