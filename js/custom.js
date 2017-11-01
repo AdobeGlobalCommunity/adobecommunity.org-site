@@ -231,7 +231,7 @@
                         var $ctr = $(this);
                         var meetupId = $ctr.data('meetup-id');
                         var accessToken = localStorage.getItem('meetup_access_token',accessToken);
-                        if(false) {
+                        if (accessToken != null) {
                             $.ajax({
                                 url: 'https://api.meetup.com'+meetupId+'events?&sign=true&photo-host=public&page=5',
                                 headers: {
