@@ -1,7 +1,7 @@
 <div class="col-12">
     <div class="row text-center justify-content-center">
         <div class="col-md-4 px-0">
-            <div class="p-4 mr-2 {{cb.background}}">
+            <div class="p-4 mr-2 {{cb.background}} h-100">
                 <img src="{{cb.image1}}" class="mx-auto my-4 d-block" />
                 <h4>{{cb.header1}}</h4>
                 <p>
@@ -16,7 +16,7 @@
         </div>
         {% if cb.header2 %}
             <div class="col-md-4 px-0">
-                <div class="p-4 mr-2 {{cb.background}}">
+                <div class="p-4 mr-2 {{cb.background}} h-100">
                     <img src="{{cb.image2}}" class="mx-auto my-4 d-block" />
                     <h4>{{cb.header2}}</h4>
                     <p>
@@ -32,14 +32,14 @@
         {% endif %}
         {% if cb.header3 %}
             <div class="col-md-4 px-0">
-                <div class="p-4 {{cb.background}}">
+                <div class="p-4 {{cb.background}} h-100">
                     <img src="{{cb.image3}}" class="mx-auto my-4 d-block" />
                     <h4>{{cb.header3}}</h4>
                     <p>
                         {{cb.text3}}
                     </p>
                     {% if cb.cta3 %}
-                        <a class="btn btn-secondary" href="{{cb.link3}}">
+                        <a class="btn btn-secondary " href="{{cb.link3}}">
                             {{cb.cta3}}
                         </a>
                     {% endif %}

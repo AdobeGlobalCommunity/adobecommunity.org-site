@@ -1,6 +1,6 @@
 body {
     color: #1c1618;
-    background-color: white;
+    background-color: #f5f5f5;
 }
 
 .agenda--date {
@@ -20,8 +20,7 @@ body {
 
 .agenda--time {
     width: 140px;
-} 
-
+}
 
 .background--img {
     background-size: cover;
@@ -34,6 +33,10 @@ body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
     margin-right: -15px;
     margin-left: -15px;
+}
+
+.background--pad {
+    padding: 0 15px;
 }
 
 .background--dark, .navbar.bg-dark {
@@ -67,6 +70,8 @@ body {
 
 .background--white {
     background-color: #fff;
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 3px;
 }
 
 .btn-primary {
@@ -83,6 +88,10 @@ body {
 .community-posts {
     height:408px;
     overflow:auto;
+}
+
+.container > .row:last-child {
+    margin-bottom: 3rem;
 }
 
 .contentblock {
@@ -105,6 +114,8 @@ fieldset {
     position:sticky;
     top: 0;
     z-index: 1000;
+    background-color: white;
+    border-bottom: 1px solid rgba(0,0,0,.3);
 }
 
 .header-row img {
@@ -140,6 +151,7 @@ fieldset {
 
 .padded-content {
     padding: 4em 0;
+    background-color:white;
 }
 
 .separator {

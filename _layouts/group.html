@@ -1,23 +1,10 @@
 ---
 layout: content-page
+leftnav: community
 ---
 
-<h1 class="display-3">{{page.title}}</h1>
-<div class="navbar navbar-light bg-light my-5">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link" href="{{page.link}}/quick_join/" target="_blank">Join</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{page.link}}/members/" target="_blank">Members</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{page.link}}/messages/boards/" target="_blank">Message Board</a>
-        </li>
-    </ul>
-</div>
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <a href="{{page.link}}" target="_blank">
             <img src="{{page.image}}" title="{{page.title}}" class="img-flex" />
         </a>
@@ -27,9 +14,20 @@ layout: content-page
                 {{page.location}}
             </a>
         </div>
-        
+        <ul class="nav flex-column my-2">
+            <li class="nav-item">
+                <a class="nav-link" href="{{page.link}}/quick_join/" target="_blank">Join</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{page.link}}/members/" target="_blank">Members</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{page.link}}/messages/boards/" target="_blank">Message Board</a>
+            </li>
+        </ul>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-9">
+        <h1 class="display-3">{{page.title}}</h1>
         {{content}}
         <a href="{{page.link}}" class="btn btn-secondary" target="_blank">
             Group Page
