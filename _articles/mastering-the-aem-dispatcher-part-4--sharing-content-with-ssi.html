@@ -1,0 +1,19 @@
+---
+date: 2017-11-02T17:26:56.414Z
+title: 'Mastering the AEM Dispatcher Part 4: Sharing Content with SSI'
+link: >-
+  https://blogs.perficient.com/adobe/2017/10/30/mastering-the-aem-dispatcher-part-4-sharing-content-with-ssi/
+thumbnail: >-
+  https://blogs.perficient.com/adobe/files/2017/10/iStock-468157964-featured-image-1600x600.jpg
+links:
+  - Adobe Experience Manager
+  - Best Practices
+  - AEM Dispatcher
+author: Dan Klco
+authorEmail: daniel.klco@gmail.com
+created: 2017-11-02T17:26:56.415Z
+layout: event
+
+---
+
+We're delving deeper into the AEM Dispatcher as we continue in the series, Mastering the AEM Dispatcher. In this post, we'll discuss how to share content with non-AEM applications in the Dispatcher using SSI includes. Integrating AEM and non-AEM websites is tricky. To create a consistent look and feel, you need to share the stylesheets, header, and footer, but you don't want to be duplicating information or hard-coding in markup into non-AEM sites. If your website lives in or publishes to Apache, you can use Server Side Includes (or SSI) to include the content seamlessly into the non-AEM websites. Using SSI to include content from AEM websites on non-AEM sites, requires a few steps to get set up and work properly to avoid caching issues.   Step 1: Enable SSI   SSI is not enabled in Apache by default, so the first thing you'll need to do is enable SSI.
