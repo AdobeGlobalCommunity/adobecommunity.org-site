@@ -90,6 +90,10 @@ body {
     overflow:auto;
 }
 
+.padded-content {
+    min-height: 600px;
+}
+
 .container > .row:last-child {
     margin-bottom: 3rem;
 }
@@ -150,7 +154,7 @@ fieldset {
 }
 
 .padded-content {
-    padding: 4em 0;
+    padding: 4em 1em;
     background-color:white;
 }
 
