@@ -1,0 +1,15 @@
+---
+layout: content-page
+---
+
+<div class="tag">
+    <h1 class="param-val" data-param="tags">Tag</h1>
+    <p>
+        Content tagged with &quot;<span class="param-val" data-param="tags"></span>&quot;.
+    </p>
+    <div class="tag__container ajax--load" data-src="/content.json" data-tpl="content-item" data-filter-param="tags">
+        <div class="ajax--loader text-center">
+            <i class="my-4 fa fa-refresh fa-spin fa-3x fa-fw"></i>
+        </div>
+    </div>
+</div>

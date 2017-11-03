@@ -28,7 +28,7 @@
     </url>
     {% endfor %}
     {% for page in site.pages %}
-    {% if page.exclude_sitemap != true %}
+    {% if page.exclude_sitemap != true and page.layout != nil %}
     <url>
         <loc>{{ site.url }}{{ page.url | remove: 'index.html' | replace: ' ', '%20' }}</loc>
     	<changefreq>monthly</changefreq>

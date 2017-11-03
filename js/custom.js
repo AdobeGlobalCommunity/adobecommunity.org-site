@@ -164,7 +164,10 @@
                         var reverse = $cnt.data('reverse') || false;
                         var limit = $cnt.data('limit') || 2147483647;
                         var filterParam = $cnt.data('filter-param');
-                        if(filter && filterParam){
+                        if(filterParam){
+                            if (!filter) {
+                                filter = [];
+                            }
                             var url = new URL(location);
                             var param = url.searchParams.get(filterParam);
                             if(param){
@@ -185,9 +188,15 @@
                                         if (matches) {
                                             var method = chk.method || 'equals';
                                             if (method === 'equals') {
-                                                if (elem[chk.key] != chk.value) {
-                                                    matches = false;
-                                                } 
+                                                if(elem[chk.key].constructor === Array){
+                                                    if (elem[chk.key].indexOf(chk.value) == -1) {
+                                                        matches = false;
+                                                    }
+                                                } else{
+                                                    if (elem[chk.key] != chk.value) {
+                                                        matches = false;
+                                                    } 
+                                                }
                                             } else if (method === 'future') {
                                                 var date = new Date(elem[chk.key]);
                                                 if(date <= new Date()){
@@ -307,6 +316,14 @@
                         window.opener.location.reload(false);
                         window.close();
                     }
+                }
+            },
+            paramval: {
+                init: function($ctx){
+                    var url = new URL(window.location);
+                    $ctx.find('.param-val').each(function(){
+                        $(this).html(url.searchParams.get($(this).data('param')));
+                    });
                 }
             },
             repeating: {

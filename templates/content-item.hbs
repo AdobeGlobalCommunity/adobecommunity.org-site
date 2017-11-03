@@ -1,0 +1,24 @@
+<div class="row my-3 px-5">
+    <div class="col-12">
+        <div class="lead" >
+            <a href="{{url}}">
+                {{title }}
+            </a>
+        </div>
+        <div>
+            <small>
+                <span class="fa fa-tag"></span>
+                {{#each tags}}
+                    <a href="/tag.html?tags={{this}}">{{this}}</a>{{#unless @last }}, {{/unless}}
+                {{/each}}
+            </small>
+        </div>
+        <div>
+        <em>
+            {{summary}}
+        </em>
+        </div>
+        <a href="{{url}}" class="btn btn-primary my-2">Read More</a>
+        <hr/>
+    </div>
+</div>

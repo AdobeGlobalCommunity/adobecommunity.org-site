@@ -1,0 +1,23 @@
+---
+---
+
+[
+    {% for item in site.pages %}
+        {% if item.exclude_sitemap != true and item.layout != nil %}
+            {% include content-item.json %},
+        {% endif %}
+    {% endfor %}
+    {% for item in site.events %}
+        {% capture nowTime %}{{'now' | date: '%s'}}{% endcapture %}
+        {% capture eventTime %}{{ item.event_date | date: '%s'}}{% endcapture %}
+        {% if eventTime > nowTime %}
+            {% include content-item.json %},
+        {% endif %}
+    {% endfor %}
+    {% for item in site.articles %}
+        {% include content-item.json %},
+    {% endfor %}
+    {% for item in site.groups %}
+        {% include content-item.json %}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+]
