@@ -37,6 +37,12 @@
          "required":true
       },
       {
+         "name":"background_video",
+         "type":"path",
+         "label":"Hero Background video",
+         "required":true
+      },
+      {
          "name":"cta",
          "type":"text",
          "label":"Hero CTA",
