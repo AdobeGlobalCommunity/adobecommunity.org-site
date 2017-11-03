@@ -69,6 +69,38 @@
                         });
                         return false;
                     });
+                    
+                    
+                    $ctx.find('.github-contact-form').submit(function () {
+                        var $form = $(this);
+                        var data = {
+                            date: new Date()
+                        };
+                        $form.find('input, select, textarea').each(function(idx, el){
+                            var $fld = $(el);
+                            data[$fld.attr('name')] = $fld.val();
+                        })
+                        $form.children('fieldset').attr('disabled', 'disabled');
+                        
+                        var issues = AGC.gh.getIssues();
+
+                        issues.createIssue({
+                            "title": "Form Submission '" + $form.data('analytics-id') + "' on " + new Date().toLocaleDateString(),
+                            "body": jsyaml.safeDump(data),
+                            "labels": [
+                                "form"
+                            ]
+                        }, function (err, res) {
+                            $form.children('fieldset').removeAttr('disabled');
+                            if (err) {
+                                AGC.ui.alert("danger", "Unable to submit due to unexpected exception, please <a href='/contact.html'>Contact Us</a>");
+                                console.log(err);
+                            } else {
+                                AGC.ui.alert("success", "Submitted successfully.");
+                            }
+                        });
+                        return false;
+                    });
                 }
             },
             groupSearch: {

@@ -35,6 +35,8 @@ a {
 
 .background--opaque {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 .background--pad {
