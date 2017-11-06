@@ -4,9 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="/css/custom.css" />
+        {% bundle %}[ /css/bootstrap.min.css, /css/font-awesome.min.css, /css/custom.css ]{% endbundle %}
 		<title>{{page.title}} | {{site.title}}</title>
 		{% if page.tags %}<meta content="{{page.tags | join: ', '}}" name="keywords" />{% endif %}
 		{% if page.description %}
@@ -19,7 +17,6 @@
 		{% if page.author %}
 		  <meta content="{{ page.author }}" name="author" />
 		{% endif %}
-		<link rel="dns-prefetch" href="//ssl.google-analytics.com" />
 		<link rel="dns-prefetch" href="//twitter.com" />
 		<link rel="dns-prefetch" href="//platform.twitter.com" />
 		<link rel="dns-prefetch" href="//syndication.twitter.com" />
@@ -82,13 +79,6 @@
                 </ul>
             </div>
         </footer>
-		<script src="/js/jquery-3.2.1.min.js"></script>
-        <script src="/js/popper.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/handlebars.js"></script>
-        <script src="/js/js-yaml.js"></script>
-        <script src="/js/GitHub.bundle.js"></script>
-        <script src="/js/custom.js"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCAVkmSzjVx5ByNRpNf2hNMk17hg-DLow&callback=AGC.fn.maps.initMaps"></script>
+        {% bundle %}[ /js/jquery-3.2.1.min.js, /js/popper.min.js, /js/bootstrap.min.js, /js/handlebars.js, /js/js-yaml.js, /js/GitHub.bundle.js, /js/custom.js, 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDCAVkmSzjVx5ByNRpNf2hNMk17hg-DLow&callback=AGC.fn.maps.initMaps' ]{% endbundle %}
 	</body>
 </html>

@@ -29,6 +29,13 @@ defaults:
       type: articles
     values:
       leftnav: learn
+      
+asset_bundler:
+  compress:
+    js: 'yui'
+    css: 'yui'
+  markup_templates:
+    js: "\t\t<script src=\"{{url}}\"></script>\n"
 
 collections:
     articles:
