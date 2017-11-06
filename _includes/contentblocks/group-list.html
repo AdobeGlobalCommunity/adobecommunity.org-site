@@ -1,15 +1,19 @@
-<div class="col-12">
+<div class="col-12 background--white">
     {% if cb.title %}
         <h3 class="my-4">
             {{ cb.title }}
         </h3>
     {% endif %}
-    <form class="form-inline group--location-search">
-        <div class="form-group">
-            <label for="address" class="sr-only">Address</label>
-            <input type="text" class="form-control" name="address" />
+    <form class="group--location-search">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label for="address" class="sr-only">Address</label>
+                <input type="text" class="form-control" name="address" />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Find Groups</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Find Groups</button>
     </form>
     <br/><hr/><br/>
     <div class="ajax--load group--container" data-src="/community/groups.json" data-tpl="group-list">

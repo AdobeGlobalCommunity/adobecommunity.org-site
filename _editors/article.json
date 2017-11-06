@@ -22,6 +22,18 @@
          "name":"image",
          "type":"path",
          "label":"Image"
+      },
+      {
+         "name":"author",
+         "label":"Author",
+         "type":"text",
+         "required":true
+      },
+      {
+         "name":"date",
+         "label":"Date",
+         "type":"date",
+         "required":true
       }
    ],
    "rte": {
