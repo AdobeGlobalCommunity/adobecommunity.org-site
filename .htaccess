@@ -19,7 +19,7 @@ Header set Cache-Control "max-age=604800, public"
 </FilesMatch>
 
 # cache html and htm files for one hour
-<FilesMatch ".(html|htm|xml)$">
+<FilesMatch ".(html|htm|xml|json)$">
 Header set Cache-Control "max-age=3600, public"
 </FilesMatch>
 
@@ -31,7 +31,7 @@ ErrorDocument 404 /404.html
 ErrorDocument 403 /403.html
 
 # Compress text files
-AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
 
 # Security Protection
 Header set X-Frame-Options SAMEORIGIN
