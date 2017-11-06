@@ -387,16 +387,17 @@
 		tpls: {},
 		tplcb: function (data, name, cb) {
 			if (AGC.tpls[name]) {
-				$cnt.append(AGC.tpls[name](data));
-			}
-			$.ajax({
-				url: '/templates/' + name + '.hbs',
-				cache: true,
-				success: function (hbs) {
-					AGC.tpls[name] = Handlebars.compile(hbs);
-					cb(AGC.tpls[name](data));
-				}
-			});
+                cb(AGC.tpls[name](data));
+			} else {
+                $.ajax({
+                    url: '/templates/' + name + '.hbs',
+                    cache: true,
+                    success: function (hbs) {
+                        AGC.tpls[name] = Handlebars.compile(hbs);
+                        cb(AGC.tpls[name](data));
+                    }
+                });
+            }
 		},
 		tpl: function (data, name, $cnt) {
 			AGC.tplcb(data, name, function(content){
