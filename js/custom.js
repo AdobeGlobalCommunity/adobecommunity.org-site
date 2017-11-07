@@ -213,13 +213,12 @@
 									return matches;
 								});
 							}
+                            data.slice(0, limit);
 							data.forEach(function (el, idx) {
 								el.index = idx;
 								el.first = (idx === 0);
-								if (idx < limit) {
-									AGC.tpl(el, tpl, $cnt);
-								}
 							});
+                            AGC.tpl(data, tpl, $cnt);
 							$loader.hide();
 						});
 					});
@@ -248,25 +247,24 @@
 								zoom: 2,
 								center: center
 							});
-							groups.forEach(function(group){
-								AGC.tplcb(group, template, function(content){
-									var marker = new google.maps.Marker({
-										position: {
-											lat: group.lat,
-											lng: group.lng
-										},
-										map: map
-									});
-									var infowindow = new google.maps.InfoWindow({
-										content: content,
-										maxWidth: 300
-									});
-									google.maps.event.addListener(marker, 'click', function() {
-										infowindow.open(map,marker);
-									});
-								});
-							});
-
+                            groups.forEach(function (group) {
+                                AGC.tplcb(group, template, function(content){
+                                    var marker = new google.maps.Marker({
+                                        position: {
+                                            lat: group.lat,
+                                            lng: group.lng
+                                        },
+                                        map: map
+                                    });
+                                    var infowindow = new google.maps.InfoWindow({
+                                        content: content,
+                                        maxWidth: 300
+                                    });
+                                    google.maps.event.addListener(marker, 'click', function() {
+                                        infowindow.open(map,marker);
+                                    });
+                                });
+                            });
 						});
 					});
 				}	
@@ -295,9 +293,9 @@
 											"month": date.toLocaleString(locale, { month: "long" }),
 											"year": date.getYear()
 										};
-										AGC.tpl(event, 'meetup-event', $ctr);
 										count++;
 									}
+                                    AGC.tpl(events, 'meetup-event', $ctr);
 									if(count == 0){
 										$ctr.append("<em>No upcoming events found...</em>");
 									}
@@ -386,15 +384,27 @@
 		},
 		tpls: {},
 		tplcb: function (data, name, cb) {
-			if (AGC.tpls[name]) {
-                cb(AGC.tpls[name](data));
-			} else {
+            if (AGC.tpls[name]) {
+                if (Array.isArray(data)) {
+                    cb(AGC.tpls[name](data));
+                } else {
+                    data.forEach(function (item) {
+                        cb(AGC.tpls[name](item));
+                    });
+                }
+            } else {
                 $.ajax({
                     url: '/templates/' + name + '.hbs',
                     cache: true,
                     success: function (hbs) {
                         AGC.tpls[name] = Handlebars.compile(hbs);
-                        cb(AGC.tpls[name](data));
+                        if (Array.isArray(data)) {
+                            data.forEach(function (item) {
+                                cb(AGC.tpls[name](item));
+                            });
+                        } else {
+                            cb(AGC.tpls[name](data));
+                        }
                     }
                 });
             }
