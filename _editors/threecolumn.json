@@ -37,80 +37,67 @@
       {
          "name":"text1",
          "type":"textarea",
-         "label":"Text 1",
-         "required":true
+         "label":"Text 1"
       },
       {
          "name":"cta1",
          "type":"text",
-         "label":"CTA 1",
-         "required":true
+         "label":"CTA 1"
       },
       {
          "name":"link1",
          "type":"path",
-         "label":"Link 1",
-         "required":true
+         "label":"Link 1"
       },
       {
          "name":"header2",
          "label":"Header 2",
-         "type":"text",
-         "required":true
+         "type":"text"
       },
       {
          "name":"image2",
          "label":"Image 2",
-         "type":"path",
-         "required":true
+         "type":"path"
       },
       {
          "name":"text2",
          "type":"textarea",
-         "label":"Text 2",
-         "required":true
+         "label":"Text 2"
       },
       {
          "name":"cta2",
          "type":"text",
-         "label":"CTA 2",
-         "required":true
+         "label":"CTA 2"
       },
       {
          "name":"link2",
          "type":"path",
-         "label":"Link 2",
-         "required":true
+         "label":"Link 2"
       },
       {
          "name":"header3",
          "label":"Header 3",
-         "type":"text",
-         "required":true
+         "type":"text"
       },
       {
          "name":"image3",
          "label":"Image 3",
-         "type":"path",
-         "required":true
+         "type":"path"
       },
       {
          "name":"text3",
          "type":"textarea",
-         "label":"Text 3",
-         "required":true
+         "label":"Text 3"
       },
       {
          "name":"cta3",
          "type":"text",
-         "label":"CTA 3",
-         "required":true
+         "label":"CTA 3"
       },
       {
          "name":"link3",
          "type":"path",
-         "label":"Link 3",
-         "required":true
+         "label":"Link 3"
       }
    ],
    "rte": {
