@@ -1,0 +1,13 @@
+---
+layout: article
+title: 'AEM Touch UI Dialog Validation New Best Practice: Use Foundation-Validation'
+tags:
+  - 'Adobe Experience Manager'
+  - TouchUI
+original: 'https://blogs.perficient.com/adobe/2017/11/06/aem-touch-ui-dialog-validation-new-best-practice-use-foundation-validation/'
+image: 'https://blogs.perficient.com/adobe/files/2017/07/iStock-638909530-featured-image-1600x600.jpg'
+author: 'Eddie Yao'
+date: 2017-11-09T10:00:00.000Z
+---
+
+<p>Oftentimes, AEM developers will be asked to develop validator for component dialog. Back in the Classic UI dialog days, you will probably write a JavaScript function for dialog before submit event. In Touch UI dialog, if you&rsquo;ve googled around, you probably found a lot articles/codes to use&nbsp;<a href="https://docs.adobe.com/docs/en/aem/6-1/ref/granite-ui/api/jcr_root/libs/granite/ui/components/foundation/clientlibs/foundation/js/validation/index.html" target="_blank" rel="noopener">jQuery based validator</a>, i.e.&nbsp;<code>$.validator.register({})</code>.&nbsp;Recently, I found out that this jQuery based validator is deprecated starting in AEM 6.2 (see screenshot below), where the new best practice is to use&nbsp;<a href="https://docs.adobe.com/docs/en/aem/6-3/develop/ref/granite-ui/api/jcr_root/libs/granite/ui/components/coral/foundation/clientlibs/foundation/js/validation/index.html" target="_blank" rel="noopener">foundation-validation</a>.&nbsp;In this blog, I am going to walk you through foundation-validation, the things you can do with it, using a sample icon component. You can find all the source codes in&nbsp;<a href="https://github.com/guangweiyao/blog" target="_blank" rel="noopener">my GitHub project</a>.</p>
