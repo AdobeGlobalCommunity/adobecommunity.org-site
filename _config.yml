@@ -30,6 +30,11 @@ defaults:
     values:
       leftnav: learn
 
+# Configure the Asset Bundler
+asset_bundler:
+  markup_templates:
+    js: "\t\t<script src=\"{{url}}\"></script>\n"
+    
 collections:
     articles:
         output: true
