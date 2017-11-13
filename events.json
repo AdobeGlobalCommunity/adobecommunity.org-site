@@ -2,7 +2,8 @@
 ---
 
 [
-    {% for event in site.events %}
+    {% assign events = site.events | sort: event_date | reverse %}
+    {% for event in events %}
         {
             "cta": {{event.cta | json2}},
             "event_date":"{{ event.event_date | date_to_xmlschema}}",
@@ -20,7 +21,7 @@
             "location_name": {{ event.location_name | json2 }},
             "location_link": {{ event.location_link | json2 }},
             "presenter": {{ event.presenter | json2 }},
-            "summary": {{ event.content | strip_html | truncatewords: 150 | json2 }},
+            "summary": {{ event.content | strip_html | replace: '&nbsp;', ' ' | truncatewords: 20 | json2 }},
             "tags": [{% for tag in event.tags %}{{ tag | json2 }}{%unless forloop.last %}, {%endunless%}{%endfor%}],
             "title": {{event.title | json2 }},
             "type": {{event.type | json2 }},
