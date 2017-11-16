@@ -1,0 +1,12 @@
+---
+layout: article
+title: 'No Matter What Anyone Tells You There''s No TouchUI Under /etc'
+tags:
+  - 'Adobe Experience Manager'
+original: 'https://blogs.perficient.com/adobe/2017/11/16/no-matter-what-a-anyone-tells-you-theres-no-touchui-under-etc/'
+image: 'https://www.danklco.com/images/posts/2017-11-16-no-touchui-under-etc/wrong-way.jpg'
+author: 'Dan Klco'
+date: 2017-11-16T17:00:00.000Z
+---
+
+<p>I'm posting a little-known fact to save anyone else the frustration of banging their head against why this doesn't work for a couple hours: Except for a few specific conditions, you cannot use TouchUI to edit any components under the /etc directory. There you have it! That's really the crux of the blog post! Of course, a reasonable question may be why? To understand why we'll need to first understand what's going on when AEM builds out the editor fields for a component. &nbsp; How AEM Builds the Touch UI &nbsp; Astute users and developers of AEM have probably noticed the url structure of pages in the AEM editor looks something like: http://localhost:4502/editor.html/content/site/page.html The trick for building this out is that AEM is using a single page /editor.html for the page editing features and then using Sling Suffix to load the contents to edit /content/site/page.html as an iframe.</p>
