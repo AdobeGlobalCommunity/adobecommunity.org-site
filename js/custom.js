@@ -295,7 +295,7 @@
                                             "month": date.toLocaleString(locale, {
                                                 month: "long"
                                             }),
-                                            "year": date.getYear()
+                                            "year": date.getFullYear()
                                         };
                                         count++;
                                     }
