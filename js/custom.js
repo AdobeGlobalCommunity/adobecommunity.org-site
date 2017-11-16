@@ -288,7 +288,7 @@
                                         var date = new Date(event.local_date);
                                         var locale = "en-us";
                                         event.date = {
-                                            "dayofmonth": event.getDate(),
+                                            "dayofmonth": date.getDate(),
                                             "dayofweek": date.toLocaleString(locale, {
                                                 weekday: 'long'
                                             }),
