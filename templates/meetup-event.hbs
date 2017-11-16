@@ -1,11 +1,13 @@
-<div class="my-4 meetup--item">
-    <span class="agenda--date">
-        <span class="dayofmonth">{{date.dayofmonth}}</span>
-        <span class="dayofweek">{{date.dayofweek}}</span>
-        <span class="shortdate text-muted">{{date.month}}, {{date.year}}</span>
-    </span>
-    <div class="agenda--event">
-        <a href="{{ link }}">{{ name }}</a>
-        <small>{{{ description }}}</small>
+<div class="my-4 meetup--item card">
+    <div class="card-body">
+        <span class="agenda--date">
+            <span class="dayofmonth">{{date.dayofmonth}}</span>
+            <span class="dayofweek">{{date.dayofweek}}</span>
+            <span class="shortdate text-muted">{{date.month}}, {{date.year}}</span>
+        </span>
+        <div class="agenda--event">
+            <a href="{{ link }}">{{ name }}</a>
+            <small>{{{ description }}}</small>
+        </div>
     </div>
 </div>
