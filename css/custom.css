@@ -202,6 +202,10 @@ fieldset {
     min-height:200px;
 }
 
+.meetup--item .agenda--date {
+    float:left;
+}
+
 .padded-content {
     padding: 4em 1em;
     background-color:white;
