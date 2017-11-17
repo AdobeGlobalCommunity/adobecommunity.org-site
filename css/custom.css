@@ -221,6 +221,9 @@ fieldset {
 }
 
 @media screen and (max-width: 990px) {
+    .header-row img {
+        float: none;
+    }
     #topnav .nav-link:after {
         content: '';
     }
