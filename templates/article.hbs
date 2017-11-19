@@ -1,18 +1,14 @@
-<div class="row my-3">
-    <div class="col-4">
-        <a href="{{url}}">
-            <img class="img-fluid" src="{{image}}" alt="{{title}}" />
-        </a>
-    </div>
-    <div class="col-8">
-        <div class="lead" >
-            <a href="{{url}}">
-                {{title }}
-            </a>
+<div class="col-sm-6">
+    <div class="card m-2">
+        <div class="card-img-top background--img" style="height:200px; background-image: url({{image}})" alt="{{title}}">
         </div>
-        <em>
-            By {{ author }} on {{ dateStr }}
-        </em><br/>
-        <a href="{{url}}" class="btn btn-primary">Read More</a>
+        <div class="card-body">
+            <h4 class="card-title">{{title}}</h4>
+            <p class="card-text">{{{short_summary}}}</p>
+            <a href="{{url}}" class="btn btn-primary">Read More</a>
+        </div>
     </div>
 </div>
+{{#unless even}}
+    </div><div class="row">
+{{/unless }}

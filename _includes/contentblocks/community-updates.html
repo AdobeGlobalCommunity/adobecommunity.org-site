@@ -1,23 +1,25 @@
-<div class="row">
-    <div class="col-md-8 px-0">
-        <div class="background--pad mr-sm-0 mr-md-2 background--white h-100">
-            <h3 class="mt-2">Community Events</h3>
-            <hr class="my-2" />
-            <div class="ajax--load" data-src="/events.json" data-tpl="event-feature" data-filter="[{&quot;key&quot;: &quot;event_date&quot;, &quot;method&quot;: &quot;future&quot;},{&quot;key&quot;: &quot;featured&quot;, &quot;value&quot;: true}]">
-                <div class="ajax--loader text-center">
-                    <i class="my-4 fa fa-refresh fa-spin fa-3x fa-fw"></i>
+<div class="col-12">
+    <div class="row">
+        <div class="col-md-8 px-0">
+            <div class="background--pad mr-sm-0 mr-md-2 background--white h-100">
+                <h3 class="mt-2">Community Events</h3>
+                <hr class="my-2" />
+                <div class="ajax--load" data-src="/events.json" data-tpl="event-feature" data-filter="[{&quot;key&quot;: &quot;event_date&quot;, &quot;method&quot;: &quot;future&quot;},{&quot;key&quot;: &quot;featured&quot;, &quot;value&quot;: true}]">
+                    <div class="ajax--loader text-center">
+                        <i class="my-4 fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4 background--white px-0">
-        <div class="community-posts background--pad">
-            <h3 class="mt-2">Community Posts</h3>
-            <hr class="my-2" />
-            {% assign articles = site.articles | reverse %}
-            {% for article in articles limit:3 %}
-                {% include article-summary.html %} 
-            {% endfor %}
+        <div class="col-md-4 background--white px-0">
+            <div class="community-posts background--pad">
+                <h3 class="mt-2">Community Posts</h3>
+                <hr class="my-2" />
+                {% assign articles = site.articles | reverse %}
+                {% for article in articles limit:3 %}
+                    {% include article-summary.html %} 
+                {% endfor %}
+            </div>
         </div>
-    </div>
+</div>
 </div>
