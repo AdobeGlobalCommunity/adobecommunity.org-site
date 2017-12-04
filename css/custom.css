@@ -97,6 +97,10 @@ a {
     border: 1px solid #9F0000;
 }
 
+.btn-secondary {
+    border-radius: 0;
+}
+
 .community-posts {
     overflow:auto;
 }
@@ -217,9 +221,12 @@ fieldset {
     max-height: 540px;
     overflow: hidden;
     position: relative;
-    top: 0;
-    right: 0;
-    color:white
+    color: white;
+    display: flex;
+}
+
+.home-video__header-container {
+    align-self: flex-end;
 }
 
 .home-video__video {
