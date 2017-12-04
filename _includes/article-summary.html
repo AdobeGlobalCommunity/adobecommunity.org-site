@@ -1,18 +1,13 @@
 
-<div class="row">
-    <div class="col-3">
-        <a href="{{article.url}}">
-            <img class="img-fluid" src="{{article.image}}" alt="{{article.title}}" />
-        </a>
-    </div>
-    <div class="col-9">
+<div class="row my-2">
+    <div class="col-12">
         <div class="lead" >
             <a href="{{article.url}}">
                 {{ article.title }}
             </a>
         </div>
         <em>
-            By {{ article.author }}
+            By {{ article.author }} on {{article.date | date: "%B %d, %Y"}}
         </em>
     </div>
 </div>
