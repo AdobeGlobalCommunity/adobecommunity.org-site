@@ -1,21 +1,21 @@
-<div class="row my-2">
+<div class="row my-2 eventfeature">
     <div class="col-sm-6">
          <div class="background--img" style="background-image: url({{image}})"></div>
     </div>
     <div class="col-sm-6">
         <div class="my-2">
-            <div class="lead">
+            <div class="lead eventfeature__header">
                 <a href="{{url}}">
                     {{title}}
                 </a>
             </div>
             <div>
-                {{ date.dateStr }}
+                <strong>{{ date.dateStr }}</strong>
             </div>
-        </div>
-        <div class="text-small">
-            {{ summary }}
-            <a href="{{url}}">More</a>
+            <div class="text-small">
+                {{ summary }}
+                <a href="{{url}}">More</a>
+            </div>
         </div>
     </div>
 </div>

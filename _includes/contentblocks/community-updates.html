@@ -1,8 +1,8 @@
 <div class="col-12">
     <div class="row">
         <div class="col-md-8 px-0">
-            <div class="background--pad mr-sm-0 mr-md-2 background--white h-100">
-                <h3 class="mt-2">Community Events</h3>
+            <div class="background--pad mr-sm-0 mr-md-2 background--white">
+                <h3 class="mt-2 communityupdate__header">Community Events</h3>
                 <hr class="my-2" />
                 <div class="ajax--load" data-src="/events.json" data-tpl="event-feature" data-filter="[{&quot;key&quot;: &quot;event_date&quot;, &quot;method&quot;: &quot;future&quot;},{&quot;key&quot;: &quot;featured&quot;, &quot;value&quot;: true}]">
                     <div class="ajax--loader text-center">
@@ -10,13 +10,65 @@
                     </div>
                 </div>
             </div>
+            <div class="background--pad mr-sm-0 mr-md-2 background--dark my-4 communityupdate__engage">
+                <h3 class="my-2">{{cb.header}}</h3>
+                {{cb.content}}
+            </div>
+            <div class="background--pad mr-sm-0 mr-md-2 my-4 background--white">
+                <div class="row">
+                    <div class="col-md-6 background--img" style="background-image: url({{cb.image1}})"></div>
+                    <div class="col-md-6 p-3">
+                        <h4 class="communityupdate__header">{{cb.header1}}</h4>
+                        <p>
+                            {{cb.text1}}
+                        </p>
+                        <p class="lead">
+                            <a class="btn btn-secondary" href="{{cb.link1}}" role="button">
+                                {{cb.cta1}}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="background--pad mr-sm-0 mr-md-2 my-4 background--white">
+                <div class="row">
+                    <div class="col-md-6 background--img" style="background-image: url({{cb.image2}})"></div>
+                    <div class="col-md-6 p-3">
+                        <h4 class="communityupdate__header">{{cb.header2}}</h4>
+                        <p>
+                            {{cb.text2}}
+                        </p>
+                        <p class="lead">
+                            <a class="btn btn-secondary" href="{{cb.link2}}" role="button">
+                                {{cb.cta2}}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="background--pad mr-sm-0 mr-md-2 mt-4 background--white">
+                <div class="row">
+                    <div class="col-md-6 background--img" style="background-image: url({{cb.image3}})"></div>
+                    <div class="col-md-6 p-3">
+                        <h4 class="communityupdate__header">{{cb.header3}}</h4>
+                        <p>
+                            {{cb.text3}}
+                        </p>
+                        <p class="lead">
+                            <a class="btn btn-secondary" href="{{cb.link3}}" role="button">
+                                {{cb.cta3}}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-4 background--white px-0">
             <div class="community-posts background--pad">
-                <h3 class="mt-2">Community Posts</h3>
+                <h3 class="mt-2 communityupdate__header">Community Posts</h3>
                 <hr class="my-2" />
                 {% assign articles = site.articles | reverse %}
-                {% for article in articles limit:3 %}
+                {% for article in articles limit:8 %}
                     {% include article-summary.html %} 
                 {% endfor %}
             </div>

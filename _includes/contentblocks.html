@@ -1,7 +1,7 @@
 {% capture page_path %}/{{page.path}}{% endcapture %}
 {% for cb in site.contentblocks %}
     {% if cb.page == page_path %}
-        <div class="contentblock contentblock--{{cb.layout}} row">
+        <div class="contentblock contentblock-{{cb.layout}} row">
             {% include contentblocks/{{cb.layout}}.html %}
         </div>
     {% endif %}
