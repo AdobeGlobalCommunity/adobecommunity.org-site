@@ -119,7 +119,7 @@
                     $ctx.find('.group--location-search').each(function (idx, el) {
                         var $form = $(el);
                         var $ctr = $($ctx.find('.group--container'));
-                        var $ldr = $($ctr.find('.ajax--loader'));
+                        var $ldr = $($ctr.find('.ajax-load__loader'));
                         $form.submit(function () {
                             $($ctr.find('.group--item')).hide();
                             $ldr.show();
@@ -160,66 +160,89 @@
             },
             loader: {
                 init: function ($ctx) {
-                    $ctx.find('.ajax--load').each(function (idx, el) {
+                    $ctx.find('.ajax-load').each(function (idx, el) {
                         var $cnt = $(el),
-                            $loader = $cnt.find('.ajax--loader'),
+                            $loader = $cnt.find('.ajax-load__loader'),
+                            $ctr = $cnt.find('.ajax-load__container'),
                             src = $cnt.data('src'),
                             tpl = $cnt.data('tpl'),
                             filter = $cnt.data('filter'),
                             reverse = $cnt.data('reverse') || false,
                             limit = $cnt.data('limit') || 2147483647,
-                            filterParam = $cnt.data('filter-param');
-                        if (filterParam) {
-                            if (!filter) {
-                                filter = [];
+                            filterParam = $cnt.data('filter-param'),
+                            pageSize = $cnt.data('page-size'),
+                            page = 0;
+                        var load = function(start, end){
+                            var dfd = jQuery.Deferred();
+                            if (filterParam) {
+                                if (!filter) {
+                                    filter = [];
+                                }
+                                var url = new URL(location);
+                                var param = url.searchParams.get(filterParam);
+                                if (param) {
+                                    filter.push({
+                                        "key": filterParam,
+                                        "value": param
+                                    })
+                                }
                             }
-                            var url = new URL(location);
-                            var param = url.searchParams.get(filterParam);
-                            if (param) {
-                                filter.push({
-                                    "key": filterParam,
-                                    "value": param
-                                })
-                            }
-                        }
-                        $.getJSON(src, function (data) {
-                            if (reverse) {
-                                data.reverse();
-                            }
-                            if (filter) {
-                                data = data.filter(function (elem) {
-                                    var matches = true;
-                                    filter.forEach(function (chk) {
-                                        if (matches) {
-                                            var method = chk.method || 'equals';
-                                            if (method === 'equals') {
-                                                if (elem[chk.key].constructor === Array) {
-                                                    if (elem[chk.key].indexOf(chk.value) === -1) {
+                            $.getJSON(src, function (data) {
+                                if (reverse) {
+                                    data.reverse();
+                                }
+                                if (filter) {
+                                    data = data.filter(function (elem) {
+                                        var matches = true;
+                                        filter.forEach(function (chk) {
+                                            if (matches) {
+                                                var method = chk.method || 'equals';
+                                                if (method === 'equals') {
+                                                    if (elem[chk.key].constructor === Array) {
+                                                        if (elem[chk.key].indexOf(chk.value) === -1) {
+                                                            matches = false;
+                                                        }
+                                                    } else {
+                                                        if (elem[chk.key] != chk.value) {
+                                                            matches = false;
+                                                        }
+                                                    }
+                                                } else if (method === 'future') {
+                                                    var date = new Date(elem[chk.key]);
+                                                    if (date <= new Date()) {
                                                         matches = false;
                                                     }
-                                                } else {
-                                                    if (elem[chk.key] != chk.value) {
-                                                        matches = false;
-                                                    }
-                                                }
-                                            } else if (method === 'future') {
-                                                var date = new Date(elem[chk.key]);
-                                                if (date <= new Date()) {
-                                                    matches = false;
                                                 }
                                             }
-                                        }
+                                        });
+                                        return matches;
                                     });
-                                    return matches;
+                                }
+
+                                data = data.slice(start, end);
+                                data.forEach(function (el, idx) {
+                                    el.index = idx;
+                                    el.first = (idx === 0);
                                 });
-                            }
-                            data.slice(0, limit);
-                            data.forEach(function (el, idx) {
-                                el.index = idx;
-                                el.first = (idx === 0);
+                                AGC.tpl(data, tpl, ($ctr.length > 0 ? $ctr : $cnt));
+                                $loader.hide();
+                                dfd.resolve();
                             });
-                            AGC.tpl(data, tpl, $cnt);
-                            $loader.hide();
+                            return dfd.promise();
+                        }
+                        var end = limit;
+                        if(pageSize){
+                            end = pageSize;
+                        }
+                        load(page, end);
+                        $cnt.find('.ajax-load__more').click(function(){
+                            var $btn = $(this);
+                            $btn.attr('disabled', 'disabled');
+                            page = page + pageSize;
+                            load(page, pageSize + page).done(function(){
+                                $btn.removeAttr('disabled');
+                            });
+                            return false;
                         });
                     });
                 }
@@ -390,11 +413,11 @@
         tplcb: function (data, name, cb) {
             if (AGC.tpls[name]) {
                 if (Array.isArray(data)) {
-                    cb(AGC.tpls[name](data));
-                } else {
                     data.forEach(function (item) {
                         cb(AGC.tpls[name](item));
                     });
+                } else {
+                    cb(AGC.tpls[name](data));
                 }
             } else {
                 $.ajax({

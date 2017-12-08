@@ -2,7 +2,7 @@
 ---
 
 [
-    {% for article in site.articles limit:50 %}
+    {% for article in site.articles limit:200 %}
         {
             "author": {{article.author | json2}},
             "date": "{{ article.date | date_to_xmlschema }}",

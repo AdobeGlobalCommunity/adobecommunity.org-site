@@ -14,9 +14,9 @@
                     <th>Event</th>
                 </tr>
             </thead>
-            <tbody class="ajax--load carousel-inner" data-src="/events.json" data-tpl="event-list" data-filter="[{&quot;key&quot;: &quot;event_date&quot;, &quot;method&quot;: &quot;future&quot;}{% if cb.type %},{&quot;key&quot;: &quot;type&quot;, &quot;value&quot;: &quot;{{cb.type}}&quot;}{% endif %}]" data-filter-param="type">
+            <tbody class="ajax-load carousel-inner" data-src="/events.json" data-tpl="event-list" data-filter="[{&quot;key&quot;: &quot;event_date&quot;, &quot;method&quot;: &quot;future&quot;}{% if cb.type %},{&quot;key&quot;: &quot;type&quot;, &quot;value&quot;: &quot;{{cb.type}}&quot;}{% endif %}]" data-filter-param="type" data-limit="20">
                 <tr>
-                    <td colspan="3" class="ajax--loader text-center">  
+                    <td colspan="3" class="ajax-load__loader text-center">  
                         <i class="my-4 fa fa-refresh fa-spin fa-3x fa-fw"></i>
                     </td>
                 </tr>
