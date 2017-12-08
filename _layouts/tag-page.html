@@ -7,9 +7,18 @@ layout: content-page
     <p>
         Content tagged with &quot;<span class="param-val" data-param="tags"></span>&quot;.
     </p>
-    <div class="tag__container ajax--load" data-src="/content.json" data-tpl="content-item" data-filter-param="tags">
-        <div class="ajax--loader text-center">
+    <div class="tag__container ajax-load" data-src="/content.json" data-tpl="content-item" data-filter-param="tags" data-page-size=10>
+        <div class="ajax-load__loader text-center">
             <i class="my-4 fa fa-refresh fa-spin fa-3x fa-fw"></i>
         </div>
+    <div class="ajax-load__container">
+    </div>
+    <div class="row my-4">
+        <div class="text-center col-12 m">
+            <a class="btn btn-primary ajax-load__more " href="#">
+                See More
+            </a>
+        </div>
+    </div>
     </div>
 </div>
