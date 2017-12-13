@@ -1,0 +1,18 @@
+---
+layout: article
+title: 'Setting the Selected Value in CoralUI 3'
+tags:
+  - 'Adobe Experience Manager'
+original: 'https://blogs.perficient.com/adobe/2017/12/12/setting-the-selected-value-in-coralui-3/'
+image: 'https://blogs.perficient.com/adobe/files/2017/12/lockers.jpg'
+author: 'Dan Klco'
+date: 2017-12-12T17:00:00.000Z
+---
+
+<p>Setting the value of a coral-select element in the&nbsp;<a href="https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/reference-materials/coral-ui/coralui3/index.html" target="_blank">CoralUI framework v3</a>&nbsp;is somewhat complicated. It is also different than the process for&nbsp;<a href="https://forums.adobe.com/external-link.jspa?url=https%3A%2F%2Fdocs.adobe.com%2Fdocs%2Fen%2Faem%2F6-1%2Fref%2Fcoral-ui%2Fdocs%2F2.17.0-granite-004%2Fselect.html" target="_blank">CoralUI v2</a>&nbsp;and for standard HTML5 select elements.</p>
+<p>With standard HTML5 select elements, you can simply use a snippet like this to set the selected value:</p>
+<p>&nbsp;</p>
+<pre>$('#my-select').val(value);</pre>
+<p>&nbsp;</p>
+<p>This does not work for a coral-select, however, as a coral-select contains several sub-elements to render the look and feel of the select and to see the actual form value.</p>
+<p>&nbsp;</p>
