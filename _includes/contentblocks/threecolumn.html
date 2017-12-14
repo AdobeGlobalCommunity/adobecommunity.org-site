@@ -8,12 +8,12 @@
                     {{cb.text1}}
                 </p>
                 {% if cb.cta1 %}
-                    <a class="btn btn-secondary" href="{{cb.link1}}">
+                    <a class="btn btn-secondary" href="{{cb.link1}}"{% if cb.link1 contains 'http' %} target="_blank"{% endif %}>
                         {{cb.cta1}}
                     </a>
                 {% endif %}
                 {% if cb.ctaImage1 %}
-                    <a href="{{cb.link1}}" class="align-bottom">
+                    <a href="{{cb.link1}}" class="align-bottom"{% if cb.link1 contains 'http' %} target="_blank"{% endif %}>
                         <img src="{{cb.ctaImage1}}" class="mx-auto my-1 d-block" />
                     </a>
                 {% endif %}
@@ -28,12 +28,12 @@
                         {{cb.text2}}
                     </p>
                     {% if cb.cta2 %}
-                        <a class="btn btn-secondary" href="{{cb.link2}}">
+                        <a class="btn btn-secondary" href="{{cb.link2}}"{% if cb.link2 contains 'http' %} target="_blank"{% endif %}>
                             {{cb.cta2}}
                         </a>
                     {% endif %}
                     {% if cb.ctaImage2 %}
-                        <a href="{{cb.link2}}" class="align-bottom">
+                        <a href="{{cb.link2}}" class="align-bottom"{% if cb.link2 contains 'http' %} target="_blank"{% endif %}>
                             <img src="{{cb.ctaImage2}}" class="mx-auto my-1 d-block" />
                         </a>
                     {% endif %}
@@ -49,12 +49,12 @@
                         {{cb.text3}}
                     </p>
                     {% if cb.cta3 %}
-                        <a class="btn btn-secondary " href="{{cb.link3}}">
+                        <a class="btn btn-secondary " href="{{cb.link3}}"{% if cb.link3 contains 'http' %} target="_blank"{% endif %}>
                             {{cb.cta3}}
                         </a>
                     {% endif %}
                     {% if cb.ctaImage3 %}
-                        <a href="{{cb.link3}}" class="align-bottom">
+                        <a href="{{cb.link3}}" class="align-bottom"{% if cb.link3 contains 'http' %} target="_blank"{% endif %}>
                             <img src="{{cb.ctaImage3}}" class="mx-auto my- d-block" />
                         </a>
                     {% endif %}

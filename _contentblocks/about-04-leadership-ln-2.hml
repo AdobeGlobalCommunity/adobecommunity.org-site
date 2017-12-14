@@ -2,11 +2,13 @@
 layout: threecolumn
 page: /about.html
 background: background--white
-header1: 'Carlos Castaneda<br/> Director / Volunteer Lead'
+header1: 'Carlos Castaneda'
+text1: 'Director / Volunteer Lead'
 image1: /images/leaders/carlos.jpg
 link1: https://www.amtrak.com/home.html
 ctaImage1: /images/leaders/companies/amtrak.jpg
-header2: 'Harry Segal<br/> Director'
+header2: 'Harry Segal'
+text2: 'Director'
 image2: /images/leaders/harry.jpg
 link2: https://segalsavad.com/
 ctaImage2: /images/leaders/companies/segal-savad.png
