@@ -12,6 +12,11 @@
                         {{cb.cta1}}
                     </a>
                 {% endif %}
+                {% if cb.ctaImage1 %}
+                    <a href="{{cb.link1}}" class="align-bottom">
+                        <img src="{{cb.ctaImage1}}" class="mx-auto my-1 d-block" />
+                    </a>
+                {% endif %}
             </div>
         </div>
         {% if cb.header2 %}
@@ -25,6 +30,11 @@
                     {% if cb.cta2 %}
                         <a class="btn btn-secondary" href="{{cb.link2}}">
                             {{cb.cta2}}
+                        </a>
+                    {% endif %}
+                    {% if cb.ctaImage2 %}
+                        <a href="{{cb.link2}}" class="align-bottom">
+                            <img src="{{cb.ctaImage2}}" class="mx-auto my-1 d-block" />
                         </a>
                     {% endif %}
                 </div>
@@ -41,6 +51,11 @@
                     {% if cb.cta3 %}
                         <a class="btn btn-secondary " href="{{cb.link3}}">
                             {{cb.cta3}}
+                        </a>
+                    {% endif %}
+                    {% if cb.ctaImage3 %}
+                        <a href="{{cb.link3}}" class="align-bottom">
+                            <img src="{{cb.ctaImage3}}" class="mx-auto my- d-block" />
                         </a>
                     {% endif %}
                 </div>

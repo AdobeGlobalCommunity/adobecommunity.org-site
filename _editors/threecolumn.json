@@ -50,6 +50,11 @@
          "label":"Link 1"
       },
       {
+         "name":"ctaImage1",
+         "type":"path",
+         "label":"CTA Image 1"
+      },
+      {
          "name":"header2",
          "label":"Header 2",
          "type":"text"
@@ -75,6 +80,11 @@
          "label":"Link 2"
       },
       {
+         "name":"ctaImage2",
+         "type":"path",
+         "label":"CTA Image 2"
+      },
+      {
          "name":"header3",
          "label":"Header 3",
          "type":"text"
@@ -96,6 +106,11 @@
       },
       {
          "name":"link3",
+         "type":"path",
+         "label":"CTA Image 3"
+      },
+      {
+         "name":"ctaImage3",
          "type":"path",
          "label":"Link 3"
       }
