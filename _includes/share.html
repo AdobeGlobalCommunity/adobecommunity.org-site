@@ -1,4 +1,4 @@
-<div class="share">
+<div class="share background--grey py-2 pl-1">
     Share this:
     {% capture absolute_url %}{{ site.url }}{{page.url | remove: 'index.html' | replace: '.html', '' }}?utm_source%3Dsocialshare%26utm_medium%3D{% endcapture %}
     <a class="btn btn-sm btn-secondary" href="https://twitter.com/intent/tweet?text={{page.title | urlencode}}%20{{ absolute_url | urlencode }}twitter" target="_blank" title="Share this article on Twitter">

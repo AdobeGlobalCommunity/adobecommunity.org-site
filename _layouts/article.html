@@ -2,30 +2,28 @@
 layout: content-page
 ---
 
+{% assign site =  page.original | remove:'https://' | remove:'http://' | split:'/' | first %}
 <article class="post" typeof="BlogPosting">
-    <header>
-        <div class="row">
-            <div class="col-3">
-                <img class="img-fluid" src="{{page.image}}" alt="{{page.title}}" />
-            </div>
-            <div class="col-9">
-                <h1 class="mt-0" property="headline">{{ page.title }}</h1>
-                <em>
-                    Published on <time datetime='{{page.date | date: "%Y-%m-%d"}}'>
-                    <span property="datePublished">{{page.date | date: "%B %d, %Y"}}</span></time> by 
-                    <span property="publisher" typeOf="Organization">
-                    <span property="name">{{ page.author }}</span></span>
-                </em>
-            </div>
+    <header class="background--img" style="background-image: url({{page.image}})">
+        <div class="cover p-4">
+            <h1 class="mt-0" property="headline">
+                <a href="{{page.original}}" target="_blank" rel="noopener">{{ page.title }}</a>
+            </h1>
+            <em>
+                Published on <time datetime='{{page.date | date: "%Y-%m-%d"}}'>
+                <span property="datePublished">{{page.date | date: "%B %d, %Y"}}</span></time> by 
+                <span property="publisher" typeOf="Person">
+                <span property="name">{{ page.author }}</span> on {{site}}</span>
+            </em>
         </div>
-        {% include share.html %}
     </header>
+    {% include share.html %}
     <hr class="my-4" />
     <div class="content">
         <blockquote class="blockquote">
             {{ content | strip_html | truncatewords: 150 }}
             <footer class="blockquote-footer">
-                <a href="{{page.original}}" target="_blank" rel="noopener">Read the full post &quot;{{page.title}}&quot; on {{ page.original | remove:'https://' | remove:'http://' | split:'/' | first }}</a>
+                <a href="{{page.original}}" target="_blank" rel="noopener">Read the full post &quot;{{page.title}}&quot; on {{site}}</a>
             </footer>
         </blockquote>  
     </div>

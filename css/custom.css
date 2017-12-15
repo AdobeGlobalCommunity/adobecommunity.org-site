@@ -254,6 +254,19 @@ fieldset {
     min-height: 600px;
 }
 
+.post header {
+    color: white;
+}
+
+.post header .cover {
+    min-height: 300px;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+}
+
+.post header a {
+    color: white;
+}
+
 .separator {
     height: 1em;
 }
