@@ -1,0 +1,24 @@
+---
+layout: article
+title: 'How to Incorporate Front End Builds into OSGi Bundles'
+tags:
+  - 'Apache Sling'
+  - 'Adobe Experience Manager'
+original: 'https://blogs.perficient.com/adobe/2018/01/15/how-to-incorporate-front-end-builds-into-osgi-bundles/'
+image: 'https://blogs.perficient.com/adobe/files/2018/01/packaging-1600x601.jpg'
+author: 'Dan Klco'
+date: 2018-01-15T11:00:00.000Z
+---
+
+<p>The&nbsp;<a href="https://sling.apache.org/documentation/bundles/content-loading-jcr-contentloader.html" target="_blank">Sling Content Loader</a>&nbsp;allows for creating OSGi bundles which contain content loaded into the Sling Repository. This works well for static content but doesn&rsquo;t work so well for dynamic content. This includes when using modern Front End development tools to compile and minify&nbsp;Sass / JS, especially&nbsp;when&nbsp;integrating with the&nbsp;<a href="https://maven.apache.org/" target="_blank">Maven</a>&nbsp;build process. Among&nbsp;the challenges are:</p>
+<p>&nbsp;</p>
+<ul>
+<li>Invoking the Front End Build&nbsp;as a part of the Maven Build</li>
+<li>Excluding node_modules from License Checks</li>
+<li>Including Generated Content in the Bundle</li>
+</ul>
+<p>&nbsp;</p>
+<h2>Invoking the Front End Build in the Maven Build</h2>
+<p>&nbsp;</p>
+<p>Luckily, this is a solved problem. The&nbsp;<a href="https://github.com/eirslett/frontend-maven-plugin" target="_blank">frontend-maven-plugin</a>&nbsp;is made to coordinate the build of Front End build technologies, including Gulp, Bower, NPM and Grunt through a plugin in your Maven build. To add this plugin into a Maven build,&nbsp;add a snippet like this into the relevant pom.xml:</p>
+<p>&nbsp;</p>
