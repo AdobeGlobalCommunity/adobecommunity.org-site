@@ -10,6 +10,7 @@
 			<item>
 				<title><![CDATA[{{ post.title | strip_html }}]]></title>
 				<description><![CDATA[{{ post.content | strip_html | truncatewords: 50 }}]]></description>
+                <author><![CDATA[{{ post.author | strip_html }}]]></author>
 				<content:encoded>
 					<![CDATA[
 						<img src="{{ post.image }}" title="{{ post.title }}" />
