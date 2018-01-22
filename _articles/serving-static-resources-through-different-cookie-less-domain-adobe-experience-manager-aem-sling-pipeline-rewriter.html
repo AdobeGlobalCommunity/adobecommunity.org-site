@@ -1,0 +1,12 @@
+---
+layout: article
+title: 'Serving the static resources through different domains(Cookie less Domains)'
+tags:
+  - 'Adobe Experience Manager'
+original: 'https://www.albinsblog.com/2018/01/serving-static-resources-through-different-cookie-less-domain-adobe-experience-manager-aem-sling-pipeline-rewriter.html#.WmXeX5M-dBI'
+image: 'https://2.bp.blogspot.com/-xYs7mWfP8-E/WmK28uCEzSI/AAAAAAAAAk8/zvLDWO2b8X82qlf2j4us6rFs9fd8FaedgCLcBGAs/s320/sling_pipeline_rewriter.png'
+author: 'Albin Isaac'
+date: 2018-01-20T11:00:00.000Z
+---
+
+<p>This post will explain the approach to improve the page load time of the websites through serving static resources via multiple cookie less domain.<br /><br />The page load time of the website directly related to the number of resources requested to render the page in browser, most of the cases the browser makes multiple calls to receive the related resources.<br /><br />The browser is restricted with number of default simultaneous connections per server, if the number of resources requested in the same domain is more then that will delay the page load time - the resources are loaded sequentially(this restriction is more for HTTP 1.1 but HTTP 2 protocol support parallel downloading). This issue can be addressed by distributing the static resources across multiple domains that will intern increase the parallel download of resources.<br /><br />The static resource to be on a cookie-less domain that makes the content load faster. The&nbsp;Cookies are uploaded with every request on a domain although they are only required on dynamic pages. This will add additional overhead while requesting the static resources through a cookie aware domain and increases the page load time - loading the cookie to request and download the cookie from the response.<br /><br />To avoid this problem as discussed above define multiple domains and those are cookie less.</p>
