@@ -95,7 +95,8 @@
                             if (err) {
                                 AGC.ui.alert("danger", "Unable to submit due to unexpected exception, please <a href='/contact.html'>Contact Us</a>");
                             } else {
-                                AGC.ui.alert("success", "Submitted successfully.");
+                                $form.children('fieldset').hide();
+                                $form.children('.thank-you').removeClass('d-none');
                             }
                         });
                         return false;
