@@ -1,0 +1,15 @@
+---
+layout: article
+title: 'Quick Fix: AEM + Search&Promote Integration Uses Stage'
+tags:
+  - 'Adobe Experience Manager'
+  - 'Adobe Search&Promote'
+original: 'https://blogs.perficient.com/adobe/2018/02/19/quick-fix-aem-searchpromote-integration-uses-staging/'
+image: 'https://blogs.perficient.com/adobe/files/2018/02/stage.jpg'
+author: 'Dan Klco'
+date: 2018-02-19T13:00:00.000Z
+---
+
+<p><a href="https://www.adobe.com/marketing-cloud/target/search-and-promote.html" target="_blank">Adobe Search&amp;Promote</a>&nbsp;is a powerful SaaS search offering within the&nbsp;<a href="https://www.adobe.com/marketing-cloud.html" target="_blank">Adobe Marketing Cloud</a>.&nbsp;Adobe offers an integration between Adobe Experience Manager and Adobe Search&amp;Promote using&nbsp;<a href="https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/search-and-promote.html" target="_blank">AEM&rsquo;s Cloud Services</a>. This integration is meant to allow authors to easily deploy and configure basic search experiences with the two tools.</p>
+<p>&nbsp;</p>
+<p>Unfortunately, there is an issue with the integration where AEM will cache the Stage URL for Adobe Search&amp;Promote&rsquo;s API endpoint. While you can force Adobe Search&amp;Promote to use the Live index with the sp_staged parameter, it will still use the Stage configuration. This is a serious problem as it means that you may be using configurations which are not tested or not ready yet to be live.&nbsp;</p>
