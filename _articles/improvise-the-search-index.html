@@ -1,0 +1,32 @@
+---
+layout: article
+title: 'Improvise the Search Index'
+tags:
+  - 'Adobe Experience Manager'
+original: 'https://hashimkhan.in/2018/03/12/improvise-the-search-index/'
+image: 'https://adobecq5tricksoftrade.files.wordpress.com/2015/12/cropped-cropped-1920x1080.jpg'
+author: 'Hashim Khan'
+date: 2018-03-12T09:00:00.000Z
+---
+
+<p>Conquering the necessary query is a battle half won (Read&nbsp;<a href="https://hashimkhan.in/2015/12/02/query-builder/">QueryBuilder API</a>).&nbsp; The other crucial aspect of Search in AEM is indexing. Many times it happens that even after the Query is well written with correct predicates, it results in slow executions and traversals of the repository. This can prove to be an expensive request for the system and can contribute to slower page response. OOTB Oak doesn&rsquo;t perform indexing like Jackrabbit2 used to do when the AEM instance restarts every-time. If you see below error warnings in your logs, it&rsquo;s a sign that Indexing is missing in the instance. There is a need to create Indexes using various tools and below approaches.</p>
+<div>
+<div id="highlighter_598102" class="syntaxhighlighter  bash">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="bash plain">*WARN* Traversed 10000 nodes with filter Filter(query=</code><code class="bash functions">select</code> <code class="bash plain">...) consider creating an index or changing the query</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Through this post, I would like to give an insight into Indexing fundamentals, with various Tools, by which you can improvise the Oak Indexes for your application with more understanding.</p>
+<p>&nbsp;</p>
