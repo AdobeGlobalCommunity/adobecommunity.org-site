@@ -68,7 +68,7 @@
                 <h3 class="mt-2 communityupdate__header">Community Posts</h3>
                 <hr class="my-2" />
                 {% assign articles = site.articles | reverse %}
-                {% for article in articles limit:8 %}
+                {% for article in articles limit:10 %}
                     {% include article-summary.html %} 
                 {% endfor %}
             </div>
