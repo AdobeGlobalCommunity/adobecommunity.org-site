@@ -1,6 +1,6 @@
 {% capture page_path %}/{{page.path}}{% endcapture %}
 {% for cb in site.contentblocks %}
-    {% if cb.page == page_path %}
+    {% if cb.page == page_path && cb.published != false %}
         <div class="contentblock contentblock-{{cb.layout}} row">
             {% include contentblocks/{{cb.layout}}.html %}
         </div>
