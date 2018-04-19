@@ -31,7 +31,7 @@
       },
       {
          "name":"cta",
-         "type":"textarea",
+         "type":"text",
          "label":"Call to Action"
       },
       {
@@ -50,6 +50,12 @@
          "name":"event_date",
          "type":"date",
          "label":"Date",
+         "required":true
+      },
+      {
+         "name":"event_time",
+         "type":"text",
+         "label":"Time",
          "required":true
       },
       {

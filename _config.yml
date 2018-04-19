@@ -20,6 +20,7 @@ social:
   twitter: AdobeCommunity
   facebook: AdobeCommunity
 
+date_format: '%b %d, %Y'
 time_format: '%b %d, %Y at %I:%M %p'
 
 defaults:

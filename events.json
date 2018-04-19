@@ -10,10 +10,10 @@
             "date": {
                 "dayofmonth": "{{ event.event_date | date: '%e'}}",
                 "dayofweek": "{{ event.event_date | date: '%A'}}",
-                "time": "{{ event.event_date | date: '%l:%M %p'}}",
+                "time": "{{ event.event_time }}",
                 "month": "{{ event.event_date | date: '%B'}}",
                 "year": "{{ event.event_date | date: '%Y'}}",
-                "dateStr": "{{ event.event_date | date: site.time_format }}"
+                "dateStr": "{{ event.event_date | date: site.date_format }} at {{ event.event_time }}"
             },
             "featured": {{event.featured | json2}},
             "image": {{ event.image | json2 }},
