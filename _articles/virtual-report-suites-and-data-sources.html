@@ -1,0 +1,13 @@
+---
+layout: article
+title: 'Virtual Report Suites and Data Sources'
+tags:
+  - 'Adobe Analytics'
+original: 'https://analyticsdemystified.com/adobe-analytics/virtual-report-suites-and-data-sources/?utm_source=twitter&utm_medium=social&utm_campaign=vrs-ds&utm_content=adam'
+image: 'https://analyticsdemystified.com/wp-content/uploads/2018/04/Screen-Shot-2018-04-20-at-9.56.52-AM-768x742.png'
+author: 'Adam Greco'
+date: 2018-04-30T09:00:00.000Z
+---
+
+<p>Lately, I have been seeing more and more Adobe Analytics clients moving to Virtual Report Suites. Virtual Report Suites are data sets that you create from a base Adobe Analytics report suite that differ from the original by either limiting data by a segment or making other changes to it, such as changing the visit length. Virtual Report Suites are handy because they are free, whereas sending data to multiple report suites in Adobe Analytics costs more due to increased server calls. The Virtual Report Suite feature of Adobe Analytics has matured since I&nbsp;<a href="https://analyticsdemystified.com/featured/virtual-report-suites-adobe-analytics/" target="_blank" rel="noopener">originally wrote about it back in 2016</a>. If you are not using them, you probably should be by now.</p>
+<p>However, when some of my clients have used Virtual Report Suites, I have noticed that there are some data elements that tend to not transition from the main report suite to the Virtual Report Suite. One of those items is data imported via&nbsp;<a class="externalLink" href="https://theblog.adobe.com/data-sources-inside-omniture-sitecatalyst/" target="_blank" rel="noopener">Data Sources</a>. In&nbsp;<a href="https://analyticsdemystified.com/featured/dimension-penetration/" target="_blank" rel="noopener">last week&rsquo;s post</a>, I shared an example of how you can import external metrics to your Adobe Analytics implementation via Data Sources, but there are many data points that can be imported, including metrics from 3rd party apps. One of the more common 3rd party apps that my clients integrate into Adobe Analytics are e-mail applications. For example, if your organization uses Responsys to send and report on e-mails sent to customers, you may want to use the established Data Connector that allows you to import your e-mail metrics into Adobe Analytics, such as:</p>
