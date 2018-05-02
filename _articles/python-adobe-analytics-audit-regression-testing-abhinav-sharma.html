@@ -1,0 +1,14 @@
+---
+layout: article
+title: 'Python for Adobe Analytics audit and regression testing'
+tags:
+  - 'Adobe Analytics'
+original: 'https://www.linkedin.com/pulse/python-adobe-analytics-audit-regression-testing-abhinav-sharma/'
+image: 'https://media.licdn.com/media/gcrc/dms/image/C5612AQGjGnvkSmphkA/article-cover_image-shrink_423_752/0?e=2124662400&v=beta&t=Xoa6BJDdhM1P6Gc2f7JMSRNMzD9hGXoUDSVgBKUaXxQ'
+author: 'Abhinav Sharma'
+date: 2018-03-26T09:00:00.000Z
+---
+
+<p>With Python, it&rsquo;s possible to build automation scripts that would allow you to do quick regression testing of your Adobe Analytics tags. It&rsquo;s an excellent option when you don&rsquo;t have access to enterprise data quality auditing tools (like ObservePoint etc.)&nbsp;and the task is not practical for manual testing.&nbsp;</p>
+<p>How does it work &ndash;</p>
+<p>The script will start with a single base url. Through the base url, it would launch all (or specified) links present on the page and record the tag variables fired on those specific links. The script framework that I am sharing below can be customized as per the testing needs. It&rsquo;s especially helpful if you have made changes in limited number of pages and want to test &ndash;</p>
