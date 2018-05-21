@@ -1,0 +1,14 @@
+---
+layout: article
+title: '3 Gotchas in Migrating from Felix SCR to OSGi R6 Annotations'
+tags:
+  - 'Adobe Experience Manager'
+original: 'https://blogs.perficient.com/adobe/2018/05/21/3-gotchas-in-migrating-from-felix-scr-to-osgi-r6-annotations/'
+image: 'https://blogs.perficient.com/adobe/files/2018/05/rebuilding-1.jpg'
+author: 'Dan Klco'
+date: 2018-05-21T08:00:00.000Z
+---
+
+<p>If you are on or considering upgrading to AEM 6.3+ and not already migrating to the <a href="https://enroute.osgi.org/FAQ/300-declarative-services.html" target="_blank" shape="rect">OSGi R6 DS annotations</a>, you need to start! These annotations are the officially supported method of defining OSGi Services, Components and Configurations and should be used on any new AEM development.</p>
+<p>Getting older codebases upgraded, however can be a bit more of a challenge. You <em>could</em> leave legacy projects using the <a href="http://felix.apache.org/documentation/subprojects/apache-felix-maven-scr-plugin/scr-annotations.html" target="_blank" shape="rect">Apache Felix SCR annotations</a>, however these are now officially deprecated by the Apache Felix project and will not be receiving any further updates so you may miss out on new features and capabilities available in the OSGi annotations.</p>
+<p><a href="https://github.com/cziegeler" target="_blank" shape="rect">Carsten Ziegeler</a> of Adobe R&amp;D wrote a good series of posts to help understand migrating to the OSGi DS annotations including:</p>
