@@ -1,0 +1,6 @@
+{
+    "jcr:primaryType" : "sling:Component",
+    "jcr:title": "AdobeCommunity.org - Content Page",
+    "sling:resourceSuperType": "adobecommunity-org/components/pages/base",
+    "componentType": "Page"
+}
