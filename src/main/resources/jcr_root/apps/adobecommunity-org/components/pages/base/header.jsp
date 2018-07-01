@@ -1,7 +1,7 @@
 <%@include file="/apps/adobecommunity-org/global.jsp"%>
 <div class="header-row">
     <a href="/">
-        <img src="/static/agc/clientlibs/images/logo.jpg" class="img-fluid" alt="Adobe Global Community" />
+        <img src="/static/clientlibs/adobecommunity-org/images/logo.jpg" class="img-fluid" alt="Adobe Global Community" />
     </a>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand d-lg-none" href="/">&nbsp;</a>

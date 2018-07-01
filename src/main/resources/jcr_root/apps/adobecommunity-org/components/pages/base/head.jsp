@@ -1,4 +1,4 @@
-<%@include file="/apps/danklco-com/global.jsp"%>
+<%@include file="/apps/adobecommunity-org/global.jsp"%>
 <head>
     <meta charset="utf-8" />
     <sling:call script="meta.jsp" />
@@ -21,10 +21,11 @@
     <link rel="dns-prefetch" href="//platform.twitter.com" />
     <link rel="dns-prefetch" href="//syndication.twitter.com" />
     <link rel="dns-prefetch" href="//pbs.twimg.com" />
-    <link rel="icon" type="image/png" href="/static/agc/clientlibs/images/favicon-16x16.png" sizes="16x16" />
-    <link rel="icon" type="image/png" href="/static/agc/clientlibs/images/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/static/agc/clientlibs/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/static/clientlibs/adobecommunity-org/images/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/static/clientlibs/adobecommunity-org/images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/static/clientlibs/adobecommunity-org/images/favicon-96x96.png" sizes="96x96" />
     <meta name="theme-color" content="#f4f4f4" />
-    <link rel="shortcut icon" href="/static/agc/clientlibs/images/favicon.ico" />
+    <link rel="shortcut icon" href="/static/clientlibs/adobecommunity-org/images/favicon.ico" />
+    <link rel="stylesheet" href="${sitestylesheet}" />
     <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Adobe Global Community RSS Feed" />
 </head>

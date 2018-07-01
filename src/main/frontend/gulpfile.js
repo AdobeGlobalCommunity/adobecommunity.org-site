@@ -26,13 +26,14 @@ gulp.task('styles', function() {
 		], { base: './' }))
      	.pipe(concat('styles.min.css'))
 		.pipe(rev())
-        .pipe(gulp.dest('./dist/jcr_root/static/clientlibs/danklco-com/css'))
+        .pipe(gulp.dest('./dist/jcr_root/static/clientlibs/adobecommunity-org/css'))
         .pipe(rev.manifest())
         .pipe(gulp.dest('./dist/css'));
 });
 
 var vendorJSStream = gulp.src([
 	'./node_modules/jquery/dist/jquery.min.js',
+	'./node_modules/handlebars/dist/handlebars.min.js',
 	'./node_modules/bootstrap/dist/js/bootstrap.min.js']);
 
 var jsStream = gulp.src([
@@ -50,7 +51,7 @@ gulp.task("revreplace", function(){
       manifest: manifest,
       replaceInExtensions:['.jsp']
     }))
-    .pipe(gulp.dest('./dist/jcr_root/apps/danklco-com/components/pages/base'));
+    .pipe(gulp.dest('./dist/jcr_root/apps/adobecommunity-org/components/pages/base'));
 });
 
 gulp.task('js', function() {
@@ -58,19 +59,20 @@ gulp.task('js', function() {
 		.pipe(order([
 			'node_modules/jquery/dist/jquery.min.js',
 			'node_modules/bootstrap/dist/js/bootstrap.min.js',
+			'node_modules/bootstrap/dist/js/handlebars.min.js',
 			'src/js/*.js',
 		], { base: './' }))
 		.pipe(concat('scripts.min.js'))
 		.pipe(rev())
-		.pipe(gulp.dest('./dist/jcr_root/static/clientlibs/danklco-com/js'))
+		.pipe(gulp.dest('./dist/jcr_root/static/clientlibs/adobecommunity-org/js'))
         .pipe(rev.manifest())
 		.pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('assets', function() {
 	gulp.src([
-		'./src/{fonts,img}/**/*'
-	]).pipe(gulp.dest('./dist/jcr_root/static/clientlibs/danklco-com'));
+		'./src/{fonts,images,templates}/**/*'
+	]).pipe(gulp.dest('./dist/jcr_root/static/clientlibs/adobecommunity-org'));
 
 	gulp.src([
 		'./node_modules/font-awesome/fonts/*.*'

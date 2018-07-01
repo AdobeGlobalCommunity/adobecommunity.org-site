@@ -3,7 +3,7 @@
 <c:set var="page" value="${pageMgr.page}" />
 <ul class="navbar-nav">
     <c:choose>
-        <c:when test="${page.path = '/content/agc/adobecommunity.org'}">
+        <c:when test="${page.path == '/content/agc/adobecommunity.org'}">
             <li class="nav-item active">
                 <a class="nav-link" href="/content/agc/adobecommunity.org/">Home <span class="sr-only">(current)</span></a>
             </li>

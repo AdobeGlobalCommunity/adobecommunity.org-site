@@ -15,8 +15,8 @@
         <meta name="twitter:image" content="${page.thumbnail}"/>
     </c:when>
     <c:otherwise>
-        <meta property="og:image" content="/static/agc/clientlibs/images/logo.jpg"/>
-        <meta name="twitter:image" content="/static/agc/clientlibs/images/logo.jpg"/>
+        <meta property="og:image" content="/static/clientlibs/adobecommunity-org/images/logo.jpg"/>
+        <meta name="twitter:image" content="/static/clientlibs/adobecommunity-org/images/logo.jpg"/>
     </c:otherwise>
 </c:choose>
 <meta property="og:url" content="https://www.adobecommunity.org${page.publishedPath}"/>
