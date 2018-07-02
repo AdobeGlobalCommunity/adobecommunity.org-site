@@ -1,0 +1,5 @@
+{
+    "jcr:primaryType" : "sling:Component",
+    "jcr:title": "Community Updates",
+    "componentType": "AdobeCommunity.org Home"
+}

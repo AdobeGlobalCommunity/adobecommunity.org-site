@@ -33,31 +33,6 @@
 			"name": "canonical",
 			"titleProperty": "jcr:content/jcr:title"
 		},
-		"display": {
-			"jcr:primaryType": "nt:unstructured",
-			"sling:resourceType": "sling-cms/components/editor/fields/select",
-			"type": "sling:File",
-			"label": "Display",
-			"name": "display",
-			"options": {
-				"post": {
-					"label": "Post",
-					"value": "post"
-				},
-				"audio": {
-					"label": "Audio",
-					"value": "audio"
-				},
-				"pdf": {
-					"label": "PDF",
-					"value": "pdf"
-				},
-				"video": {
-					"label": "Video",
-					"value": "embed"
-				}
-			}
-		},
 		"featuredImage": {
 			"jcr:primaryType": "nt:unstructured",
 			"sling:resourceType": "sling-cms/components/editor/fields/path",
@@ -66,6 +41,13 @@
 			"label": "Featured Image",
 			"name": "sling:thumbnail",
 			"titleProperty": "jcr:content/jcr:title"
+		},
+		"author": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Author",
+			"name": "author",
+			"required": true
 		},
 		"original": {
 			"jcr:primaryType": "nt:unstructured",

@@ -1,0 +1,50 @@
+ {
+	"jcr:primaryType": "nt:unstructured",
+	"sling:resourceType": "sling-cms/components/editor/slingform",
+	"button": "Save Left Right",
+	"fields": {
+		"jcr:primaryType": "nt:unstructured",
+		"sling:resourceType": "sling-cms/components/general/container",
+		"header1": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Header 1",
+			"name": "header1",
+			"required": true
+		},
+		"image1": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/path",
+			"label": "Image 1",
+			"name": "image1",
+			"required": true,
+			"type": "sling:File"
+		},
+		"header2": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Header 2",
+			"name": "header2"
+		},
+		"image2": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/path",
+			"label": "Image 2",
+			"name": "image2",
+			"type": "sling:File"
+		},
+		"header3": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Header 3",
+			"name": "header3"
+		},
+		"image3": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/path",
+			"label": "Image 3",
+			"name": "image3",
+			"type": "sling:File"
+		}
+	}
+}

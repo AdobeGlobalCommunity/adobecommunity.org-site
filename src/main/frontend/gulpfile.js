@@ -70,13 +70,15 @@ gulp.task('js', function() {
 });
 
 gulp.task('assets', function() {
+
 	gulp.src([
 		'./src/{fonts,images,templates}/**/*'
 	]).pipe(gulp.dest('./dist/jcr_root/static/clientlibs/adobecommunity-org'));
 
+
 	gulp.src([
 		'./node_modules/font-awesome/fonts/*.*'
-	]).pipe(gulp.dest('./dist/jcr_root/static/clientlibs/danklco-com/fonts'));
+	]).pipe(gulp.dest('./dist/jcr_root/static/clientlibs/adobecommunity-org/fonts'));
 });
 
 

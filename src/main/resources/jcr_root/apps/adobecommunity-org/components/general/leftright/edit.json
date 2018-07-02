@@ -1,0 +1,35 @@
+ {
+	"jcr:primaryType": "nt:unstructured",
+	"sling:resourceType": "sling-cms/components/editor/slingform",
+	"button": "Save Left Right",
+	"fields": {
+		"jcr:primaryType": "nt:unstructured",
+		"sling:resourceType": "sling-cms/components/general/container",
+		"header": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Header",
+			"name": "header",
+			"required": true
+		},
+		"backgroundimage": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/path",
+			"label": "Background Image",
+			"name": "backgroundimage",
+			"required": true,
+			"type": "sling:File"
+		},
+		"layout": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/select",
+			"label": "Layout",
+			"name": "layout",
+			"options": [
+				"Image Left=left",
+				"Image Right=right"
+			],
+			"required": true
+		}
+	}
+}
