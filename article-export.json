@@ -15,7 +15,7 @@
         "published": true,
         "sling:resourceType": "adobecommunity-org/components/pages/post",
         "sling:template": "/conf/adobecommunity-org/site/templates/post".
-        "snippet": "{{content | strip_html | truncatewords: 150}}"
+        "snippet": "{{article.content | strip_html | truncatewords: 150}}"
       }
     }
   {% endfor %}
