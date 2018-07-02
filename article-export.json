@@ -1,3 +1,6 @@
+---
+---
+
 {
   {% for article in site.articles %}
     "{{article.url | remove: '/learn/articles/'}}": {
