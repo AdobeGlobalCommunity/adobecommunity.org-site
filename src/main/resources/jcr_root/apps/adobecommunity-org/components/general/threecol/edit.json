@@ -1,7 +1,7 @@
  {
 	"jcr:primaryType": "nt:unstructured",
 	"sling:resourceType": "sling-cms/components/editor/slingform",
-	"button": "Save Left Right",
+	"button": "Save Three Col",
 	"fields": {
 		"jcr:primaryType": "nt:unstructured",
 		"sling:resourceType": "sling-cms/components/general/container",

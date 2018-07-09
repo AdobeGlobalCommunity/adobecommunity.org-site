@@ -14,7 +14,7 @@
 			<div class="p-4 mr-sm-0 mr-md-2 background--white h-100">
 				<img src="${properties.image2}" class="mx-auto my-4 d-block" alt="${sling:encode(properties.header2,'HTML_ATTR')}">
 				<h4>
-					<sling:encode value="${properties.header1}" mode="HTML" />
+					<sling:encode value="${properties.header2}" mode="HTML" />
 				</h4>
 				<sling:include path="container2" resourceType="sling-cms/components/general/container" />
 			</div>

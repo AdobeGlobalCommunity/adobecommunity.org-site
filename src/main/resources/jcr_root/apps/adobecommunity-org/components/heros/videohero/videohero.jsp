@@ -1,10 +1,10 @@
 <%@include file="/apps/adobecommunity-org/global.jsp"%>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 home-video" style="background-image: url('${properties.backgroundimage}');">
+        <div class="col-12 home-video" style="background-image: url('${fn:replace(properties.backgroundimage,'/content/agc/adobecommunity-org','')}');">
             <div class="home-video__container">
                 <video autoplay loop muted class="home-video__video">
-                    <source src="${properties.backgroundvideo}" type="video/mp4" />
+                    <source src="${fn:replace(properties.backgroundvideo,'/content/agc/adobecommunity-org','')}" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </div>

@@ -10,99 +10,41 @@
             });
         },
         fn: {
-            form: {
-                init: function ($ctx) {
-                    $ctx.find('.github-form').submit(function () {
-                        var $form = $(this),
-                            properties = {
-                                date: new Date()
-                            };
-                        $form.children('fieldset').attr('disabled', 'disabled');
-                        $form.find('fieldset > .form-group').each(function (idx, fieldGroup) {
-                            if ($(fieldGroup).hasClass('repeating-parent')) {
-                                var key = $(fieldGroup).attr('data-name'),
-                                    values = [],
-                                    $fields = $($(fieldGroup).find('.repeating-container input,.repeating-container select'));
-                                $fields.each(function (idx, field) {
-                                    values.push($(field).val());
-                                });
-                                properties[key] = values;
-                            } else {
-                                if ($(fieldGroup).find('textarea[name=content]').length <= 0) {
-                                    var $fields = $($(fieldGroup).find('input,select'));
-                                    $fields.each(function (idx, field) {
-                                        properties[$(field).attr('name')] = $(field).val();
-                                    });
-                                }
-                            }
-                        });
-
-                        if (properties.created === '') {
-                            properties.created = new Date();
-                        } else {
-                            properties.created = new Date(Date.parse(properties.created));
-                        }
-                        var page = "---\n" + jsyaml.safeDump(properties) + "\n---\n\n" + $form.find('textarea[name=content]').val();
-                        var path = null;
-                        if (window.location.hash === "") {
-                            path = $('input[name=path]').val() + properties.title.toLowerCase().replace(/\W/g, '-') + '.html';
-                        } else {
-                            path = window.location.hash.substr(1);
-                        }
-
-                        var issues = AGC.gh.getIssues();
-
-                        issues.createIssue({
-                            "title": "Add " + path + " by " + properties.author + " on " + new Date().toLocaleDateString(),
-                            "body": page,
-                            "labels": [
-								"content"
-							]
-                        }, function (err) {
-                            $form.children('fieldset').removeAttr('disabled');
-                            if (err) {
-                                AGC.ui.alert("danger", "Unable to submit due to unexpected exception, please <a href='/contact.html'>Contact Us</a>");
-                                console.log(err);
-                            } else {
-                                AGC.ui.alert("success", "Submitted successfully. Changes should be reflected within 24-48 hours.");
-                            }
-                        });
-                        return false;
-                    });
-
-
-                    $ctx.find('.github-contact-form').submit(function () {
-                        var $form = $(this);
-                        var data = {
-                            date: new Date()
-                        };
-                        $form.find('input, select, textarea').each(function (idx, el) {
-                            var $fld = $(el);
-                            data[$fld.attr('name')] = $fld.val();
-                        })
-                        $form.children('fieldset').attr('disabled', 'disabled');
-
-                        var issues = AGC.gh.getIssues();
-
-                        issues.createIssue({
-                            "title": "Form Submission '" + $form.data('analytics-id') + "' on " + new Date().toLocaleDateString(),
-                            "body": jsyaml.safeDump(data),
-                            "labels": [
-								"form"
-							]
-                        }, function (err) {
-                            $form.children('fieldset').removeAttr('disabled');
-                            if (err) {
-                                AGC.ui.alert("danger", "Unable to submit due to unexpected exception, please <a href='/contact.html'>Contact Us</a>");
-                            } else {
-                                $form.children('fieldset').hide();
-                                $form.children('.thank-you').removeClass('d-none');
-                            }
-                        });
-                        return false;
-                    });
-                }
-            },
+        	cug: {
+        		hide: function($cug){
+        			$cug.css('display','none');
+        		},
+        		init: function($ctx){
+        			
+        			if(!AGC.profile.initialized){
+        				AGC.fn.profile.init($ctx);
+        			}
+        			$ctx.find('.agc__cug').each(function(idx, el){
+        				var $cug = $(el);
+        				if($cug.data('auth')){
+        					if(AGC.profile.loggedIn){
+        						AGC.fn.cug.show($cug);
+        					} else {
+        						AGC.fn.cug.hide($cug);
+        					}
+        				} else {
+        					if(!AGC.profile.loggedIn){
+        						AGC.fn.cug.show($cug);
+        					} else {
+        						AGC.fn.cug.hide($cug);
+        					}
+        				}
+        			});
+        		},
+        		show: function($cug){
+        			$cug.css('display','block');
+        			if($cug.data('template')){
+        				AGC.tplcb(AGC.profile, $cug.data('template'), function (content) {
+        					 $cug.html(content);
+        				});
+        			}
+        		}
+        	},
             groupSearch: {
                 distance: function (lat1, lon1, lat2, lon2) {
                     var radlat1 = Math.PI * lat1 / 180;
@@ -173,6 +115,7 @@
                             filterParam = $cnt.data('filter-param'),
                             pageSize = $cnt.data('page-size'),
                             page = 0;
+                        filter = JSON.parse(filter.replace(/'/g, '"'));
                         var load = function(start, end){
                             var dfd = jQuery.Deferred();
                             if (filterParam) {
@@ -189,10 +132,14 @@
                                 }
                             }
                             $.getJSON(src, function (data) {
+                            	if(!Array.isArray(data)){
+                            		data = data.data;
+                            	}
                                 if (reverse) {
                                     data.reverse();
                                 }
                                 if (filter) {
+
                                     data = data.filter(function (elem) {
                                         var matches = true;
                                         filter.forEach(function (chk) {
@@ -257,9 +204,9 @@
                             var latTotal = 0;
                             var lngTotal = 0;
                             var markerCount = 0;
-                            groups.forEach(function (group) {
-                                latTotal += group.lat;
-                                lngTotal += group.lng;
+                            groups.data.forEach(function (group) {
+                                latTotal += parseFloat(group.lat);
+                                lngTotal += parseFloat(group.lng);
                                 markerCount++;
                             });
                             var center = {
@@ -271,12 +218,12 @@
                                 zoom: 2,
                                 center: center
                             });
-                            groups.forEach(function (group) {
+                            groups.data.forEach(function (group) {
                                 AGC.tplcb(group, template, function (content) {
                                     var marker = new google.maps.Marker({
                                         position: {
-                                            lat: group.lat,
-                                            lng: group.lng
+                                            lat: parseFloat(group.lat),
+                                            lng: parseFloat(group.lng)
                                         },
                                         map: map
                                     });
@@ -357,6 +304,21 @@
                     });
                 }
             },
+			profile : {
+				init : function($ctx) {
+					if (AGC.profile.initialized === false) {
+						if(sessionStorage.hasOwnProperty('profile')){
+							AGC.profile = JSON.parse(sessionStorage.getItem("profile"));
+						} else {
+							$.getJSON(window.location.pathname.replace('.html','.model.json'), function(profile){
+								AGC.profile = profile;
+								sessionStorage.setItem('profile', JSON.stringify(profile));
+							});
+						}
+						AGC.profile.initialized = true;
+					}
+				}
+			},
             repeating: {
                 repeatingAdd: function ($btn) {
                     var html = $btn.closest('.repeating-parent').find('.repeating-template').first().html();
@@ -380,6 +342,15 @@
                     });
                     $ctx.find('.repeating-remove').click(AGC.fn.repeating.repeatingRemove);
                 }
+            },
+            resetLogin: {
+            	init: function ($ctx) {
+            		$ctx.find('a[href=/system/sling/logout]').click(AGC.fn.resetLogin.reset);
+            		$ctx.find('form[data-analytics-id="Login Form"]').submit(AGC.fn.resetLogin.reset);
+            	},
+            	reset: function(){
+            		sessionStorage.removeItem("profile");
+            	}
             },
             tags: {
                 init: function ($ctx) {
@@ -410,6 +381,9 @@
                 return gh.getRepo("AdobeGlobalCommunity/adobeglobalcommunity.org-site");
             }
         },
+        profile: {
+        	initialized: false
+        },
         tpls: {},
         tplcb: function (data, name, cb) {
             if (AGC.tpls[name]) {
@@ -422,7 +396,7 @@
                 }
             } else {
                 $.ajax({
-                    url: '/templates/' + name + '.hbs',
+                    url: '/static/clientlibs/adobecommunity-org/templates/' + name + '.hbs',
                     cache: true,
                     success: function (hbs) {
                         AGC.tpls[name] = Handlebars.compile(hbs);

@@ -7,7 +7,7 @@
                 	<sling:encode value="${properties.eventsheader}" mode="HTML" />
                 </h3>
                 <hr class="my-2" />
-                <h1>Placeholder for events!</h1>
+                <sling:include path="eventfeature" resourceType="adobecommunity-org/components/home/eventfeature" />
             </div>
             <div class="background--pad mr-sm-0 mr-md-2 background--dark my-4 communityupdate__engage">
                 <h3 class="my-2">
@@ -23,7 +23,7 @@
                 	<sling:encode value="${properties.postsheader}" mode="HTML" />
                 </h3>
                 <hr class="my-2" />
-                <h1>Placeholder for articles!</h1>
+                <sling:include path="posts" resourceType="adobecommunity-org/components/lists/recent-posts" />
             </div>
         </div>
     </div>

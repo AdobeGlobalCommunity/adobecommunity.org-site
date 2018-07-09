@@ -1,6 +1,6 @@
 {
 	"jcr:primaryType": "sling:Component",
     "sling:resourceSuperType": "reference/components/general/list",
-    "componentType": "DanKlco.com",
+    "componentType": "AdobeCommunity.org",
     "jcr:title": "Tag List Item"
 }

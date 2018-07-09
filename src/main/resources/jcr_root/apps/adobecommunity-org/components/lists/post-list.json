@@ -1,0 +1,6 @@
+{
+	"jcr:primaryType": "sling:Component",
+    "componentType": "AdobeCommunity.org",
+    "sling:resourceSuperType": "reference/components/general/list",
+    "jcr:title": "Post List"
+}

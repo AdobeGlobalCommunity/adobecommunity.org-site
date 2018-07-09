@@ -1,5 +1,5 @@
 <%@include file="/apps/adobecommunity-org/global.jsp"%>
-<div class="col-12 background--img" style="background-image: url(${properties.backgroundimage})">
+<div class="col-12 background--img" style="background-image: url(${fn:replace(properties.backgroundimage,'/content/agc/adobecommunity-org','')})">
     <div class="background--opaque">
         <div class="jumbotron jumbotron--light container">    
             <h1 class="display-3">

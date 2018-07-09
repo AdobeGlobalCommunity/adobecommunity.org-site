@@ -1,0 +1,51 @@
+ {
+	"jcr:primaryType": "nt:unstructured",
+	"sling:resourceType": "sling-cms/components/editor/slingform",
+	"button": "Save Contact Form",
+	"fields": {
+		"jcr:primaryType": "nt:unstructured",
+		"sling:resourceType": "sling-cms/components/general/container",
+		"to": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "To",
+			"name": "to",
+			"required": true
+		},
+		"subject": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Subject",
+			"name": "subject",
+			"required": true
+		},
+		"template": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/textarea",
+			"label": "Template",
+			"name": "template",
+			"required": true
+		},
+		"thankyoupage": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/path",
+			"label": "Thank You Page",
+			"name": "thankyoupage",
+			"required": true
+		},
+		"confirmationsubject": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Confirmation Subject",
+			"name": "confirmationsubject",
+			"required": true
+		},
+		"confirmationmessage": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/textarea",
+			"label": "Confirmation Message",
+			"name": "confirmationmessage",
+			"required": true
+		}
+	}
+}

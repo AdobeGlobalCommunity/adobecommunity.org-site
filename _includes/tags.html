@@ -1,7 +1,0 @@
-<hr class="my-4"/>
-<h4>Tags</h4>
-<div class="tags" property="keywords">
-    {% for tag in page.tags %}
-        <a href="/tag.html?tags={{tag | UrlEncode | replace: ' ', '%20'}}" title="Posts tagged with {{tag}}">{{ tag }}</a>&nbsp;&nbsp;
-    {% endfor %}
-</div>
