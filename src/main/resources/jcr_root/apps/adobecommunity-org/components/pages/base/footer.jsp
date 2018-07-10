@@ -7,6 +7,8 @@
                 <fmt:formatDate value="${date}" pattern="yyyy" var="currentYear" />
                 <a class="nav-link disabled" href="/content/agc/adobecommunity-org/">&copy; Copyright ${currentYear} &mdash; Adobe Global Community</a>
             </li>
+        </ul>
+        <ul class="nav pull-right">
             <li class="nav-item">
                 <a class="nav-link" href="https://twitter.com/adobeglobal" target="_blank" title="Follow Adobe Global Community on Twitter"><em class="fa fa-twitter"></em></a>
             </li>
@@ -28,5 +30,9 @@
                 <a class="nav-link" href="/content/agc/adobecommunity-org/privacy-policy.html">Privacy Policy</a>
             </li>
         </ul>
+	  <form class="form-inline" action="/content/agc/adobecommunity-org/search.html">
+	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" />
+	    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+	  </form>
     </div>
 </footer>
