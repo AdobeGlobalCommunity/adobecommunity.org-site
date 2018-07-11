@@ -6,7 +6,7 @@
 		</div>
 	</c:when>
 </c:choose>
-<form class="my-4" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Login Form">  
+<form class="my-4" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Request Reset Password Form">  
     <div class="form-group">
         <label for="email">Your Email <span class="text-danger">*</span></label>
         <input type="email" class="form-control" required="required" name="email" />

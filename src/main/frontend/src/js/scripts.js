@@ -195,6 +195,34 @@
                     });
                 }
             },
+            login:{
+            	init: function($ctx){
+            		$ctx.find('.login-form').submit(function(ev){
+            			var $form= $(ev.target);
+            			$.post($form.attr('action'), $form.serialize(), function(){
+                    		sessionStorage.removeItem("profile");
+            				window.location = '/members.html';
+            			}).fail(function(jqXHR, textStatus, errorThrown){
+            				$('.alert-warning').removeClass('d-none');
+                    		sessionStorage.removeItem("profile");
+            			});
+            			return false;
+            		});
+            	}
+            },
+            logout: {
+            	init: function ($ctx) {
+            		$ctx.find('a[href="/system/sling/logout"]').click(function(){
+            			$.get('/system/sling/logout', function(){
+                    		sessionStorage.removeItem("profile");
+            				window.location = '/';
+            			}).fail(function(jqXHR, textStatus, errorThrown){
+                    		sessionStorage.removeItem("profile");
+            				window.location = '/';
+            			});
+            		});
+            	}
+            },
             maps: {
                 initMaps: function () {
                     $('.google-map').each(function (idx, el) {
@@ -313,6 +341,7 @@
 							$.getJSON(window.location.pathname.replace('.html','.model.json'), function(profile){
 								AGC.profile = profile;
 								sessionStorage.setItem('profile', JSON.stringify(profile));
+								AGC.fn.cug.init($(document));
 							});
 						}
 						AGC.profile.initialized = true;
@@ -343,42 +372,80 @@
                     $ctx.find('.repeating-remove').click(AGC.fn.repeating.repeatingRemove);
                 }
             },
-            resetLogin: {
-            	init: function ($ctx) {
-            		$ctx.find('a[href=/system/sling/logout]').click(AGC.fn.resetLogin.reset);
-            		$ctx.find('form[data-analytics-id="Login Form"]').submit(AGC.fn.resetLogin.reset);
-            	},
-            	reset: function(){
-            		sessionStorage.removeItem("profile");
+            stripe: {
+            	init: function($ctx){
+            		var enablePayment = false;
+            		var paymentValidated = false;
+            		
+            		var paymentDisplay = function(){
+            			if($ctx.find('input[name=level]:checked').val() == 'Free'){
+            				enablePayment = false;
+            				$ctx.find('.card-container').css('display','none');
+            			} else {
+            				$ctx.find('.card-container').css('display','block').removeClass('d-none');
+            				enablePayment = true;
+            			}
+            		}
+            		paymentDisplay();
+            		
+            		$ctx.find('input[name=level]').change(paymentDisplay);
+            		
+            		$ctx.find('form.payment-form').each(function(idx, form){
+            			var $form = $(form);
+            			var stripe = Stripe('pk_test_qewDgNPXMwIYc6coBVfS1ZQ1');
+            			var elements = stripe.elements();
+            			
+            			var style = {
+						  base: {
+						    color: '#323232',
+						    lineHeight: '24px',
+						    fontFamily: 'Helvetica, sans-serif',
+						    fontSmoothing: 'antialiased',
+						    fontSize: '16px',
+						    '::placeholder': {
+						      color: '#aab7c4'
+						    }
+						  },
+						  invalid: {
+						    color: '#fa755a',
+						    iconColor: '#fa755a'
+						  }
+						};
+
+            			var card = elements.create('card', style);
+            			card.mount('#card-element');
+            			
+            			card.addEventListener('change', function(event) {
+            				var displayError = document.getElementById('card-errors');
+            				if (event.error) {
+            					displayError.textContent = event.error.message;
+            				} else {
+            					displayError.textContent = '';
+            				}
+            			});
+            			$form.submit(function(event) {
+                			if(enablePayment && !paymentValidated){
+                				event.preventDefault();
+        						stripe.createToken(card).then(function(result) {
+        							if (result.error) {
+        								$('#card-errors').text(result.error.message);
+        							} else {
+        								var hiddenInput = document.createElement('input');
+        								hiddenInput.setAttribute('type', 'hidden');
+        								hiddenInput.setAttribute('name', 'stripeToken');
+        								hiddenInput.setAttribute('value', result.token.id);
+        								$form.append(hiddenInput);
+        								paymentValidated = true;
+        								// Submit the form
+        								$form.submit();
+        						    }
+        						});
+
+                    			return false;
+                			}
+    					});
+            		});
             	}
-            },
-            tags: {
-                init: function ($ctx) {
-                    $ctx.find('#tag-options').each(function (idx, el) {
-                        var $ops = $(el);
-                        $.getJSON("/tags.json", function (tags) {
-                            tags.sort(function (a, b) {
-                                return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-                            });
-                            tags.forEach(function (tag) {
-                                $ops.append("<option>" + tag.name + "<option>");
-                            });
-                        })
-                    });
-                }
-            }
-        },
-        gh: {
-            accessToken: 'ZTZiZWFiNmRlZTI4N2U0YzBkMGNiNjgzMGVlY2FjY2QzZGY1NmU1NQ==',
-            getIssues: function () {
-                var gh = new GitHub({
-                    token: atob(AGC.gh.accessToken)
-                });
-                return gh.getIssues("AdobeGlobalCommunity/adobeglobalcommunity.org-site");
-            },
-            getRepo: function () {
-                var gh = new GitHub();
-                return gh.getRepo("AdobeGlobalCommunity/adobeglobalcommunity.org-site");
             }
         },
         profile: {

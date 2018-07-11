@@ -12,11 +12,13 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 
 import org.adobecommunity.site.impl.jobs.EmailQueueConsumer;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.api.security.user.UserManager;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
@@ -33,14 +35,19 @@ public class RequestResetPasswordServlet extends SlingAllMethodsServlet {
 
 	public static final String PN_RESETTOKEN = "resettoken";
 
+	public static final String PN_EMAIL = "email";
+
 	public static final String PN_RESETDEADLINE = "resetdeadline";
 
 	private static final long serialVersionUID = -1265699330904067650L;
 
-	private static final Logger log = LoggerFactory.getLogger(JoinServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(RequestResetPasswordServlet.class);
 
 	@Reference
 	private JobManager jobManager;
+
+	@Reference
+	private ResourceResolverFactory factory;
 
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -48,14 +55,23 @@ public class RequestResetPasswordServlet extends SlingAllMethodsServlet {
 		Map<String, Object> serviceParams = new HashMap<String, Object>();
 		serviceParams.put(ResourceResolverFactory.SUBSERVICE, "usermanager");
 
+		String referer = request.getHeader("referer");
+		if (referer.contains("?")) {
+			referer = referer.substring(0, referer.indexOf("?"));
+		}
+
+		ResourceResolver adminResolver = null;
 		try {
 
-			JackrabbitSession session = (JackrabbitSession) request.getResourceResolver().adaptTo(Session.class);
+			adminResolver = factory.getServiceResourceResolver(serviceParams);
+			JackrabbitSession session = (JackrabbitSession) adminResolver.adaptTo(Session.class);
 			final UserManager userManager = session.getUserManager();
 
-			if (userManager.getAuthorizable(request.getParameter("email")) != null) {
+			String email = StringUtils.trim(request.getParameter("email"));
 
-				User user = (User) userManager.getAuthorizable(request.getParameter("email"));
+			if (userManager.getAuthorizable(email) != null) {
+
+				User user = (User) userManager.getAuthorizable(email);
 
 				String resetToken = UUID.randomUUID().toString();
 				Calendar deadline = Calendar.getInstance();
@@ -67,32 +83,33 @@ public class RequestResetPasswordServlet extends SlingAllMethodsServlet {
 				user.setProperty(PN_RESETDEADLINE, vf.createValue(deadline));
 
 				log.debug("Saving changes!");
-				request.getResourceResolver().commit();
+				adminResolver.commit();
 
 				ValueMap properties = request.getResource().getValueMap();
 
-				EmailQueueConsumer.queueMessage(jobManager, properties.get("resetsender", String.class),
-						request.getParameter("email"), properties.get("resetsubject", String.class),
+				EmailQueueConsumer.queueMessage(jobManager, properties.get("emailsender", String.class),
+						request.getParameter(PN_EMAIL), properties.get("resetsubject", String.class),
 						properties.get("resetmessage", String.class), new HashMap<String, Object>() {
 							private static final long serialVersionUID = 1L;
 							{
 								put(PN_RESETTOKEN, resetToken);
+								put(PN_EMAIL, request.getParameter(PN_EMAIL));
 							}
 						});
 
-				String referer = request.getHeader("referer");
-				if (referer.contains("?")) {
-					referer = referer.substring(0, referer.indexOf("?"));
-				}
 				response.sendRedirect(referer + "?res=passwordreset");
 
 			} else {
-				log.warn("A user with the name {} already exists!", request.getResourceResolver().getUserID());
-				response.sendRedirect(request.getHeader("referer") + "?res=passwordreset");
+				log.warn("Unable to find user {}", email);
+				response.sendRedirect(referer + "?res=passwordreset");
 			}
 		} catch (Exception e) {
 			log.debug("Unexpected exception requesting password reset", e);
-			response.sendRedirect(request.getHeader("referer") + "?res=passwordreset");
+			response.sendRedirect(referer + "?res=passwordreset");
+		} finally {
+			if (adminResolver != null) {
+				adminResolver.close();
+			}
 		}
 
 	}

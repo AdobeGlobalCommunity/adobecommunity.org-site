@@ -51,7 +51,7 @@ public class UserData {
 						value[i] = val[i].getString();
 					}
 					profile.put(key, value);
-				} else {
+				} else if (val.length != 0) {
 					profile.put(key, val[0].getString());
 				}
 			}

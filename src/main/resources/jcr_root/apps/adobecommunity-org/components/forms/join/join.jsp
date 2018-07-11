@@ -16,7 +16,51 @@
 		</div>
 	</c:when>
 </c:choose>
-<form class="my-4" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Join AGC">
+<form class="my-4 payment-form" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Join AGC">
+	<fieldset>
+        <legend>Membership Level</legend>
+        <div class="row">
+			<div class="col-md-4">
+				<div class="p-1 m-1 background--white h-100">
+					<label>
+						<input type="radio" name="level" id="level-free" value="Free" checked="checked" />
+						<strong>Free Member</strong>
+					</label>
+					<sling:include path="freecontainer" resourceType="sling-cms/components/general/container" />
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="p-1 m-1 background--white h-100">
+					<label>
+						<input type="radio" name="level" id="level-pro" value="Pro" />
+						<strong>Pro Member</strong>
+					</label>
+					<sling:include path="procontainer" resourceType="sling-cms/components/general/container" />
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="p-1 m-1 background--white h-100">
+					<label>
+						<input type="radio" name="level" id="level-expert" value="Expert" />
+						<strong>Expert Member</strong>
+					</label>
+					<sling:include path="expertcontainer" resourceType="sling-cms/components/general/container" />
+				</div>
+			</div>
+		</div>
+    </fieldset>
+    <fieldset class="d-none card-container">
+        <legend>Membership Payment</legend>
+		<div class="form-group">
+			<label for="card-element">
+			  Credit or debit card
+			</label>
+			<div id="card-element">
+			  <!-- A Stripe Element will be inserted here. -->
+			</div>
+			<div id="card-errors" role="alert"></div>
+		</div>
+    </fieldset>
     <fieldset>
         <legend>Login</legend>
         <div class="form-group">

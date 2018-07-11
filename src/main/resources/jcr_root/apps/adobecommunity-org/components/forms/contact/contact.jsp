@@ -1,4 +1,11 @@
 <%@include file="/libs/sling-cms/global.jsp"%>
+<c:choose>
+	<c:when test="${param.err == 'email'}">
+		<div class="alert alert-danger" role="alert">
+			Please complete all required fields.
+		</div>
+	</c:when>
+</c:choose>
 <form class="my-4" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Contact Us">
     <fieldset>
         <legend>Your Information</legend>

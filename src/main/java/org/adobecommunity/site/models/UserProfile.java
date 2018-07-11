@@ -2,7 +2,9 @@ package org.adobecommunity.site.models;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.jcr.RepositoryException;
@@ -46,8 +48,11 @@ public class UserProfile {
 
 	private String organizing;
 
+	@Required
+	private String level;
+
 	public UserProfile(SlingHttpServletRequest request) throws IllegalArgumentException, IllegalAccessException {
-		for (Field field : this.getClass().getDeclaredFields()) {
+		for (Field field : this.getFields(this.getClass())) {
 			if (!Modifier.isStatic(field.getModifiers())) {
 				log.debug("Loading field {}", field.getName());
 				field.setAccessible(true);
@@ -69,6 +74,10 @@ public class UserProfile {
 
 	public String getCompany() {
 		return company;
+	}
+
+	public String getLevel() {
+		return level;
 	}
 
 	public String getName() {
@@ -103,6 +112,10 @@ public class UserProfile {
 		this.company = company;
 	}
 
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -131,10 +144,39 @@ public class UserProfile {
 		this.topics = topics;
 	}
 
+	public Map<String, Object> toMap()
+			throws IllegalArgumentException, IllegalAccessException, UnsupportedRepositoryOperationException {
+		Map<String, Object> data = new HashMap<String, Object>();
+		for (Field field : getFields(this.getClass())) {
+			if (!Modifier.isStatic(field.getModifiers())) {
+				field.setAccessible(true);
+				if (!"password".equals(field.getName())) {
+					data.put(field.getName(), field.get(this));
+				}
+			}
+		}
+		return data;
+	}
+
+	public List<Field> getFields(Class<?> clazz) {
+		List<Field> fields = new ArrayList<Field>();
+
+		for (Field f : clazz.getDeclaredFields()) {
+			fields.add(f);
+		}
+
+		if (clazz.getSuperclass() != null) {
+			for (Field f : clazz.getSuperclass().getDeclaredFields()) {
+				fields.add(f);
+			}
+		}
+		return fields;
+	}
+
 	public void updateUser(User user, Session session) throws IllegalArgumentException, IllegalAccessException,
 			UnsupportedRepositoryOperationException, RepositoryException {
 		ValueFactory vf = session.getValueFactory();
-		for (Field field : this.getClass().getDeclaredFields()) {
+		for (Field field : getFields(this.getClass())) {
 			if (!Modifier.isStatic(field.getModifiers())) {
 				field.setAccessible(true);
 				if (!ArrayUtils.contains(new String[] { "email", "password" }, field.getName())) {
@@ -155,20 +197,6 @@ public class UserProfile {
 				}
 			}
 		}
-	}
-
-	public Map<String, Object> toMap()
-			throws IllegalArgumentException, IllegalAccessException, UnsupportedRepositoryOperationException {
-		Map<String, Object> data = new HashMap<String, Object>();
-		for (Field field : this.getClass().getDeclaredFields()) {
-			if (!Modifier.isStatic(field.getModifiers())) {
-				field.setAccessible(true);
-				if (!"password".equals(field.getName())) {
-					data.put(field.getName(), field.get(this));
-				}
-			}
-		}
-		return data;
 	}
 
 }

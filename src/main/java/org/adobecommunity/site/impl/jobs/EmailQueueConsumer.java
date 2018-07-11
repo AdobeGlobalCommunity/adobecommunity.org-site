@@ -74,6 +74,7 @@ public class EmailQueueConsumer implements JobConsumer {
 		data.put(EmailQueueConsumer.MESSAGE, message);
 		data.put(EmailQueueConsumer.TO, to);
 		jobMgr.addJob(TOPIC, data);
+		log.debug("Job queued successfully!");
 	}
 
 	public JobResult process(final Job job) {

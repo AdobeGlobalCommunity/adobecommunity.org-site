@@ -1,10 +1,7 @@
 package org.adobecommunity.site.internal;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -14,7 +11,6 @@ import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.api.security.user.UserManager;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
@@ -32,8 +28,10 @@ public class ChangePasswordServlet extends SlingAllMethodsServlet {
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 
-		Map<String, Object> serviceParams = new HashMap<String, Object>();
-		serviceParams.put(ResourceResolverFactory.SUBSERVICE, "usermanager");
+		String referer = request.getHeader("referer");
+		if (referer.contains("?")) {
+			referer = referer.substring(0, referer.indexOf("?"));
+		}
 
 		try {
 
@@ -48,19 +46,15 @@ public class ChangePasswordServlet extends SlingAllMethodsServlet {
 				log.debug("Saving changes!");
 				request.getResourceResolver().commit();
 
-				String referer = request.getHeader("referer");
-				if (referer.contains("?")) {
-					referer = referer.substring(0, referer.indexOf("?"));
-				}
 				response.sendRedirect(referer + "?res=changepasswd");
 
 			} else {
 				log.warn("A user with the name {} already exists!", request.getResourceResolver().getUserID());
-				response.sendRedirect(request.getHeader("referer") + "?err=pwdne");
+				response.sendRedirect(referer + "?err=pwdne");
 			}
-		} catch (RepositoryException e) {
+		} catch (Exception e) {
 			log.debug("Unexpected exception creating user", e);
-			response.sendRedirect(request.getHeader("referer") + "?err=pwerr");
+			response.sendRedirect(referer + "?err=pwerr");
 		}
 
 	}

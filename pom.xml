@@ -108,6 +108,7 @@
 						</Sling-Initial-Content>
 						<Include-Resource>{maven-resources},${basedir}/target/frontend/dist</Include-Resource>
 						<Sling-Model-Packages>org.adobecommunity.site.models</Sling-Model-Packages>
+						<Embed-Dependency>*;scope=compile|runtime;inline=true</Embed-Dependency>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -125,8 +126,8 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -207,7 +208,18 @@
 			<groupId>org.apache.jackrabbit</groupId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>5.38.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.2</version>
+		</dependency>
 	</dependencies>
+
 
 
 	<profiles>

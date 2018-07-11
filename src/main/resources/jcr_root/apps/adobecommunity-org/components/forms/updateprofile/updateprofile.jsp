@@ -25,6 +25,11 @@
             <input type="text" class="form-control" required="required" name="name" value="${sling:encode(userData.profile.name,'HTML_ATTR')}" />
         </div>
         <div class="form-group">
+            <label for="level">Membership Level <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" readonly="readonly" name="level" value="${sling:encode(userData.profile.level,'HTML_ATTR')}"  />
+            <p><a href="/content/agc/adobecommunity-org/contact.html">Contact Us</a> to update your membership level.
+        </div>
+        <div class="form-group">
             <label for="phone">Your Phone <span class="text-danger">*</span></label>
             <input type="tel" class="form-control" required="required" name="phone" value="${sling:encode(userData.profile.phone,'HTML_ATTR')}"  />
         </div>

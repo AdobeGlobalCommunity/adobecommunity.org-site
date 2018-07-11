@@ -29,6 +29,11 @@ public class ContactServlet extends SlingAllMethodsServlet {
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 
+		String referer = request.getHeader("referer");
+		if (referer.contains("?")) {
+			referer = referer.substring(0, referer.indexOf("?"));
+		}
+
 		String email = request.getParameter("email");
 		if (StringUtils.isNotEmpty(email)) {
 
@@ -40,8 +45,7 @@ public class ContactServlet extends SlingAllMethodsServlet {
 
 			response.sendRedirect(request.getResourceResolver().map(request, thankyoupage) + ".html");
 		} else {
-			response.sendError(400, "No email specified");
-			throw new ServletException("No email specified");
+			response.sendRedirect(referer + "?error=email");
 		}
 
 	}
