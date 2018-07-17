@@ -1,6 +1,6 @@
 <%@include file="/apps/adobecommunity-org/global.jsp"%>
 <c:if test="${param.res == 'created'}">
-	<div class="d-none alert alert-success" role="alert">
+	<div class="alert alert-success" role="alert">
 		User created successfully! Please login with your email and password.
 	</div>
 </c:if>

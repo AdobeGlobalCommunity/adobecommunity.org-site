@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.adobecommunity.site.impl.jobs.EmailQueueConsumer.Config;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -41,6 +42,8 @@ public class EmailQueueConsumer implements JobConsumer {
 		@AttributeDefinition(type = AttributeType.PASSWORD)
 		String password();
 
+		String defaultSender();
+
 	}
 
 	@Reference
@@ -77,6 +80,22 @@ public class EmailQueueConsumer implements JobConsumer {
 		log.debug("Job queued successfully!");
 	}
 
+	public static void queueMessage(JobManager jobMgr, String to, String subject, String messageTemplate,
+			Map<String, Object> parameters) {
+		StrSubstitutor sub = new StrSubstitutor(parameters);
+
+		String message = sub.replace(messageTemplate);
+
+		log.debug("Queueing contact message to {}", to);
+
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put(EmailQueueConsumer.SUBJECT, subject);
+		data.put(EmailQueueConsumer.MESSAGE, message);
+		data.put(EmailQueueConsumer.TO, to);
+		jobMgr.addJob(TOPIC, data);
+		log.debug("Job queued successfully!");
+	}
+
 	public JobResult process(final Job job) {
 
 		try {
@@ -89,6 +108,9 @@ public class EmailQueueConsumer implements JobConsumer {
 					config.username());
 
 			String from = job.getProperty(FROM, String.class);
+			if (StringUtils.isBlank(from)) {
+				from = config.defaultSender();
+			}
 			String to = job.getProperty(TO, String.class);
 			String subject = job.getProperty(SUBJECT, String.class);
 			String message = job.getProperty(MESSAGE, String.class);

@@ -11,6 +11,12 @@
 			"label": "Root Path",
 			"name": "path",
 			"required": true
+		},
+		"resourceType": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/hidden",
+			"name": "sling:resourceType",
+			"value": "adobecommunity-org/components/home/eventfeature"
 		}
 	}
 }
