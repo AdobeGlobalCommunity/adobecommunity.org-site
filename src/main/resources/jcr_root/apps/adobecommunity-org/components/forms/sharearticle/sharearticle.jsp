@@ -16,7 +16,7 @@
 		</div>
 	</c:when>
 </c:choose>
-<form class="github-form my-4" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Share Article">
+<form class="my-4" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Share Article">
     <fieldset>
         <legend>Article Information</legend>
         <div class="form-group">
