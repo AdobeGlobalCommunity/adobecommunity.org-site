@@ -21,15 +21,17 @@ public class EventData {
 	private ResourceResolver resolver;
 
 	@ValueMapValue
-	private String path;
+	private String[] paths;
 
 	public List<EventItem> getData() {
 		List<EventItem> data = new ArrayList<EventItem>();
-		Resource resource = resolver.getResource(path);
-		for (Resource child : resource.getChildren()) {
-			EventItem item = child.adaptTo(EventItem.class);
-			if (item != null) {
-				data.add(item);
+		for (String path : paths) {
+			Resource resource = resolver.getResource(path);
+			for (Resource child : resource.getChildren()) {
+				EventItem item = child.adaptTo(EventItem.class);
+				if (item != null) {
+					data.add(item);
+				}
 			}
 		}
 		return data;

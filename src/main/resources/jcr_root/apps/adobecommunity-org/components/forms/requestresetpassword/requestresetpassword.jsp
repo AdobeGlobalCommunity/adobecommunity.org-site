@@ -13,6 +13,6 @@
     </div>
     <input type="hidden" name="resource" value="/content/agc/adobecommunity-org/members.html" />
     <div class="form-group">
-        <button class="btn btn-success">Request Password Reset</button>
+        <button class="btn btn-success">Reset Password</button>
     </div>
 </form>

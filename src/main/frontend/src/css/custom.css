@@ -187,6 +187,7 @@ fieldset {
 .header-row img {
     height: 56px;
     float: left;
+    padding: 0 1em;
 }
 
 .header-row nav {

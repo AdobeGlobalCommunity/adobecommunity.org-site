@@ -89,21 +89,20 @@ public class JoinServlet extends SlingAllMethodsServlet {
 						user.setProperty("payment/customerId", vf.createValue(customerId));
 					} catch (Exception e) {
 						log.warn("Unable to set user " + profile.getEmail() + " up with subscription", e);
-						EmailQueueConsumer.queueMessage(jobManager, confirmationSender, confirmationSender,
-								"Failed to setup subscription", "Failed to setup scription for ${email}",
-								profile.toMap());
+						EmailQueueConsumer.queueMessage(jobManager, confirmationSender, "Failed to setup subscription",
+								"Failed to setup scription for ${email}", profile.toMap());
 					}
 
 					log.debug("Saving changes!");
 					adminResolver.commit();
 
 					log.debug("Sending confirmation email");
-					EmailQueueConsumer.queueMessage(jobManager, confirmationSender, profile.getEmail(),
+					EmailQueueConsumer.queueMessage(jobManager, profile.getEmail(),
 							properties.get("confirmationsubject", String.class),
 							properties.get("confirmationmessage", String.class), profile.toMap());
 
 					log.debug("Sending info email");
-					EmailQueueConsumer.queueMessage(jobManager, confirmationSender, confirmationSender,
+					EmailQueueConsumer.queueMessage(jobManager, confirmationSender,
 							properties.get("infosubject", String.class), properties.get("infosubject", String.class),
 							profile.toMap());
 

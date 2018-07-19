@@ -52,8 +52,7 @@ public class ContactServlet extends SlingAllMethodsServlet {
 
 	private void queueConfirmationEmail(SlingHttpServletRequest request, String email) {
 		ValueMap properties = request.getResource().getValueMap();
-		EmailQueueConsumer.queueMessage(jobManager, properties.get(EmailQueueConsumer.TO, String.class), email,
-				properties.get("confirmationsubject", String.class),
+		EmailQueueConsumer.queueMessage(jobManager, email, properties.get("confirmationsubject", String.class),
 				properties.get("confirmationmessage", String.class), new HashMap<String, Object>());
 
 	}
@@ -64,7 +63,7 @@ public class ContactServlet extends SlingAllMethodsServlet {
 		Map<String, Object> params = new HashMap<String, Object>();
 		request.getRequestParameterList().forEach(p -> params.put(p.getName(), request.getParameter(p.getName())));
 
-		EmailQueueConsumer.queueMessage(jobManager, email, properties.get(EmailQueueConsumer.TO, String.class),
+		EmailQueueConsumer.queueMessage(jobManager, properties.get(EmailQueueConsumer.TO, String.class),
 				properties.get(EmailQueueConsumer.SUBJECT, String.class), properties.get("template", String.class),
 				params);
 	}

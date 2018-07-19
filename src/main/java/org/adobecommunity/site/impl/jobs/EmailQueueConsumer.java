@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.adobecommunity.site.impl.jobs.EmailQueueConsumer.Config;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -59,26 +58,9 @@ public class EmailQueueConsumer implements JobConsumer {
 
 	public static final String SUBJECT = "subject";
 	public static final String MESSAGE = "message";
-	public static final String FROM = "from";
 	public static final String TO = "to";
 	public static final String TOPIC = "adobecommunity-org/email/sendsimple";
 
-	public static void queueMessage(JobManager jobMgr, String from, String to, String subject, String messageTemplate,
-			Map<String, Object> parameters) {
-		StrSubstitutor sub = new StrSubstitutor(parameters);
-
-		String message = sub.replace(messageTemplate);
-
-		log.debug("Queueing contact message from {} to {}", from, to);
-
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(EmailQueueConsumer.SUBJECT, subject);
-		data.put(EmailQueueConsumer.FROM, from);
-		data.put(EmailQueueConsumer.MESSAGE, message);
-		data.put(EmailQueueConsumer.TO, to);
-		jobMgr.addJob(TOPIC, data);
-		log.debug("Job queued successfully!");
-	}
 
 	public static void queueMessage(JobManager jobMgr, String to, String subject, String messageTemplate,
 			Map<String, Object> parameters) {
@@ -107,10 +89,7 @@ public class EmailQueueConsumer implements JobConsumer {
 			log.debug("Configuring connection to {}:{} with username {}", config.hostName(), config.smtpPort(),
 					config.username());
 
-			String from = job.getProperty(FROM, String.class);
-			if (StringUtils.isBlank(from)) {
-				from = config.defaultSender();
-			}
+			String from = config.defaultSender();
 			String to = job.getProperty(TO, String.class);
 			String subject = job.getProperty(SUBJECT, String.class);
 			String message = job.getProperty(MESSAGE, String.class);

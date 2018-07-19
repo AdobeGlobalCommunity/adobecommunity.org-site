@@ -87,9 +87,9 @@ public class RequestResetPasswordServlet extends SlingAllMethodsServlet {
 
 				ValueMap properties = request.getResource().getValueMap();
 
-				EmailQueueConsumer.queueMessage(jobManager, properties.get("emailsender", String.class),
-						request.getParameter(PN_EMAIL), properties.get("resetsubject", String.class),
-						properties.get("resetmessage", String.class), new HashMap<String, Object>() {
+				EmailQueueConsumer.queueMessage(jobManager, request.getParameter(PN_EMAIL),
+						properties.get("resetsubject", String.class), properties.get("resetmessage", String.class),
+						new HashMap<String, Object>() {
 							private static final long serialVersionUID = 1L;
 							{
 								put(PN_RESETTOKEN, resetToken);
