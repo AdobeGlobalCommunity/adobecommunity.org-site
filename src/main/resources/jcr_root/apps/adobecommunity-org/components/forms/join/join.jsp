@@ -20,7 +20,7 @@
 	<fieldset>
         <legend>Membership Level</legend>
         <div class="row">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="p-1 m-1 background--white h-100">
 					<label>
 						<input type="radio" name="level" id="level-free" value="Free" checked="checked" />
@@ -29,22 +29,13 @@
 					<sling:include path="freecontainer" resourceType="sling-cms/components/general/container" />
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="p-1 m-1 background--white h-100">
 					<label>
 						<input type="radio" name="level" id="level-pro" value="Pro" />
 						<strong>Pro Member</strong>
 					</label>
 					<sling:include path="procontainer" resourceType="sling-cms/components/general/container" />
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="p-1 m-1 background--white h-100">
-					<label>
-						<input type="radio" name="level" id="level-expert" value="Expert" />
-						<strong>Expert Member</strong>
-					</label>
-					<sling:include path="expertcontainer" resourceType="sling-cms/components/general/container" />
 				</div>
 			</div>
 		</div>

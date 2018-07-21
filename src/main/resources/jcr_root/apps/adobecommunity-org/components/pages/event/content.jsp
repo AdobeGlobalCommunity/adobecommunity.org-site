@@ -2,6 +2,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 padded-content">
+			<sling:call script="breadcrumb.jsp" />
 			<div class="row event">
 			    <div class="col-sm-8">
 			        <c:if test="${not empty properties['sling:thumbnail']}">

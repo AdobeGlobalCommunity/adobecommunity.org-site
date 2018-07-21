@@ -54,6 +54,12 @@ a {
     color: white;
 }
 
+.breadcrumb {
+	background-color:transparent;
+	padding: .75rem 0;
+	margin-bottom: 0;	
+}
+
 
 .primary-footer {
     background-color: #000 !important;

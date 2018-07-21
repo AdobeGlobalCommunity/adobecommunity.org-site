@@ -1,6 +1,7 @@
 <%@include file="/libs/sling-cms/global.jsp"%>
 <c:set var="domain" value="${fn:split(fn:replace(fn:replace(properties.original,'https://',''),'http://',''),'/')[0]}" />
 <div class="container">
+	<sling:call script="breadcrumb.jsp" />
 	<div class="row background__white">
 		<div class="col-md-12">
 			<article class="post" typeof="BlogPosting">

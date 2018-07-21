@@ -1,5 +1,6 @@
 <%@include file="/apps/adobecommunity-org/global.jsp"%>
 <div class="container main">
+	<sling:call script="breadcrumb.jsp" />
     <div class="padded-content h-100">
 		<div class="row">
 			<div class="col-sm-3">

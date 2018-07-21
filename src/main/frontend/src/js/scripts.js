@@ -201,7 +201,11 @@
             			var $form= $(ev.target);
             			$.post($form.attr('action'), $form.serialize(), function(){
                     		sessionStorage.removeItem("profile");
-            				window.location = '/members.html';
+                    		if(window.location.pathname.startsWith('/members')){
+                    			window.location.reload();
+                    		} else {
+                    			window.location = '/members.html';
+                    		}
             			}).fail(function(jqXHR, textStatus, errorThrown){
             				$('.alert-warning').removeClass('d-none');
                     		sessionStorage.removeItem("profile");
