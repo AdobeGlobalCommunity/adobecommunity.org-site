@@ -1,8 +1,4 @@
 <%@include file="/libs/sling-cms/global.jsp"%>
-<h3 class="my-4">
-	<sling:encode value="${properties.header}" mode="HTML" />
-	<a href="/content/agc/adobecommunity-org/members/share-event.html" class="btn btn-primary pull-right">+ Event</a>
-</h3>
 <table class="table table-hover table-responsive agenda w-100 d-block d-md-table">
     <thead>
         <tr>

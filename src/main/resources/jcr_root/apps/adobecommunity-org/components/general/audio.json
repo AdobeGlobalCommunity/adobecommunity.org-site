@@ -1,0 +1,5 @@
+{
+    "jcr:primaryType" : "sling:Component",
+    "jcr:title": "Audio",
+    "componentType": "AdobeCommunity.org"
+}

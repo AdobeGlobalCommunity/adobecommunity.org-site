@@ -3,11 +3,16 @@ package org.adobecommunity.site.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.jackrabbit.JcrConstants;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.cms.CMSConstants;
 import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.Optional;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
@@ -23,17 +28,26 @@ public class EventData {
 	@ValueMapValue
 	private String[] paths;
 
+	@ValueMapValue
+	@Optional
+	private String tag;
+
 	public List<EventItem> getData() {
 		List<EventItem> data = new ArrayList<EventItem>();
 		for (String path : paths) {
 			Resource resource = resolver.getResource(path);
 			for (Resource child : resource.getChildren()) {
-				EventItem item = child.adaptTo(EventItem.class);
-				if (item != null) {
-					data.add(item);
+				if (child.getChild(JcrConstants.JCR_CONTENT) != null
+						&& (StringUtils.isEmpty(tag) || ArrayUtils.contains(child.getChild(JcrConstants.JCR_CONTENT)
+								.getValueMap().get(CMSConstants.PN_TAXONOMY, String[].class), tag))) {
+					EventItem item = child.adaptTo(EventItem.class);
+					if (item != null) {
+						data.add(item);
+					}
 				}
 			}
 		}
 		return data;
 	}
+
 }

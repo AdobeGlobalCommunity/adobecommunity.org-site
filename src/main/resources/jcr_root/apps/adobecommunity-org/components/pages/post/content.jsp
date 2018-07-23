@@ -44,9 +44,7 @@
 							<div class="post-body">
 								<sling:include path="container" resourceType="sling-cms/components/general/container" />
 							</div>
-							<hr class="large" />
 							<sling:call script="tags.jsp" />
-							<hr class="large" />
 							<sling:call script="comments.jsp" />
 						</c:when>
 						<c:otherwise>
