@@ -18,7 +18,7 @@
 						<header class="background--img" style="background-image: url(${image})">
 							<div class="cover p-4">
 								<h1 class="mt-0" property="headline">
-									<a href="http://perfectdashboard.rocks/time-parting-heatmap-update/?cid=twitter:heatmap-update:urs" target="_blank" rel="noopener">
+									<a href="${properties.original}" target="_blank" rel="noopener">
 										<sling:encode value="${properties['jcr:title']}" mode="HTML" />
 									</a>
 								</h1>

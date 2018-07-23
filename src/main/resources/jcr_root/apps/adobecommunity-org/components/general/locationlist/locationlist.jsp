@@ -35,7 +35,7 @@
 			        <sling:encode value="${groupProps['jcr:description']}"  mode="HTML" />
 			    </p>
 			    <div>
-			        <a href="${group.path}y.html" class="btn btn-sm btn-secondary">
+			        <a href="${group.path}.html" class="btn btn-sm btn-secondary">
 			            More Info <span class="fa fa-caret-right"></span>
 			        </a>
 			    </div>
