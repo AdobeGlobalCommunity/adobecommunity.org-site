@@ -29,7 +29,7 @@
 										<fmt:formatDate value="${publishDate}" pattern="MMM d, yyyy" /> 
 									</span></time> by 
 									<span property="publisher" typeof="Person">
-									<span property="name">${properties.author}</span> on ${domain}</span>
+									<span property="name">${properties.author}</span> <c:if test="${not empty domain}">on ${domain}</c:if></span>
 								</em>
 							</div>
 						</header>
