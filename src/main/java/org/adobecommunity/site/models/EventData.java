@@ -1,6 +1,8 @@
 package org.adobecommunity.site.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -47,6 +49,15 @@ public class EventData {
 				}
 			}
 		}
+		Collections.sort(data, new Comparator<EventItem>() {
+			{
+			}
+
+			@Override
+			public int compare(EventItem o1, EventItem o2) {
+				return o1.getEventDate().compareTo(o2.getEventDate());
+			}
+		});
 		return data;
 	}
 

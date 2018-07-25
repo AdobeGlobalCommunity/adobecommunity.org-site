@@ -3,7 +3,7 @@
 <fmt:parseDate value="${item.valueMap['jcr:content/publishDate']}" var="publishDate" pattern="yyyy-MM-dd" />
 <div class="col-sm-6">
     <div class="card m-2">
-        <div class="card-img-top background--img" style="height:200px; background-image: url(${item.valueMap['jcr:content/sling:thumbnail']})">
+        <div class="card-img-top background--img" style="height:200px; background-image: url(${fn:replace(item.valueMap['jcr:content/sling:thumbnail'],'/content/agc/adobecommunity-org','')})">
         </div>
         <div class="card-body">
             <h4 class="card-title">
