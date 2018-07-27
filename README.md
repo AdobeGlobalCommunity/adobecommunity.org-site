@@ -1,6 +1,6 @@
-# DanKlco.com
+# AdobeCommunity.org
 
-My personal website, built to work with Sling CMS.
+The website [https://adobecommunity.org](https://adobecommunity.org), built to work with Sling CMS.
 
 ## Build
 
