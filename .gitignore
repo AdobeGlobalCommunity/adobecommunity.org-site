@@ -3,3 +3,6 @@ _site
 .jekyll-metadata
 .DS_Store
 _asset_bundler_cache
+
+target/
+bin/

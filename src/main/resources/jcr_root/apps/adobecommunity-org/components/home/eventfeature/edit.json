@@ -1,0 +1,28 @@
+ {
+	"jcr:primaryType": "nt:unstructured",
+	"sling:resourceType": "sling-cms/components/editor/slingform",
+	"button": "Save Event Feature",
+	"fields": {
+		"jcr:primaryType": "nt:unstructured",
+		"sling:resourceType": "sling-cms/components/general/container",
+		"paths": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/repeating",
+			"label": "Root Paths",
+			"name": "paths",
+			"required": true
+		},
+		"pathsTypeHint": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/hidden",
+			"name": "paths@TypeHint",
+			"value": "String[]"
+		},
+		"resourceType": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/hidden",
+			"name": "sling:resourceType",
+			"value": "adobecommunity-org/components/home/eventfeature"
+		}
+	}
+}

@@ -1,0 +1,17 @@
+<tr>
+    <td class="agenda--date" class="active" rowspan="1">
+        <div class="dayofmonth">{{dayOfMonth}}</div>
+        <div class="dayofweek">{{dayOfWeek}}</div>
+        <div class="shortdate text-muted">{{month}}, {{year}}</div>
+    </td>
+    <td class="agenda--time">
+        {{time}}
+    </td>
+    <td class="agenda--events">
+        <div class="agenda-event">
+            <a href="{{url}}">{{ title }}</a>
+            <br/>
+            <small>{{{summary}}}</small>
+        </div>
+    </td>
+</tr>

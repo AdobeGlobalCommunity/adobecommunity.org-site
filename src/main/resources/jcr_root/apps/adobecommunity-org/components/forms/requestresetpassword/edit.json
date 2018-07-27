@@ -1,0 +1,30 @@
+ {
+	"jcr:primaryType": "nt:unstructured",
+	"sling:resourceType": "sling-cms/components/editor/slingform",
+	"button": "Save Request Password Reset Form",
+	"fields": {
+		"jcr:primaryType": "nt:unstructured",
+		"sling:resourceType": "sling-cms/components/general/container",
+		"resetsubject": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Reset Subject",
+			"name": "resetsubject",
+			"required": true
+		},
+		"resetmessage": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/textarea",
+			"label": "Reset Message",
+			"name": "resetmessage",
+			"required": true
+		},
+		"emailsender": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Email Sender",
+			"name": "emailsender",
+			"required": true
+		}
+	}
+}

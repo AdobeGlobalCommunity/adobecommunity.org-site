@@ -1,0 +1,5 @@
+{
+    "jcr:primaryType" : "sling:Component",
+    "jcr:title": "Start Discussion Form",
+    "componentType": "AdobeCommunity.org Form"
+}

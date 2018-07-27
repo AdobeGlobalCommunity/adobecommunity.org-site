@@ -1,0 +1,32 @@
+ {
+	"jcr:primaryType": "nt:unstructured",
+	"sling:resourceType": "sling-cms/components/editor/slingform",
+	"button": "Save Video Hero",
+	"fields": {
+		"jcr:primaryType": "nt:unstructured",
+		"sling:resourceType": "sling-cms/components/general/container",
+		"header": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Header",
+			"name": "header",
+			"required": true
+		},
+		"backgroundimage": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/path",
+			"label": "Background Image",
+			"name": "backgroundimage",
+			"required": true,
+			"type": "sling:File"
+		},
+		"backgroundvideo": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/path",
+			"label": "Background Video",
+			"name": "backgroundvideo",
+			"required": true,
+			"type": "sling:File"
+		}
+	}
+}
