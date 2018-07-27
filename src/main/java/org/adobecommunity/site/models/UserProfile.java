@@ -48,6 +48,8 @@ public class UserProfile {
 
 	private String organizing;
 
+	private String hosting;
+
 	@Required
 	private String level;
 
@@ -74,6 +76,25 @@ public class UserProfile {
 
 	public String getCompany() {
 		return company;
+	}
+
+	public List<Field> getFields(Class<?> clazz) {
+		List<Field> fields = new ArrayList<Field>();
+
+		for (Field f : clazz.getDeclaredFields()) {
+			fields.add(f);
+		}
+
+		if (clazz.getSuperclass() != null) {
+			for (Field f : clazz.getSuperclass().getDeclaredFields()) {
+				fields.add(f);
+			}
+		}
+		return fields;
+	}
+
+	public String getHosting() {
+		return hosting;
 	}
 
 	public String getLevel() {
@@ -110,6 +131,10 @@ public class UserProfile {
 
 	public void setCompany(String company) {
 		this.company = company;
+	}
+
+	public void setHosting(String hosting) {
+		this.hosting = hosting;
 	}
 
 	public void setLevel(String level) {
@@ -156,21 +181,6 @@ public class UserProfile {
 			}
 		}
 		return data;
-	}
-
-	public List<Field> getFields(Class<?> clazz) {
-		List<Field> fields = new ArrayList<Field>();
-
-		for (Field f : clazz.getDeclaredFields()) {
-			fields.add(f);
-		}
-
-		if (clazz.getSuperclass() != null) {
-			for (Field f : clazz.getSuperclass().getDeclaredFields()) {
-				fields.add(f);
-			}
-		}
-		return fields;
 	}
 
 	public void updateUser(User user, Session session) throws IllegalArgumentException, IllegalAccessException,
