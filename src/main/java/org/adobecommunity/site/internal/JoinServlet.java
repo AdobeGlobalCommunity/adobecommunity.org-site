@@ -83,14 +83,16 @@ public class JoinServlet extends SlingAllMethodsServlet {
 					ValueMap properties = request.getResource().getValueMap();
 					String confirmationSender = properties.get("confirmationsender", String.class);
 					try {
-						ValueFactory vf = session.getValueFactory();
-						user.setProperty("payment/stripeToken", vf.createValue(stripeToken));
-						String customerId = stripe.createSubscription(stripeToken, profile);
-						user.setProperty("payment/customerId", vf.createValue(customerId));
+						if (!"Free".equals(profile.getLevel())) {
+							ValueFactory vf = session.getValueFactory();
+							user.setProperty("payment/stripeToken", vf.createValue(stripeToken));
+							String customerId = stripe.createSubscription(stripeToken, profile);
+							user.setProperty("payment/customerId", vf.createValue(customerId));
+						}
 					} catch (Exception e) {
 						log.warn("Unable to set user " + profile.getEmail() + " up with subscription", e);
 						EmailQueueConsumer.queueMessage(jobManager, confirmationSender, "Failed to setup subscription",
-								"Failed to setup scription for ${email}", profile.toMap());
+								"Failed to setup subscription ${level} for ${email}", profile.toMap());
 					}
 
 					log.debug("Saving changes!");
@@ -103,7 +105,7 @@ public class JoinServlet extends SlingAllMethodsServlet {
 
 					log.debug("Sending info email");
 					EmailQueueConsumer.queueMessage(jobManager, confirmationSender,
-							properties.get("infosubject", String.class), properties.get("infosubject", String.class),
+							properties.get("infosubject", String.class), properties.get("infomessage", String.class),
 							profile.toMap());
 
 					response.sendRedirect(
