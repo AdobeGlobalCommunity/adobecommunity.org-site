@@ -3,7 +3,7 @@
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">	
 		<li class="breadcrumb-item">
-			<a href="${home.path}">
+			<a href="${home.path}/">
 				<em class="fa fa-home"></em>
 			</a>
 		</li>
