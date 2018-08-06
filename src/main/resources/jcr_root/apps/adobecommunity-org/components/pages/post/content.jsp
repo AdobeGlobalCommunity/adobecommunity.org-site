@@ -16,7 +16,7 @@
 							</c:otherwise>
 						</c:choose>
 						<header class="background--img" style="background-image: url(${image})">
-							<div class="cover p-4">
+							<div class="cover p-lg-5 p-4">
 								<h1 class="mt-0" property="headline">
 									<a href="${properties.original}" target="_blank" rel="noopener">
 										<sling:encode value="${properties['jcr:title']}" mode="HTML" />
