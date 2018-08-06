@@ -1,8 +1,7 @@
-_site
-.sass-cache
-.jekyll-metadata
+.settings/
+.classpath
+.project
 .DS_Store
-_asset_bundler_cache
 
 target/
 bin/
