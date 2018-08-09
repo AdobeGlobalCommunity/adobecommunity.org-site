@@ -1,0 +1,9 @@
+{
+	"jcr:primaryType": "rep:AuthorizableFolder",
+	"agc-all-content": {
+		"jcr:primaryType": "rep:SystemUser",
+		"rep:principalName": "agc-all-content",
+		"jcr:uuid": "b64f7540-d4c5-3ba9-89ff-1958b6435346",
+		"rep:authorizableId": "agc-all-content"
+	}
+}
