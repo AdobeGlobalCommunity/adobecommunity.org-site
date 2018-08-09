@@ -19,6 +19,6 @@
         <meta name="twitter:image" content="/static/clientlibs/adobecommunity-org/images/logo.jpg"/>
     </c:otherwise>
 </c:choose>
-<meta property="og:url" content="https://www.adobecommunity.org${page.publishedPath}"/>
-<link rel="canonical" href="https://www.adobecommunity.org${page.publishedPath}" />
-<meta name="twitter:url" content="https://www.adobecommunity.org${page.publishedPath}" />
+<meta property="og:url" content="https://adobecommunity.org${page.publishedPath}"/>
+<link rel="canonical" href="https://adobecommunity.org${page.publishedPath}" />
+<meta name="twitter:url" content="https://adobecommunity.org${page.publishedPath}" />
