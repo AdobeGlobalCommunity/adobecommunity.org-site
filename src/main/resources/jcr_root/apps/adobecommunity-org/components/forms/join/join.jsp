@@ -12,7 +12,7 @@
 	</c:when>
 	<c:when test="${param.err == 'err'}">
 		<div class="alert alert-danger" role="alert">
-			An unexpected error occurred, please try again and <a href="/content/agc/adobecommunity-org/contact.html">contact us</a> if this error reoccurs.
+			An unexpected error occurred, please try again and <a href="/content/agc/adobecommunity-org/contact.html">contact us</a> if this error re-occurs.
 		</div>
 	</c:when>
 </c:choose>
@@ -21,24 +21,25 @@
         <legend>Membership Level</legend>
         <div class="row">
 			<div class="col-md-6">
-				<div class="p-1 m-1 background--white h-100">
-					<label>
-						<input type="radio" name="level" id="level-free" value="Free" checked="checked" />
-						<strong>Free Member</strong>
-					</label>
+				<div class="m-1 membership__box membership--active membership--free h-100" data-level="Free">
+					<strong>
+						Free
+						<span class="fa fa-check float-right text-success"></span>
+					</strong>
 					<sling:include path="freecontainer" resourceType="sling-cms/components/general/container" />
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="p-1 m-1 background--white h-100">
-					<label>
-						<input type="radio" name="level" id="level-pro" value="Pro" />
-						<strong>Pro Member</strong>
-					</label>
+				<div class="m-1 membership__box membership--pro h-100" data-level="Pro">
+					<strong>
+						Pro
+						<span class="fa fa-check float-right text-success"></span>
+					</strong>
 					<sling:include path="procontainer" resourceType="sling-cms/components/general/container" />
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="level" value="Free" />
     </fieldset>
     <fieldset class="d-none card-container">
         <legend>Membership Payment</legend>
@@ -107,7 +108,7 @@
     <fieldset>
         <legend>Supporting the AGC</legend>
         <div class="form-group">
-            <label for="topics">What sort of AEM / CQ related topics are most interesting to you? What would you like to know/learn from this community?</label>
+            <label for="topics">What sort of Adobe related topics are most interesting to you? What would you like to know/learn from this community?</label>
             <textarea name="topics" class="form-control"></textarea>
         </div>
         <div class="form-group">

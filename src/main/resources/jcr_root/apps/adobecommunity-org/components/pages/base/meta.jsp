@@ -20,5 +20,5 @@
     </c:otherwise>
 </c:choose>
 <meta property="og:url" content="https://adobecommunity.org${page.publishedPath}"/>
-<link rel="canonical" href="https://adobecommunity.org${page.publishedPath}" />
+<link rel="canonical" href="https://adobecommunity.org${fn:replace(page.publishedPath,'index.html','')}" />
 <meta name="twitter:url" content="https://adobecommunity.org${page.publishedPath}" />

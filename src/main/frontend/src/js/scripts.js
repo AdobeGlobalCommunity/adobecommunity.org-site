@@ -381,11 +381,22 @@
             		var enablePayment = false;
             		var paymentValidated = false;
             		
+            		$ctx.find('.membership__box').click(function(){
+            			var value = $(this).data('level');
+            			console.log('Setting value to '+value);
+            			$('input[name=level]').val(value);
+            			paymentDisplay();
+            		});
+            		
             		var paymentDisplay = function(){
-            			if($ctx.find('input[name=level]:checked').val() == 'Free'){
-            				enablePayment = false;
+            			if($ctx.find('input[name=level]').val() == 'Free'){
+            				$('.membership--free').addClass('membership--active');
+            				$('.membership--pro').removeClass('membership--active');
             				$ctx.find('.card-container').css('display','none');
+            				enablePayment = false;
             			} else {
+            				$('.membership--pro').addClass('membership--active');
+            				$('.membership--free').removeClass('membership--active');
             				$ctx.find('.card-container').css('display','block').removeClass('d-none');
             				enablePayment = true;
             			}
