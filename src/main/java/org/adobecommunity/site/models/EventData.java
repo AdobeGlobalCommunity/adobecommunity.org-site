@@ -35,7 +35,7 @@ public class EventData {
 	private String tag;
 
 	public List<EventItem> getData() {
-		List<EventItem> data = new ArrayList<EventItem>();
+		List<EventItem> data = new ArrayList<>();
 		for (String path : paths) {
 			Resource resource = resolver.getResource(path);
 			for (Resource child : resource.getChildren()) {
@@ -50,8 +50,6 @@ public class EventData {
 			}
 		}
 		Collections.sort(data, new Comparator<EventItem>() {
-			{
-			}
 
 			@Override
 			public int compare(EventItem o1, EventItem o2) {

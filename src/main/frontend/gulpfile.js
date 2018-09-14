@@ -1,16 +1,16 @@
 const gulp = require('gulp');
+var sass        = require('gulp-sass');
 const cleanCSS   = require('gulp-clean-css');
-var concatCss = require('gulp-concat-css');
 var concat = require('gulp-concat');
-var rename = require('gulp-rename');
-var uglify = require('gulp-uglify');
 var merge = require('merge-stream');
 var order = require("gulp-order");
 const rev = require('gulp-rev');
 var revReplace = require("gulp-rev-replace");
 
-var cssStream = gulp.src('./src/css/*.css')
-    .pipe(cleanCSS());
+var cssStream = gulp.src('./src/scss/*.scss')
+                .pipe(sass().on('error', sass.logError))
+                .pipe(cleanCSS());
+            
 
 var vendorCssStream = gulp.src([
 			'./node_modules/bootstrap/dist/css/bootstrap.min.css',
@@ -22,7 +22,7 @@ gulp.task('styles', function() {
 		.pipe(order([
 			'node_modules/bootstrap/dist/css/bootstrap.min.css',
 			'node_modules/font-awesome/css/font-awesome.min.css',
-			'src/css/*.css',
+			'src/scss/*.scss',
 		], { base: './' }))
      	.pipe(concat('styles.min.css'))
 		.pipe(rev())

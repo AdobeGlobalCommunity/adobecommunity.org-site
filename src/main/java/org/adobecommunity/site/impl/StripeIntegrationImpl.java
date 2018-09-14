@@ -6,6 +6,7 @@ import java.util.Map;
 import org.adobecommunity.site.StripeIntegration;
 import org.adobecommunity.site.impl.StripeIntegrationImpl.StripeConfiguration;
 import org.adobecommunity.site.models.InitialUserProfile;
+import org.apache.commons.lang3.StringUtils;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.metatype.annotations.AttributeDefinition;
@@ -33,9 +34,6 @@ public class StripeIntegrationImpl implements StripeIntegration {
 		@AttributeDefinition(name = "API Secret Key")
 		String apiSecretKey();
 
-		@AttributeDefinition(name = "Expert Plan ID")
-		String expertPlanId();
-
 		@AttributeDefinition(name = "Pro Plan ID")
 		String proPlanId();
 	}
@@ -48,7 +46,7 @@ public class StripeIntegrationImpl implements StripeIntegration {
 	}
 
 	@Override
-	public String createSubscription(String stripeToken, InitialUserProfile profile) throws Exception {
+	public String createSubscription(String stripeToken, String coupon, InitialUserProfile profile) throws Exception {
 
 		log.trace("createSubscription");
 
@@ -62,16 +60,18 @@ public class StripeIntegrationImpl implements StripeIntegration {
 		Map<String, Object> item = new HashMap<>();
 		if (profile.getLevel().equals("Pro")) {
 			item.put("plan", config.proPlanId());
-		} else if (profile.getLevel().equals("Expert")) {
-			item.put("plan", config.expertPlanId());
 		} else {
 			throw new Exception("Invalid level " + profile.getLevel());
 		}
+
 		Map<String, Object> items = new HashMap<>();
 		items.put("0", item);
 		Map<String, Object> sParams = new HashMap<>();
 		sParams.put("customer", customer.getId());
 		sParams.put("items", items);
+		if (StringUtils.isNotBlank(coupon)) {
+			sParams.put("coupon", coupon);
+		}
 		Subscription.create(sParams);
 
 		return customer.getId();

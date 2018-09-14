@@ -1,5 +1,5 @@
 <%@include file="/apps/adobecommunity-org/global.jsp"%>
-<c:set var="page" value="${sling:adaptTo(resource,'org.apache.sling.cms.core.models.PageManager').page}" />
+<c:set var="page" value="${sling:adaptTo(resource,'org.apache.sling.cms.PageManager').page}" />
 <c:set var="type" value="${fn:replace(page.templatePath,'/conf/agc/site/templates/','')}" />
 <c:if test="${not empty page.keywords}">
     <c:set var="sep" value="','" />

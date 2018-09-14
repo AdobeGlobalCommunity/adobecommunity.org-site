@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import org.adobecommunity.site.StripeIntegration;
 import org.adobecommunity.site.impl.jobs.EmailQueueConsumer;
 import org.adobecommunity.site.models.InitialUserProfile;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.Group;
 import org.apache.jackrabbit.api.security.user.User;
@@ -56,6 +57,7 @@ public class JoinServlet extends SlingAllMethodsServlet {
 		}
 
 		String stripeToken = request.getParameter("stripeToken");
+		String coupon = request.getParameter("coupon");
 
 		if (profile != null) {
 			Map<String, Object> serviceParams = new HashMap<String, Object>();
@@ -86,7 +88,8 @@ public class JoinServlet extends SlingAllMethodsServlet {
 						if (!"Free".equals(profile.getLevel())) {
 							ValueFactory vf = session.getValueFactory();
 							user.setProperty("payment/stripeToken", vf.createValue(stripeToken));
-							String customerId = stripe.createSubscription(stripeToken, profile);
+							user.setProperty("payment/coupon", vf.createValue(coupon));
+							String customerId = stripe.createSubscription(stripeToken, coupon, profile);
 							user.setProperty("payment/customerId", vf.createValue(customerId));
 						}
 					} catch (Exception e) {
@@ -98,15 +101,18 @@ public class JoinServlet extends SlingAllMethodsServlet {
 					log.debug("Saving changes!");
 					adminResolver.commit();
 
+					Map<String, Object> profileMap = profile.toMap();
+					profileMap.put("productsStr", StringUtils.join((String[]) profileMap.get("products"), ","));
+
 					log.debug("Sending confirmation email");
 					EmailQueueConsumer.queueMessage(jobManager, profile.getEmail(),
 							properties.get("confirmationsubject", String.class),
-							properties.get("confirmationmessage", String.class), profile.toMap());
+							properties.get("confirmationmessage", String.class), profileMap);
 
 					log.debug("Sending info email");
 					EmailQueueConsumer.queueMessage(jobManager, confirmationSender,
 							properties.get("infosubject", String.class), properties.get("infomessage", String.class),
-							profile.toMap());
+							profileMap);
 
 					response.sendRedirect(
 							request.getResourceResolver().map(request, properties.get("memberpage", String.class))

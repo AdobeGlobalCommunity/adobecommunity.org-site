@@ -18,7 +18,7 @@
  */ --%><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <%@ page language="java" contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/libs/sling-cms/global.jsp"%>
-	<c:set var="site" value="${sling:adaptTo(resource,'org.apache.sling.cms.core.models.SiteManager').site}" />
+	<c:set var="site" value="${sling:adaptTo(resource,'org.apache.sling.cms.SiteManager').site}" />
 	<channel>
 		<title>${site.title}</title>
 		<description>${site.description}</description>
@@ -27,7 +27,7 @@
 		<c:set var="query" value="SELECT * FROM [sling:Page] WHERE ISDESCENDANTNODE([${site.path}/learn/articles]) AND [jcr:content/published]=true ORDER BY [jcr:content/publishDate] DESC" />
 		<c:forEach var="postRsrc" items="${sling:findResources(resourceResolver,query,'JCR-SQL2')}" end="9">
 			<item>
-				<c:set var="post" value="${sling:adaptTo(postRsrc,'org.apache.sling.cms.core.models.PageManager').page}" />
+				<c:set var="post" value="${sling:adaptTo(postRsrc,'org.apache.sling.cms.PageManager').page}" />
 				<c:choose>
 					<c:when test="${fn:startsWith(post.properties['sling:thumbnail'], 'http')}">
 						<c:set var="thumbnail" value="${post.properties['sling:thumbnail']}" />

@@ -22,10 +22,10 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.cms.core.usergenerated.UGCBucketConfig;
-import org.apache.sling.cms.core.usergenerated.UserGeneratedContentService;
-import org.apache.sling.cms.core.usergenerated.UserGeneratedContentService.APPROVE_ACTION;
-import org.apache.sling.cms.core.usergenerated.UserGeneratedContentService.CONTENT_TYPE;
+import org.apache.sling.cms.usergenerated.UGCBucketConfig;
+import org.apache.sling.cms.usergenerated.UserGeneratedContentService;
+import org.apache.sling.cms.usergenerated.UserGeneratedContentService.APPROVE_ACTION;
+import org.apache.sling.cms.usergenerated.UserGeneratedContentService.CONTENT_TYPE;
 import org.apache.sling.event.jobs.JobManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -47,7 +47,6 @@ public class StartDiscussionServlet extends SlingAllMethodsServlet {
 	@Reference
 	private UserGeneratedContentService ugcService;
 
-
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -61,14 +60,13 @@ public class StartDiscussionServlet extends SlingAllMethodsServlet {
 
 		if (StringUtils.isNotBlank(title) && StringUtils.isNotBlank(summary)) {
 			try {
-				
 
 				ValueMap properties = request.getResource().getValueMap();
-				
+
 				UGCBucketConfig bucketConfig = new UGCBucketConfig();
-				bucketConfig.setAction(APPROVE_ACTION.publish);
+				bucketConfig.setAction(APPROVE_ACTION.PUBLISH);
 				bucketConfig.setBucket(properties.get("ugcBucket", String.class));
-				bucketConfig.setContentType(CONTENT_TYPE.forum_post);
+				bucketConfig.setContentType(CONTENT_TYPE.FORUM_POST);
 				bucketConfig.setPathDepth(2);
 				Resource container = ugcService.createUGCContainer(request, bucketConfig, title + "\n\n" + summary,
 						null);
@@ -99,7 +97,6 @@ public class StartDiscussionServlet extends SlingAllMethodsServlet {
 				ResourceUtil.getOrCreateResource(container.getResourceResolver(), path, contentProperties,
 						JcrConstants.NT_UNSTRUCTURED, true);
 
-
 				Map<String, Object> params = new HashMap<String, Object>();
 				request.getRequestParameterList()
 						.forEach(p -> params.put(p.getName(), request.getParameter(p.getName())));
@@ -111,7 +108,7 @@ public class StartDiscussionServlet extends SlingAllMethodsServlet {
 
 				response.sendRedirect(referer + "?res=started");
 			} catch (Exception e) {
-				log.debug("Unexpected exception creating discussion", e);
+				log.warn("Unexpected exception creating discussion", e);
 				response.sendRedirect(referer + "?err=err");
 			}
 		} else {

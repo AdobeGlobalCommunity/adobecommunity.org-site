@@ -1,5 +1,5 @@
 <%@include file="/apps/adobecommunity-org/global.jsp"%>
-<sling:adaptTo var="pageMgr" adaptable="${resource}" adaptTo="org.apache.sling.cms.core.models.PageManager" />
+<sling:adaptTo var="pageMgr" adaptable="${resource}" adaptTo="org.apache.sling.cms.PageManager" />
 <c:set var="page" value="${pageMgr.page}" />
 <ul class="navbar-nav">
     <c:choose>

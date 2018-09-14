@@ -23,10 +23,10 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.cms.core.usergenerated.UserGeneratedContentService;
-import org.apache.sling.cms.core.usergenerated.UGCBucketConfig;
-import org.apache.sling.cms.core.usergenerated.UserGeneratedContentService.APPROVE_ACTION;
-import org.apache.sling.cms.core.usergenerated.UserGeneratedContentService.CONTENT_TYPE;
+import org.apache.sling.cms.usergenerated.UGCBucketConfig;
+import org.apache.sling.cms.usergenerated.UserGeneratedContentService;
+import org.apache.sling.cms.usergenerated.UserGeneratedContentService.APPROVE_ACTION;
+import org.apache.sling.cms.usergenerated.UserGeneratedContentService.CONTENT_TYPE;
 import org.apache.sling.event.jobs.JobManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -50,9 +50,9 @@ public class ShareArticleServlet extends SlingAllMethodsServlet {
 
 	private static final UGCBucketConfig BUCKET_CONFIG = new UGCBucketConfig();
 	static {
-		BUCKET_CONFIG.setAction(APPROVE_ACTION.move);
+		BUCKET_CONFIG.setAction(APPROVE_ACTION.MOVE);
 		BUCKET_CONFIG.setBucket("agc/adobecommunity-org/articles");
-		BUCKET_CONFIG.setContentType(CONTENT_TYPE.blog_post);
+		BUCKET_CONFIG.setContentType(CONTENT_TYPE.BLOG_POST);
 		BUCKET_CONFIG.setPathDepth(0);
 	}
 
@@ -94,8 +94,8 @@ public class ShareArticleServlet extends SlingAllMethodsServlet {
 				String path = container.getPath() + "/" + toName(title);
 
 				log.debug("Creating article page {}", path);
-				ResourceUtil.getOrCreateResource(container.getResourceResolver(), path,
-						pageProperties, JcrConstants.NT_UNSTRUCTURED, false);
+				ResourceUtil.getOrCreateResource(container.getResourceResolver(), path, pageProperties,
+						JcrConstants.NT_UNSTRUCTURED, false);
 
 				Map<String, Object> contentProperties = new HashMap<String, Object>();
 				String name = "";

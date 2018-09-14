@@ -18,21 +18,20 @@
 </c:choose>
 <form class="my-4 payment-form" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Join AGC">
 	<fieldset>
-        <legend>Membership Level</legend>
         <div class="row">
-			<div class="col-md-6">
+			<div class="col-md-5 offset-md-1">
 				<div class="m-1 membership__box membership--active membership--free h-100" data-level="Free">
 					<strong>
-						Free
+						Basic Membership
 						<span class="fa fa-check float-right text-success"></span>
 					</strong>
 					<sling:include path="freecontainer" resourceType="sling-cms/components/general/container" />
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<div class="m-1 membership__box membership--pro h-100" data-level="Pro">
 					<strong>
-						Pro
+						Premium Membership
 						<span class="fa fa-check float-right text-success"></span>
 					</strong>
 					<sling:include path="procontainer" resourceType="sling-cms/components/general/container" />
@@ -51,6 +50,12 @@
 			  <!-- A Stripe Element will be inserted here. -->
 			</div>
 			<div id="card-errors" role="alert"></div>
+		</div>
+		<div class="form-group">
+			<label for="coupon">
+			  Member Company Coupon Code
+			</label>
+            <input type="text" class="form-control" name="coupon" />
 		</div>
     </fieldset>
     <fieldset>

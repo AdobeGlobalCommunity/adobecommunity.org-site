@@ -7,13 +7,14 @@
 <div class="container padded-content">
 	<div class="row">
 		<div class="col-md-12">
-			<h2>
+			<h2 class="my-0">
 				<sling:encode value="${suffixResource.valueMap['jcr:content/jcr:title']}" mode="html" />
 			</h2>
 			<small>By <sling:encode value="${item.valueMap['jcr:content/username']}" mode="HTML" /> on <fmt:formatDate value="${publishDate}" pattern="MMM d, yyyy" /></small>
-			<p>
-				<sling:encode value="${suffixResource.valueMap['jcr:content/jcr:description']}" mode="html" />
-			</p>
+			<div class="my-3">
+				<sling:adaptTo adaptable="${suffixResource}" adaptTo="org.adobecommunity.site.models.DiscussionMarkdownModel" var="comment" />
+				${comment.html}
+			</div>
 			<sling:include path="share" resourceType="adobecommunity-org/components/general/share" />
 			<sling:call script="comments.jsp" />
 		</div>

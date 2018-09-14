@@ -1,10 +1,25 @@
+/* Define colors */
+
+$darkestgray: rgb(51, 51, 51);
+$dark-gray: rgb(159, 159, 159);
+$light-gray: rgb(222, 222, 222);
+$lightest-gray: rgb(237, 237, 237);
+$red: rgb(168, 0, 35);
+$dark-red: rgb(132, 0, 27);
+/* Style overrides */
+
 body {
-	color: #323232;
-	background-color: #f5f5f5;
+	color: $darkestgray;
+	background-color: $lightest-gray;
 }
 
 a {
-	color: #326ec8;
+	color: $red;
+}
+
+a:hover,
+a:active {
+	color: $dark-red;
 }
 
 .agenda--date {
@@ -46,9 +61,9 @@ a {
 }
 
 .background--dark {
-	background-color: #868e96;
+	background-color: $darkestgray;
 	color: white;
-	border: 1px solid #868e96;
+	border: 1px solid $darkestgray;
 	border-radius: 3px;
 }
 
@@ -57,7 +72,7 @@ a {
 }
 
 .background--grey {
-	background-color: #D9DADC;
+	background-color: $dark-gray;
 }
 
 .background--none {
@@ -65,20 +80,16 @@ a {
 }
 
 .background--red {
-	background-color: #D2232A;
+	background-color: $red;
 }
 
 .background--shaded {
 	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
 }
 
-.background--tan {
-	background-color: #F1F1F2;
-}
-
 .background--white {
 	background-color: #fff;
-	border: 1px solid #E1E1E1;
+	border: 1px solid $light-gray;
 	border-radius: 3px;
 }
 
@@ -88,15 +99,19 @@ a {
 	margin-bottom: 0;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-success {
 	border-radius: 0;
-	background-color: #D2232A;
-	border: 1px solid #D2232A;
+	background-color: $red;
+	border: 1px solid $red;
 }
 
-.btn-primary:hover, .btn-primary:active {
-	background-color: #9F0000;
-	border: 1px solid #9F0000;
+.btn-primary:hover,
+.btn-primary:active,
+.btn-success:hover,
+.btn-success:active {
+	background-color: $dark-red;
+	border: 1px solid $dark-red;
 }
 
 .btn-secondary {
@@ -106,11 +121,12 @@ a {
 #card-element {
 	line-height: 24px;
 	padding: 1em;
-	border: 1px solid #e1e1e1;
+	border: 1px solid $dark-gray;
 	border-radius: 3px;
 }
 
-.carousel-control-prev, .carousel-control-next {
+.carousel-control-prev,
+.carousel-control-next {
 	background-color: rgba(0, 0, 0, .05);
 }
 
@@ -119,7 +135,7 @@ a {
 }
 
 .community-posts .articlesummary {
-	border-bottom: solid 1px #E1E1E1;
+	border-bottom: solid 1px $dark-gray;
 }
 
 .community-posts .articlesummary:last-child {
@@ -128,7 +144,6 @@ a {
 
 .communityupdate__engage h3 {
 	display: inline-block;
-	float: left;
 	font-size: 4em;
 	padding: .2em;
 	padding-left: 0;
@@ -174,7 +189,7 @@ fieldset {
 	top: 0;
 	z-index: 1000;
 	background-color: white;
-	border-bottom: 1px solid #E1E1E1;
+	border-bottom: 1px solid $dark-gray;
 }
 
 .header-row .nav-link {
@@ -213,7 +228,7 @@ fieldset {
 
 .home-video {
 	height: 540px;
-	background-color: #eee;
+	background-color: white;
 	background-position: center;
 	background-size: cover;
 	position: relative;
@@ -259,10 +274,10 @@ fieldset {
 }
 
 .membership__box {
-	background-color: #EEEEEF;
-	border-color: #9E9FA2;
+	background-color: $lightest-gray;
+	border-color: $dark-gray;
 	border-style: solid;
-	border-width: 5px 1px 1px 1px;
+	border-width: 5px 0px 0px 0px;
 	cursor: pointer;
 }
 
@@ -277,7 +292,7 @@ fieldset {
 .membership__box strong {
 	padding: 10px;
 	font-size: x-large;
-	border-bottom: 1px solid #58585A;
+	border-bottom: 1px solid $darkestgray;
 	margin: 0;
 	display: block;
 }
@@ -288,7 +303,7 @@ fieldset {
 }
 
 .membership__box p:first-of-type {
-	color: #d2232a;
+	color: $red;
 }
 
 .membership__box.membership--active .text-success {
@@ -304,7 +319,7 @@ fieldset {
 }
 
 .membership--active {
-	border-color: #58585A;
+	border-color: $darkestgray;
 }
 
 .meetup--item .agenda--date {
@@ -331,8 +346,8 @@ fieldset {
 }
 
 .primary-footer {
-	background-color: #000 !important;
-	color: #8e8e8e;
+	background-color: $darkestgray;
+	color: white;
 }
 
 .separator {
@@ -344,7 +359,7 @@ fieldset {
 }
 
 .supportlist__list {
-	border-left: 1px solid #E1E1E1;
+	border-left: 1px solid $lightest-gray;
 }
 
 .supportlist__list li:before {

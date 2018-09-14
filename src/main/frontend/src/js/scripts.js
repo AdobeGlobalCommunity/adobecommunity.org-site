@@ -221,9 +221,11 @@
                     		sessionStorage.removeItem("profile");
             				window.location = '/';
             			}).fail(function(jqXHR, textStatus, errorThrown){
+                            console.log("Logout may not have succeeded");
                     		sessionStorage.removeItem("profile");
             				window.location = '/';
-            			});
+                        });
+                        return false;
             		});
             	}
             },

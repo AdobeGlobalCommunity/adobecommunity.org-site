@@ -104,7 +104,6 @@
 						<Sling-Initial-Content>
 							jcr_root,
 							jcr_root/apps/adobecommunity-org;overwrite:=true;uninstall:=true;path:=/apps/adobecommunity-org,
-							jcr_root/home/users/system/agc;overwrite:=true;uninstall:=true;path:=/home/users/system/agc,
 							jcr_root/static/clientlibs/adobecommunity-org;overwrite=true;ignoreImportProviders:=xml;path:=/static/clientlibs/adobecommunity-org
 						</Sling-Initial-Content>
 						<Include-Resource>{maven-resources},${basedir}/target/frontend/dist</Include-Resource>
@@ -226,12 +225,16 @@
 		<dependency>
 			<groupId>org.apache.sling</groupId>
 			<artifactId>org.apache.sling.cms.core</artifactId>
-			<version>0.9.0</version>
+			<version>0.10.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vladsch.flexmark</groupId>
+			<artifactId>flexmark</artifactId>
+			<version>0.32.18</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
-
 
 	<profiles>
 		<profile>
