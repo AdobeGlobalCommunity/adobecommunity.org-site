@@ -35,9 +35,35 @@
                 <a class="nav-link" href="/content/agc/adobecommunity-org/privacy-policy.html">Privacy Policy</a>
             </li>
         </ul>
-	  <form class="form-inline" action="/content/agc/adobecommunity-org/search.html">
-	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" />
-	    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
-	  </form>
+        <form class="form-inline" action="/content/agc/adobecommunity-org/search.html">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" />
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
 </footer>
+<c:if test="${cmsEditEnabled != 'true'}">
+	<div class="modal fade" id="mailing-signup-modal" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<sling:include path="/content/agc/adobecommunity-org/index/jcr:content/footer" resourceType="sling-cms/components/general/container" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="mailing-signup-confirm-modal" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					Thank you! You are now subscribed to the AGC Newsletter!
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</c:if>

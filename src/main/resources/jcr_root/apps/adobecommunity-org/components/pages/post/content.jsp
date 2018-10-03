@@ -39,29 +39,39 @@
 					<sling:include path="share" resourceType="adobecommunity-org/components/general/share" />
 				</div>
 				<div class="padded-content">
-					<c:choose>
-						<c:when test="${empty properties.original}">
-							<div class="post-body">
-								<sling:include path="container" resourceType="sling-cms/components/general/container" />
-							</div>
-							<sling:call script="tags.jsp" />
-							<sling:call script="comments.jsp" />
-						</c:when>
-						<c:otherwise>
-							<blockquote class="blockquote">
-								<div class="post-summary">
-									${properties.snippet}
-								</div>
-								<footer class="blockquote-footer">
-									<a href="${properties.original}" target="_blank" rel="noopener">
-										Read the full post &quot;<sling:encode value="${properties['jcr:title']}" mode="HTML" />&quot; on ${domain}</a>
-									</footer>
-							</blockquote> 
-							<sling:call script="tags.jsp" />
-							<hr class="large" />
-							<sling:call script="comments.jsp" />
-						</c:otherwise>
-					</c:choose>
+					<div class="row">
+						<div class="col-md-8">
+							<c:choose>
+								<c:when test="${empty properties.original}">
+									<div class="post-body">
+										<sling:include path="container" resourceType="sling-cms/components/general/container" />
+									</div>
+									<sling:call script="tags.jsp" />
+									<sling:call script="comments.jsp" />
+								</c:when>
+								<c:otherwise>
+									<blockquote class="blockquote">
+										<div class="post-summary">
+											${properties.snippet}
+										</div>
+										<footer class="blockquote-footer">
+											<a href="${properties.original}" target="_blank" rel="noopener">
+												Read the full post &quot;<sling:encode value="${properties['jcr:title']}" mode="HTML" />&quot; on ${domain}</a>
+											</footer>
+									</blockquote> 
+									<sling:call script="tags.jsp" />
+									<sling:call script="comments.jsp" />
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="col-md-4">
+							<h4>Get Insights from the AGC!</h4>
+							<sling:include path="/content/agc/adobecommunity-org/index/jcr:content/footer/maillistsubscribe" resourceType="adobecommunity-org/components/forms/maillistsubscribe" />
+							<h4>Related Posts</h4>
+							<sling:include path="related-posts" resourceType="adobecommunity-org/components/lists/related-posts" />
+						</div>
+					</div>
+					
 				</div>
 			</article>
 		</div>

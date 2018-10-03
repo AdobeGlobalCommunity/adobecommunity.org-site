@@ -45,6 +45,28 @@
         			}
         		}
         	},
+        	exitIntent: {
+        		init: function($ctx) {
+        			var mouseY = 0;
+        			var displayed = window.sessionStorage.getItem('ei_disp') === 'true';
+
+        			document.addEventListener("mousemove", function(e) {
+        			    mouseY = e.clientY;
+        			});
+
+        			$(document).mouseleave(function () {
+        			    if (mouseY < 100 && !displayed && (AGC.profile.initialized !== true || AGC.profile.loggedIn !== true)) {
+        			    	$('#mailing-signup-modal').modal('show');
+    			            displayed = true;
+    			            window.sessionStorage.setItem('ei_disp','true');
+        			    }
+        			});
+        			
+        			if(window.location.search == '?res=subscribed') {
+        				$('#mailing-signup-confirm-modal').modal('show');
+        			}
+        		}
+        	},
             groupSearch: {
                 distance: function (lat1, lon1, lat2, lon2) {
                     var radlat1 = Math.PI * lat1 / 180;

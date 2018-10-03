@@ -9,6 +9,7 @@ import javax.jcr.ValueFactory;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 
+import org.adobecommunity.site.SendGridIntegration;
 import org.adobecommunity.site.StripeIntegration;
 import org.adobecommunity.site.impl.jobs.EmailQueueConsumer;
 import org.adobecommunity.site.models.InitialUserProfile;
@@ -45,6 +46,9 @@ public class JoinServlet extends SlingAllMethodsServlet {
 
 	@Reference
 	private StripeIntegration stripe;
+
+	@Reference
+	private SendGridIntegration sendGrid;
 
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
@@ -100,6 +104,8 @@ public class JoinServlet extends SlingAllMethodsServlet {
 
 					log.debug("Saving changes!");
 					adminResolver.commit();
+
+					sendGrid.createUser(profile);
 
 					Map<String, Object> profileMap = profile.toMap();
 					profileMap.put("productsStr", StringUtils.join((String[]) profileMap.get("products"), ","));

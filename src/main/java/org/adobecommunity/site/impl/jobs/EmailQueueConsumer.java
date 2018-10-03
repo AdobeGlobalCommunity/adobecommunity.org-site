@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
 @Component(service = JobConsumer.class, property = { JobConsumer.PROPERTY_TOPICS + "=" + EmailQueueConsumer.TOPIC })
 @Designate(ocd = Config.class)
 public class EmailQueueConsumer implements JobConsumer {
-
 	@ObjectClassDefinition(name = "Email Queue Consumer")
 	public @interface Config {
 
@@ -60,7 +59,6 @@ public class EmailQueueConsumer implements JobConsumer {
 	public static final String MESSAGE = "message";
 	public static final String TO = "to";
 	public static final String TOPIC = "adobecommunity-org/email/sendsimple";
-
 
 	public static void queueMessage(JobManager jobMgr, String to, String subject, String messageTemplate,
 			Map<String, Object> parameters) {

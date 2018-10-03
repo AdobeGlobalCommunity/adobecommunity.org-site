@@ -1,0 +1,44 @@
+ {
+	"jcr:primaryType": "nt:unstructured",
+	"sling:resourceType": "sling-cms/components/editor/slingform",
+	"button": "Save Mail List Subscribe Form",
+	"fields": {
+		"jcr:primaryType": "nt:unstructured",
+		"sling:resourceType": "sling-cms/components/general/container",
+		"inforecipient": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Info Recipient",
+			"name": "inforecipient",
+			"required": true
+		},
+		"infosubject": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Info Subject",
+			"name": "infosubject",
+			"required": true
+		},
+		"infomessage": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/textarea",
+			"label": "Info Message",
+			"name": "infomessage",
+			"required": true
+		},
+		"confirmationsubject": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Confirmation Subject",
+			"name": "confirmationsubject",
+			"required": true
+		},
+		"confirmationmessage": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/textarea",
+			"label": "Confirmation Message",
+			"name": "confirmationmessage",
+			"required": true
+		}
+	}
+}

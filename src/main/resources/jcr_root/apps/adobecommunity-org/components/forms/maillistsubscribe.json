@@ -1,0 +1,8 @@
+{
+	"jcr:primaryType": "sling:Component",
+	"jcr:title": "Mail List Subscribe Form",
+	"componentType": [
+		"AdobeCommunity.org Form",
+		"AdobeCommunity.org"
+	]
+}
