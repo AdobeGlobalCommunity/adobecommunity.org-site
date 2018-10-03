@@ -10,7 +10,7 @@
 			<h2 class="my-0">
 				<sling:encode value="${suffixResource.valueMap['jcr:content/jcr:title']}" mode="html" />
 			</h2>
-			<small>By <sling:encode value="${item.valueMap['jcr:content/username']}" mode="HTML" /> on <fmt:formatDate value="${publishDate}" pattern="MMM d, yyyy" /></small>
+			<small>By <sling:encode value="${suffixResource.valueMap['jcr:content/username']}" mode="HTML" /> on <fmt:formatDate value="${publishDate}" pattern="MMM d, yyyy" /></small>
 			<div class="my-3">
 				<sling:adaptTo adaptable="${suffixResource}" adaptTo="org.adobecommunity.site.models.DiscussionMarkdownModel" var="comment" />
 				${comment.html}

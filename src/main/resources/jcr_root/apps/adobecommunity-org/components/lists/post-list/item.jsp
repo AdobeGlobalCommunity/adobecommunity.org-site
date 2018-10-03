@@ -11,8 +11,9 @@
 				<c:set var="image" value="//placehold.it/300x300?text=${sling:encode(item.valueMap['jcr:title'],'HTML_ATTR')}" />
 			</c:otherwise>
 		</c:choose>
-        <div class="card-img-top background--img" style="height:200px; background-image: url(${image})">
-        </div>
+		<a href="${item.path}.html">
+			<img class="card-img-top" src="${image}" alt="${sling:encode(item.valueMap['jcr:content/jcr:title'],'HTML')}">
+		</a>
         <div class="card-body">
             <h4 class="card-title">
                 <a href="${item.path}.html">

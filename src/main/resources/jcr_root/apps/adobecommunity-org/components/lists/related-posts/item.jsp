@@ -8,7 +8,7 @@
 		<c:set var="image" value="//placehold.it/300x300?text=${sling:encode(item.valueMap['jcr:title'],'HTML_ATTR')}" />
 	</c:otherwise>
 </c:choose>
-<div class="card my-4">
+<div class="card my-2">
 	<a href="${item.path}.html">
 		<img class="card-img-top" src="${image}" alt="${sling:encode(item.valueMap['jcr:content/jcr:title'],'HTML')}">
 	</a>
@@ -20,6 +20,10 @@
 			<small class="text-muted">
 				<span class="fa fa-calendar" aria-hidden="true"></span>&nbsp;
 				<em itemprop="datePublished"><fmt:formatDate value="${publishDate}" pattern="MMM d, yyyy" /></em><br>
+			</small>
+			<small class="text-muted">
+				<span class="fa fa-user" aria-hidden="true"></span>&nbsp;
+				<em><sling:encode value="${item.valueMap['jcr:content/author']}" mode="HTML" /></em><br>
 			</small>
 		</p>
   </div>
