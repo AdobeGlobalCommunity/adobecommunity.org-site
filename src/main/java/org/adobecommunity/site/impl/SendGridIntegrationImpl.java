@@ -6,6 +6,7 @@ import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 
 import org.adobecommunity.site.SendGridIntegration;
 import org.adobecommunity.site.impl.SendGridIntegrationImpl.SendGridConfiguration;
@@ -59,13 +60,24 @@ public class SendGridIntegrationImpl implements SendGridIntegration {
 
 	@Override
 	public JsonObject createUser(InitialUserProfile profile) {
-		JsonObject obj = Json.createObjectBuilder().add("company", profile.getCompany())
+		JsonObjectBuilder objectBuilder = Json.createObjectBuilder().add("company", profile.getCompany())
 				.add("email", profile.getEmail()).add("hosting", profile.getHosting())
 				.add("membership", profile.getLevel()).add("organizing", profile.getOrganizing())
 				.add("phone", profile.getPhone()).add("presentation", profile.getPresentation())
 				.add("role", profile.getRole()).add("topics", profile.getTopics())
-				.add("products", String.join(",", profile.getProducts())).build();
-		return createUser(obj);
+				.add("products", String.join(",", profile.getProducts()));
+
+		String name = profile.getName();
+		String firstName = name;
+		String lastName = "";
+		if (name.contains(" ")) {
+			firstName = name.substring(0, name.indexOf(' '));
+			lastName = name.substring(name.indexOf(' '), name.length());
+		}
+		objectBuilder.add("first_name", firstName);
+		objectBuilder.add("last_name", lastName);
+
+		return createUser(objectBuilder.build());
 	}
 
 	private JsonObject createUser(JsonObject data) {
