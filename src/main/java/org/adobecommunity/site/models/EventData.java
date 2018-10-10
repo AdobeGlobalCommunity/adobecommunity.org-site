@@ -41,7 +41,7 @@ public class EventData {
 			for (Resource child : resource.getChildren()) {
 				if (child.getChild(JcrConstants.JCR_CONTENT) != null
 						&& (StringUtils.isEmpty(tag) || ArrayUtils.contains(child.getChild(JcrConstants.JCR_CONTENT)
-								.getValueMap().get(CMSConstants.PN_TAXONOMY, String[].class), tag))) {
+								.getValueMap().get(CMSConstants.PN_TAXONOMY, new String[0]), tag))) {
 					EventItem item = child.adaptTo(EventItem.class);
 					if (item != null) {
 						data.add(item);

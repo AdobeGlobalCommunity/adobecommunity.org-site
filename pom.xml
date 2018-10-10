@@ -224,7 +224,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.sling</groupId>
-			<artifactId>org.apache.sling.cms.core</artifactId>
+			<artifactId>org.apache.sling.cms.api</artifactId>
 			<version>0.10.0</version>
 			<scope>provided</scope>
 		</dependency>
