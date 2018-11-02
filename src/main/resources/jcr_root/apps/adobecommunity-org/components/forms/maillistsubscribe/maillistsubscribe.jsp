@@ -2,7 +2,7 @@
 <c:choose>
 	<c:when test="${param.res == 'subscribed'}">
 		<div class="alert alert-success" role="alert">
-			You are successfully subscribed with the Adobe Global Community.
+			<sling:encode value="${properties.confirmation}" default="You are successfully subscribed with the Adobe Global Community." mode="HTML" />
 		</div>
 	</c:when>
 </c:choose>
@@ -12,6 +12,8 @@
         <input type="email" class="form-control" required="required" name="email" />
     </div>
     <div class="form-group">
-        <button class="btn btn-success">Subscribe</button>
+        <button class="btn btn-success">
+            <sling:encode value="${properties.button}" default="Subscribe" mode="HTML" />
+        </button>
     </div>
 </form>

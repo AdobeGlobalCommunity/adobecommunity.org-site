@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.jcr.Session;
+import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.ValueFactory;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -31,116 +32,124 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Component(service = Servlet.class, property = { "sling.servlet.methods=POST",
-		"sling.servlet.resourceTypes=adobecommunity-org/components/forms/join", "sling.servlet.selectors=allowpost" })
+        "sling.servlet.resourceTypes=adobecommunity-org/components/forms/join", "sling.servlet.selectors=allowpost" })
 public class JoinServlet extends SlingAllMethodsServlet {
 
-	private static final long serialVersionUID = -1265699330904067650L;
+    private static final long serialVersionUID = -1265699330904067650L;
 
-	private static final Logger log = LoggerFactory.getLogger(JoinServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(JoinServlet.class);
 
-	@Reference
-	private JobManager jobManager;
+    @Reference
+    private transient JobManager jobManager;
 
-	@Reference
-	private ResourceResolverFactory factory;
+    @Reference
+    private transient ResourceResolverFactory factory;
 
-	@Reference
-	private StripeIntegration stripe;
+    @Reference
+    private transient StripeIntegration stripe;
 
-	@Reference
-	private SendGridIntegration sendGrid;
+    @Reference
+    private transient SendGridIntegration sendGrid;
 
-	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
-			throws ServletException, IOException {
+    @Override
+    protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
+            throws ServletException, IOException {
 
-		InitialUserProfile profile = request.adaptTo(InitialUserProfile.class);
+        InitialUserProfile profile = request.adaptTo(InitialUserProfile.class);
 
-		String referer = request.getHeader("referer");
-		if (referer.contains("?")) {
-			referer = referer.substring(0, referer.indexOf("?"));
-		}
+        String referer = request.getHeader("referer");
+        if (referer.contains("?")) {
+            referer = referer.substring(0, referer.indexOf('?'));
+        }
 
-		String stripeToken = request.getParameter("stripeToken");
-		String coupon = request.getParameter("coupon");
+        String stripeToken = request.getParameter("stripeToken");
+        String coupon = request.getParameter("coupon");
 
-		if (profile != null) {
-			Map<String, Object> serviceParams = new HashMap<String, Object>();
-			serviceParams.put(ResourceResolverFactory.SUBSERVICE, "usermanager");
+        if (profile != null) {
+            Map<String, Object> serviceParams = new HashMap<>();
+            serviceParams.put(ResourceResolverFactory.SUBSERVICE, "usermanager");
 
-			ResourceResolver adminResolver = null;
-			try {
-				adminResolver = factory.getServiceResourceResolver(serviceParams);
+            ResourceResolver adminResolver = null;
+            try {
+                adminResolver = factory.getServiceResourceResolver(serviceParams);
 
-				JackrabbitSession session = (JackrabbitSession) adminResolver.adaptTo(Session.class);
-				final UserManager userManager = session.getUserManager();
+                JackrabbitSession session = (JackrabbitSession) adminResolver.adaptTo(Session.class);
+                final UserManager userManager = session.getUserManager();
 
-				if (userManager.getAuthorizable(profile.getEmail()) == null) {
+                if (userManager.getAuthorizable(profile.getEmail()) == null) {
 
-					log.debug("Creating user {}", profile.getEmail());
-					User user = userManager.createUser(profile.getEmail(), profile.getPassword());
+                    log.debug("Creating user {}", profile.getEmail());
+                    User user = userManager.createUser(profile.getEmail(), profile.getPassword());
 
-					log.debug("Updating profile for {}", profile.getEmail());
-					profile.updateUser(user, session);
+                    log.debug("Updating profile for {}", profile.getEmail());
+                    profile.updateUser(user, session);
 
-					log.debug("Adding user {} to members group", profile.getEmail());
-					Group members = (Group) userManager.getAuthorizable("members");
-					members.addMember(user);
+                    log.debug("Adding user {} to members group", profile.getEmail());
+                    Group members = (Group) userManager.getAuthorizable("members");
+                    members.addMember(user);
 
-					ValueMap properties = request.getResource().getValueMap();
-					String confirmationSender = properties.get("confirmationsender", String.class);
-					try {
-						if (!"Free".equals(profile.getLevel())) {
-							ValueFactory vf = session.getValueFactory();
-							user.setProperty("payment/stripeToken", vf.createValue(stripeToken));
-							user.setProperty("payment/coupon", vf.createValue(coupon));
-							String customerId = stripe.createSubscription(stripeToken, coupon, profile);
-							user.setProperty("payment/customerId", vf.createValue(customerId));
-						}
-					} catch (Exception e) {
-						log.warn("Unable to set user " + profile.getEmail() + " up with subscription", e);
-						EmailQueueConsumer.queueMessage(jobManager, confirmationSender, "Failed to setup subscription",
-								"Failed to setup subscription ${level} for ${email}", profile.toMap());
-					}
+                    ValueMap properties = request.getResource().getValueMap();
+                    String confirmationSender = properties.get("confirmationsender", String.class);
+                    if (!"Free".equals(profile.getLevel())) {
+                        updatePaidUser(profile, stripeToken, coupon, session, user, confirmationSender);
+                    }
 
-					log.debug("Saving changes!");
-					adminResolver.commit();
+                    log.debug("Saving changes!");
+                    adminResolver.commit();
 
-					sendGrid.createUser(profile);
+                    sendGrid.createUser(profile);
 
-					Map<String, Object> profileMap = profile.toMap();
-					profileMap.put("productsStr", StringUtils.join((String[]) profileMap.get("products"), ","));
+                    Map<String, Object> profileMap = profile.toMap();
+                    profileMap.put("productsStr", StringUtils.join((String[]) profileMap.get("products"), ","));
 
-					log.debug("Sending confirmation email");
-					EmailQueueConsumer.queueMessage(jobManager, profile.getEmail(),
-							properties.get("confirmationsubject", String.class),
-							properties.get("confirmationmessage", String.class), profileMap);
+                    log.debug("Sending confirmation email");
+                    EmailQueueConsumer.queueMessage(jobManager, profile.getEmail(),
+                            properties.get("confirmationsubject", String.class),
+                            properties.get("confirmationmessage", String.class), profileMap);
 
-					log.debug("Sending info email");
-					EmailQueueConsumer.queueMessage(jobManager, confirmationSender,
-							properties.get("infosubject", String.class), properties.get("infomessage", String.class),
-							profileMap);
+                    log.debug("Sending info email");
+                    EmailQueueConsumer.queueMessage(jobManager, confirmationSender,
+                            properties.get("infosubject", String.class), properties.get("infomessage", String.class),
+                            profileMap);
 
-					response.sendRedirect(
-							request.getResourceResolver().map(request, properties.get("memberpage", String.class))
-									+ ".html?res=created");
+                    response.sendRedirect(
+                            request.getResourceResolver().map(request, properties.get("memberpage", String.class))
+                                    + ".html?res=created");
 
-				} else {
-					log.debug("A user with the name {} already exists!", profile.getEmail());
-					response.sendRedirect(request.getHeader("referer") + "?err=exists");
-				}
-			} catch (Exception e) {
-				log.debug("Unexpected exception creating user", e);
-				response.sendRedirect(referer + "?err=err");
-			} finally {
-				if (adminResolver != null) {
-					adminResolver.close();
-				}
-			}
-		} else {
-			log.debug("Unable to adapt request to user profile");
-			response.sendRedirect(referer + "?err=req");
-		}
+                } else {
+                    log.debug("A user with the name {} already exists!", profile.getEmail());
+                    response.sendRedirect(request.getHeader("referer") + "?err=exists");
+                }
+            } catch (Exception e) {
+                log.debug("Unexpected exception creating user", e);
+                response.sendRedirect(referer + "?err=err");
+            } finally {
+                if (adminResolver != null) {
+                    adminResolver.close();
+                }
+            }
+        } else {
+            log.debug("Unable to adapt request to user profile");
+            response.sendRedirect(referer + "?err=req");
+        }
 
-	}
+    }
+
+    private void updatePaidUser(InitialUserProfile profile, String stripeToken, String coupon,
+            JackrabbitSession session, User user, String confirmationSender)
+            throws IllegalAccessException, UnsupportedRepositoryOperationException {
+        try {
+            ValueFactory vf = session.getValueFactory();
+            user.setProperty("payment/stripeToken", vf.createValue(stripeToken));
+            user.setProperty("payment/coupon", vf.createValue(coupon));
+            String customerId = stripe.createSubscription(stripeToken, coupon, profile);
+            user.setProperty("payment/customerId", vf.createValue(customerId));
+
+        } catch (Exception e) {
+            log.warn("Unable to set user " + profile.getEmail() + " up with subscription", e);
+            EmailQueueConsumer.queueMessage(jobManager, confirmationSender, "Failed to setup subscription",
+                    "Failed to setup subscription ${level} for ${email}", profile.toMap());
+        }
+    }
 
 }

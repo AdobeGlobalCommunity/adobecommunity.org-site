@@ -1,4 +1,7 @@
-/* Define colors */
+
+/*!
+ * Color definitions
+ */
 
 $darkestgray: rgb(51, 51, 51);
 $dark-gray: rgb(159, 159, 159);
@@ -6,7 +9,10 @@ $light-gray: rgb(222, 222, 222);
 $lightest-gray: rgb(237, 237, 237);
 $red: rgb(168, 0, 35);
 $dark-red: rgb(132, 0, 27);
-/* Style overrides */
+
+/*!
+ * Style overrides
+ */
 
 body {
 	color: $darkestgray;
@@ -123,6 +129,11 @@ a:active {
 	padding: 1em;
 	border: 1px solid $dark-gray;
 	border-radius: 3px;
+}
+
+img.card-img-top {
+    object-fit: cover !important;
+    height: 10vw !important;
 }
 
 .carousel-control-prev,

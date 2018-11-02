@@ -6,15 +6,17 @@ var merge = require('merge-stream');
 var order = require("gulp-order");
 const rev = require('gulp-rev');
 var revReplace = require("gulp-rev-replace");
+var sourcemaps = require('gulp-sourcemaps');
 
 var cssStream = gulp.src('./src/scss/*.scss')
-                .pipe(sass().on('error', sass.logError))
-                .pipe(cleanCSS());
+    .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.write());
             
 
 var vendorCssStream = gulp.src([
-			'./node_modules/bootstrap/dist/css/bootstrap.min.css',
-			'./node_modules/font-awesome/css/font-awesome.min.css'
+		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
+		'./node_modules/font-awesome/css/font-awesome.min.css'
 	]);
 
 gulp.task('styles', function() {

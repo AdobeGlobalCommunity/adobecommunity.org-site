@@ -366,7 +366,11 @@
 						if(sessionStorage.hasOwnProperty('profile')){
 							AGC.profile = JSON.parse(sessionStorage.getItem("profile"));
 						} else {
-							$.getJSON(window.location.pathname.replace('.html','.model.json'), function(profile){
+						    var location = '/index.model.json';
+						    if(window.location.pathname !== '/'){
+						        location = window.location.pathname.replace('.html','.model.json');
+						    }
+							$.getJSON(location, function(profile){
 								AGC.profile = profile;
 								sessionStorage.setItem('profile', JSON.stringify(profile));
 								AGC.fn.cug.init($(document));

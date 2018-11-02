@@ -39,6 +39,25 @@
 			"label": "Confirmation Message",
 			"name": "confirmationmessage",
 			"required": true
+		},
+		"listId": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "List ID",
+			"name": "listId",
+			"type": "number"
+		},
+		"button": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Button",
+			"name": "button"
+		},
+		"confirmation": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Confirmation",
+			"name": "confirmation"
 		}
 	}
 }

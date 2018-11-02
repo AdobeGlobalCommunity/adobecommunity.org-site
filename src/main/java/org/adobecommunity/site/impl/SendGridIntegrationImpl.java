@@ -7,12 +7,15 @@ import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.json.JsonReader;
 
 import org.adobecommunity.site.SendGridIntegration;
+import org.adobecommunity.site.SendGridResponse;
 import org.adobecommunity.site.impl.SendGridIntegrationImpl.SendGridConfiguration;
 import org.adobecommunity.site.models.InitialUserProfile;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -33,84 +36,111 @@ import com.google.common.net.HttpHeaders;
 @Designate(ocd = SendGridConfiguration.class)
 public class SendGridIntegrationImpl implements SendGridIntegration {
 
-	private static final String DEFAULT_ENDPOINT = "https://api.sendgrid.com/v3/contactdb/recipients";
-	private static final Logger log = LoggerFactory.getLogger(SendGridIntegrationImpl.class);
+    @ObjectClassDefinition(name = "Send Grid Configuration")
+    public @interface SendGridConfiguration {
+        @AttributeDefinition(type = AttributeType.PASSWORD)
+        String apiKey();
+    }
+    private static final String ADD_USER_ENDPOINT = "https://api.sendgrid.com/v3/contactdb/recipients";
+    private static final String ADD_LIST_ENDPOINT = "https://api.sendgrid.com/v3/contactdb/lists/%s/recipients/%s";
 
-	@ObjectClassDefinition(name = "Send Grid Configuration")
-	public @interface SendGridConfiguration {
-		@AttributeDefinition(type = AttributeType.PASSWORD)
-		String apiKey();
+    private static final Logger log = LoggerFactory.getLogger(SendGridIntegrationImpl.class);
 
-		@AttributeDefinition(type = AttributeType.STRING, defaultValue = DEFAULT_ENDPOINT)
-		String endpoint() default DEFAULT_ENDPOINT;
-	}
+    private SendGridConfiguration config;
 
-	private SendGridConfiguration config;
+    @Activate
+    public void activate(SendGridConfiguration config) {
+        this.config = config;
+    }
 
-	@Activate
-	public void activate(SendGridConfiguration config) {
-		this.config = config;
-	}
+    @Override
+    public String addToList(String userId, int listId) {
+        CloseableHttpResponse apiResponse = null;
+        String status = null;
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
 
-	@Override
-	public JsonObject createUser(String email) {
-		JsonObject obj = Json.createObjectBuilder().add("email", email).build();
-		return createUser(obj);
-	}
+            HttpPost postRequest = new HttpPost(String.format(ADD_LIST_ENDPOINT, listId, userId));
 
-	@Override
-	public JsonObject createUser(InitialUserProfile profile) {
-		JsonObjectBuilder objectBuilder = Json.createObjectBuilder().add("company", profile.getCompany())
-				.add("email", profile.getEmail()).add("hosting", profile.getHosting())
-				.add("membership", profile.getLevel()).add("organizing", profile.getOrganizing())
-				.add("phone", profile.getPhone()).add("presentation", profile.getPresentation())
-				.add("role", profile.getRole()).add("topics", profile.getTopics())
-				.add("products", String.join(",", profile.getProducts()));
+            // set authentication header
+            postRequest.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + config.apiKey());
+            postRequest.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
-		String name = profile.getName();
-		String firstName = name;
-		String lastName = "";
-		if (name.contains(" ")) {
-			firstName = name.substring(0, name.indexOf(' '));
-			lastName = name.substring(name.indexOf(' '), name.length());
-		}
-		objectBuilder.add("first_name", firstName);
-		objectBuilder.add("last_name", lastName);
+            apiResponse = httpclient.execute(postRequest);
 
-		return createUser(objectBuilder.build());
-	}
+            log.debug("Received response: {}", apiResponse.getStatusLine());
+            String stringResponse = EntityUtils.toString(apiResponse.getEntity());
+            log.trace("Recieved response body: {}", stringResponse);
 
-	private JsonObject createUser(JsonObject data) {
-		CloseableHttpResponse apiResponse = null;
-		JsonObject response = null;
-		try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            status =  apiResponse.getStatusLine().toString();
 
-			HttpPatch patchRequest = new HttpPatch(config.endpoint());
+        } catch (IOException e) {
+            log.warn("Exception calling SendGrid API", e);
+            status = e.getMessage();
+        }
+        return status;
+    }
 
-			// set authentication header
-			patchRequest.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + config.apiKey());
-			patchRequest.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+    @Override
+    public SendGridResponse createUser(InitialUserProfile profile) {
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder().add("company", profile.getCompany())
+                .add("email", profile.getEmail()).add("hosting", profile.getHosting())
+                .add("membership", profile.getLevel()).add("organizing", profile.getOrganizing())
+                .add("phone", profile.getPhone()).add("presentation", profile.getPresentation())
+                .add("role", profile.getRole()).add("topics", profile.getTopics())
+                .add("products", String.join(",", profile.getProducts()));
 
-			// build the body
-			JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-			arrayBuilder.add(data);
-			String json = arrayBuilder.build().toString();
-			log.debug("Sending subscription request {} to endpoint {}", json, config.endpoint());
+        String name = profile.getName();
+        String firstName = name;
+        String lastName = "";
+        if (name.contains(" ")) {
+            firstName = name.substring(0, name.indexOf(' '));
+            lastName = name.substring(name.indexOf(' '), name.length());
+        }
+        objectBuilder.add("first_name", firstName);
+        objectBuilder.add("last_name", lastName);
 
-			patchRequest.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
+        return createUser(objectBuilder.build());
+    }
 
-			apiResponse = httpclient.execute(patchRequest);
+    private SendGridResponse createUser(JsonObject data) {
+        CloseableHttpResponse apiResponse = null;
+        JsonObject response = null;
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
 
-			log.debug("Received response: {}", apiResponse.getStatusLine());
-			String stringResponse = EntityUtils.toString(apiResponse.getEntity());
-			log.trace("Recieved response body: {}", stringResponse);
+            HttpPatch patchRequest = new HttpPatch(ADD_USER_ENDPOINT);
 
-			response = Json.createReader(new StringReader(stringResponse)).readObject();
+            // set authentication header
+            patchRequest.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + config.apiKey());
+            patchRequest.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
-		} catch (IOException e) {
-			log.warn("Exception calling SendGrid API", e);
-		}
-		return response;
-	}
+            // build the body
+            JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+            arrayBuilder.add(data);
+            String json = arrayBuilder.build().toString();
+            log.debug("Sending subscription request {}", json);
+
+            patchRequest.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
+
+            apiResponse = httpclient.execute(patchRequest);
+
+            log.debug("Received response: {}", apiResponse.getStatusLine());
+            String stringResponse = EntityUtils.toString(apiResponse.getEntity());
+            log.trace("Recieved response body: {}", stringResponse);
+
+            try (JsonReader reader = Json.createReader(new StringReader(stringResponse))) {
+                response = reader.readObject();
+            }
+
+        } catch (IOException e) {
+            log.warn("Exception calling SendGrid API", e);
+        }
+        return new SendGridResponse(response);
+    }
+
+    @Override
+    public SendGridResponse createUser(String email) {
+        JsonObject obj = Json.createObjectBuilder().add("email", email).build();
+        return createUser(obj);
+    }
 
 }
