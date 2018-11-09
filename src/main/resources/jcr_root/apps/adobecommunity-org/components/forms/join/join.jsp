@@ -26,6 +26,9 @@
 						<span class="fa fa-check float-right text-success"></span>
 					</strong>
 					<sling:include path="freecontainer" resourceType="sling-cms/components/general/container" />
+                    <a class="btn btn-primary" href="#join-form">
+                        Join
+                    </a>
 				</div>
 			</div>
 			<div class="col-md-6 my-1">
@@ -35,12 +38,15 @@
 						<span class="fa fa-check float-right text-success"></span>
 					</strong>
 					<sling:include path="procontainer" resourceType="sling-cms/components/general/container" />
+                    <a class="btn btn-primary" href="#join-form">
+                        Become a Member
+                    </a>
 				</div>
 			</div>
 		</div>
 		<input type="hidden" name="level" value="Free" />
     </fieldset>
-    <div id="join-form" class="d-none px-lg-5 m-lg-5 my-xs-4">
+    <div id="join-form" class="d-none px-lg-5 m-lg-5 my-xs-4 pt-5">
         <fieldset class="d-none card-container">
             <legend>Membership Payment</legend>
     		<div class="form-group">

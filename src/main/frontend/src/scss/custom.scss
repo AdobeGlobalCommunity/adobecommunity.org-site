@@ -291,10 +291,17 @@ fieldset {
 	border-style: solid;
 	border-width: 5px 0px 0px 0px;
 	cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .membership__box>* {
-	margin: .5em;
+	margin: 1em;
+}
+
+.membership__box .btn {
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 .membership__box input {
@@ -312,10 +319,12 @@ fieldset {
 .membership__box p {
 	text-transform: uppercase;
 	font-weight: bold;
+	margin: 0 1em;
 }
 
 .membership__box p:first-of-type {
 	color: $red;
+	margin-top: 1em;
 }
 
 .membership__box.membership--active .text-success {
@@ -328,6 +337,7 @@ fieldset {
 
 .membership__box ul {
 	padding: 1em 0 1em 1em;
+	margin: 0 1em;
 }
 
 .membership--active {
@@ -386,6 +396,10 @@ fieldset {
 
 #topnav li {
 	padding: 0 .5em;
+}
+
+.wysiwyg-font-size-smaller {
+	font-size:small;
 }
 
 @media screen and (max-width: 990px) {
