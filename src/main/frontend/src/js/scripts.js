@@ -413,6 +413,7 @@
             			var value = $(this).data('level');
             			console.log('Setting value to '+value);
             			$('input[name=level]').val(value);
+            			document.querySelector('#join-form').classList.remove('d-none');
             			paymentDisplay();
             		});
             		
@@ -429,7 +430,6 @@
             				enablePayment = true;
             			}
             		}
-            		paymentDisplay();
             		
             		$ctx.find('input[name=level]').change(paymentDisplay);
             		
