@@ -56,6 +56,27 @@ a:active {
 	min-height: 150px;
 }
 
+.background--img-full {
+	min-height: 0;
+    position: relative;
+    height: 92vh;
+    padding-top: 0px;
+}
+
+.background--img-full .jumbotron {
+    height: 92vh;
+    padding-top: 250px;
+}
+
+.background-img-full .display-3 {
+	font-size: 4.5rem;
+    font-weight: 500;
+}
+
+.background--img-full .lead {
+	font-size: 2rem;
+}
+
 .background--opaque {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
 	margin-left: -15px;

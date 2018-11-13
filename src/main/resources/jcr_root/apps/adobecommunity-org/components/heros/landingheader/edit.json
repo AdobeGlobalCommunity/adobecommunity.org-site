@@ -19,6 +19,30 @@
 			"name": "backgroundimage",
 			"required": true,
 			"type": "sling:File"
+		},
+		"fullheight": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/select",
+			"label": "Full Height",
+			"name": "fullheight",
+			"options": {
+				"no": {
+					"jcr:primaryType": "nt:unstructured",
+					"label": "No",
+					"value": "false"
+				},
+				"yes": {
+					"jcr:primaryType": "nt:unstructured",
+					"label": "Yes",
+					"value": "true"
+				}
+			}
+		},
+		"fullheightTypeHint": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/hidden",
+			"name": "fullheight@TypeHint",
+			"value": "Boolean"
 		}
 	}
 }
