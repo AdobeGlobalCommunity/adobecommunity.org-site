@@ -1,0 +1,84 @@
+ {
+	"jcr:primaryType": "nt:unstructured",
+	"sling:resourceType": "sling-cms/components/editor/slingform",
+	"button": "Save Check",
+	"fields": {
+		"jcr:primaryType": "nt:unstructured",
+		"sling:resourceType": "sling-cms/components/general/container",
+		"url": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "URL",
+			"name": "url",
+			"required": true
+		},
+		"method": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/select",
+			"label": "Method",
+			"name": "method",
+			"required": true,
+			"options": {
+				"critical": {
+					"jcr:primaryType": "nt:unstructured",
+					"label": "GET",
+					"value": "GET"
+				},
+				"major": {
+					"jcr:primaryType": "nt:unstructured",
+					"label": "POST",
+					"value": "POST"
+				}
+			}
+		},
+		"responsecodes": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/repeating",
+			"label": "Valid Response Codes",
+			"name": "responsecodes"
+		},
+		"responsebody": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Invalid Response Body Regex",
+			"name": "responsebody"
+		},
+		"headers": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/text",
+			"label": "Valid Headers Expression",
+			"name": "headers"
+		},
+		"severity": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/select",
+			"label": "Severity",
+			"name": "severity",
+			"required": true,
+			"options": {
+				"critical": {
+					"jcr:primaryType": "nt:unstructured",
+					"label": "Critical",
+					"value": "critical"
+				},
+				"major": {
+					"jcr:primaryType": "nt:unstructured",
+					"label": "Major",
+					"value": "major"
+				},
+				"minor": {
+					"jcr:primaryType": "nt:unstructured",
+					"label": "Minor",
+					"value": "minor"
+				}
+			}
+		},
+		"explaination": {
+			"jcr:primaryType": "nt:unstructured",
+			"sling:resourceType": "sling-cms/components/editor/fields/richtext",
+			"label": "Explaination",
+			"name": "explaination",
+			"required": true
+		}
+	}
+}

@@ -1,0 +1,5 @@
+{
+    "jcr:primaryType" : "sling:Component",
+    "jcr:title": "Dispatcher Security Scanner",
+    "componentType": "AdobeCommunity.org Form"
+}

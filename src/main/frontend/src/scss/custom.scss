@@ -28,6 +28,10 @@ a:active {
 	color: $dark-red;
 }
 
+.accordion .card-header, .overflow-scroll {
+	overflow: scroll;
+}
+
 .agenda--date {
 	width: 170px;
 }
