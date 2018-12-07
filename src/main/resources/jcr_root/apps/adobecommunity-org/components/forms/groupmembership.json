@@ -1,0 +1,8 @@
+{
+	"jcr:primaryType": "sling:Component",
+	"jcr:title": "Company Membership Form",
+	"componentType": [
+		"AdobeCommunity.org Form",
+		"AdobeCommunity.org"
+	]
+}

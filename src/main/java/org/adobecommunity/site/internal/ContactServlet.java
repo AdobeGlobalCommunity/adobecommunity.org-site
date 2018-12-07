@@ -18,53 +18,55 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component(service = Servlet.class, property = { "sling.servlet.methods=POST",
-		"sling.servlet.resourceTypes=adobecommunity-org/components/forms/contact",
-		"sling.servlet.selectors=allowpost" })
+        "sling.servlet.resourceTypes=adobecommunity-org/components/forms/contact",
+        "sling.servlet.resourceTypes=adobecommunity-org/components/forms/groupmembership",
+        "sling.servlet.selectors=allowpost" })
 public class ContactServlet extends SlingAllMethodsServlet {
-	private static final long serialVersionUID = 6077223846541287324L;
+    private static final long serialVersionUID = 6077223846541287324L;
 
-	@Reference
-	private JobManager jobManager;
+    @Reference
+    private transient JobManager jobManager;
 
-	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
-			throws ServletException, IOException {
+    @Override
+    protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
+            throws ServletException, IOException {
 
-		String referer = request.getHeader("referer");
-		if (referer.contains("?")) {
-			referer = referer.substring(0, referer.indexOf("?"));
-		}
+        String referer = request.getHeader("referer");
+        if (referer.contains("?")) {
+            referer = referer.substring(0, referer.indexOf('?'));
+        }
 
-		String email = request.getParameter("email");
-		if (StringUtils.isNotEmpty(email)) {
+        String email = request.getParameter("email");
+        if (StringUtils.isNotEmpty(email)) {
 
-			String thankyoupage = request.getResource().getValueMap().get("thankyoupage", String.class);
+            String thankyoupage = request.getResource().getValueMap().get("thankyoupage", String.class);
 
-			queueContactEmail(request, email);
+            queueContactEmail(request);
 
-			queueConfirmationEmail(request, email);
+            queueConfirmationEmail(request, email);
 
-			response.sendRedirect(request.getResourceResolver().map(request, thankyoupage) + ".html");
-		} else {
-			response.sendRedirect(referer + "?error=email");
-		}
+            response.sendRedirect(request.getResourceResolver().map(request, thankyoupage) + ".html");
+        } else {
+            response.sendRedirect(referer + "?error=email");
+        }
 
-	}
+    }
 
-	private void queueConfirmationEmail(SlingHttpServletRequest request, String email) {
-		ValueMap properties = request.getResource().getValueMap();
-		EmailQueueConsumer.queueMessage(jobManager, email, properties.get("confirmationsubject", String.class),
-				properties.get("confirmationmessage", String.class), new HashMap<String, Object>());
+    private void queueConfirmationEmail(SlingHttpServletRequest request, String email) {
+        ValueMap properties = request.getResource().getValueMap();
+        EmailQueueConsumer.queueMessage(jobManager, email, properties.get("confirmationsubject", String.class),
+                properties.get("confirmationmessage", String.class), new HashMap<String, Object>());
 
-	}
+    }
 
-	private void queueContactEmail(SlingHttpServletRequest request, String email) {
-		ValueMap properties = request.getResource().getValueMap();
+    private void queueContactEmail(SlingHttpServletRequest request) {
+        ValueMap properties = request.getResource().getValueMap();
 
-		Map<String, Object> params = new HashMap<String, Object>();
-		request.getRequestParameterList().forEach(p -> params.put(p.getName(), request.getParameter(p.getName())));
+        Map<String, Object> params = new HashMap<>();
+        request.getRequestParameterList().forEach(p -> params.put(p.getName(), request.getParameter(p.getName())));
 
-		EmailQueueConsumer.queueMessage(jobManager, properties.get(EmailQueueConsumer.TO, String.class),
-				properties.get(EmailQueueConsumer.SUBJECT, String.class), properties.get("template", String.class),
-				params);
-	}
+        EmailQueueConsumer.queueMessage(jobManager, properties.get(EmailQueueConsumer.TO, String.class),
+                properties.get(EmailQueueConsumer.SUBJECT, String.class), properties.get("template", String.class),
+                params);
+    }
 }
