@@ -1,6 +1,12 @@
 <%@include file="/libs/sling-cms/global.jsp"%>
 <c:choose>
     <c:when test="${empty slingRequest.requestPathInfo.suffix}">
+        <c:if test="${param.err == 'req'}">
+            <strong class="text-danger">Please fill out all required fields!</strong>
+        </c:if>
+        <c:if test="${param.err == 'limit'}">
+            <strong class="text-danger">We're sorry, you have reached your limit. Please wait for 30 days for your limit to reset or <a href="/contact.html">Contact Us</a> about Pro membership.</strong>
+        </c:if>
         <h3>Dispatcher Security Scanner</h3>
         <form class="my-4" action="${resource.path}.allowpost.html" method="post" data-analytics-id="Check AEM Site">
             <fieldset>
