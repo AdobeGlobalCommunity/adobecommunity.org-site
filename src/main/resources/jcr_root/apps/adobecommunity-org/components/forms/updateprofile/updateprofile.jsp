@@ -30,6 +30,10 @@
             <p><a href="/content/agc/adobecommunity-org/contact.html">Contact Us</a> to update your membership level.
         </div>
         <div class="form-group">
+            <label for="email">Your Email <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" readonly="readonly" name="email" value="${sling:encode(userData.profile.email,'HTML_ATTR')}"  />
+        </div>
+        <div class="form-group">
             <label for="phone">Your Phone <span class="text-danger">*</span></label>
             <input type="tel" class="form-control" required="required" name="phone" value="${sling:encode(userData.profile.phone,'HTML_ATTR')}"  />
         </div>

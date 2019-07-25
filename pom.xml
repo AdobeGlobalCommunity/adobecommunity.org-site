@@ -225,7 +225,7 @@
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.cms.api</artifactId>
-            <version>0.10.0</version>
+            <version>0.12.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
