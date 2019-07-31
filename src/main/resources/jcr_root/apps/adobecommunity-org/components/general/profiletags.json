@@ -1,0 +1,5 @@
+{
+    "jcr:primaryType" : "sling:Component",
+    "jcr:title": "Profile Tags",
+    "componentType": "AdobeCommunity.org"
+}

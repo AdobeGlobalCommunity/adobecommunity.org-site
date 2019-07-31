@@ -540,5 +540,14 @@
     window.AGC = AGC;
     $(document).ready(function () {
         AGC.init($(document));
+        
+        document.querySelectorAll('.dropdown-menu .form-check-label').forEach(l => {
+            l.addEventListener('click',  e => {
+                var cbx = l.closest('.form-check').querySelector('.form-check-input');
+                cbx.checked = !cbx.checked;
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        });
     });
 })(jQuery);
