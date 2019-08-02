@@ -62,7 +62,6 @@
 </form>
 <sling:adaptTo adaptable="${slingRequest}" adaptTo="org.adobecommunity.site.models.ProfileSearch" var="profileSearch" />
 <c:set var="results" value="${profileSearch.profiles}" />
-<div class="alert alert-dark">Found ${fn:length(results)} results</div>
 <div class="card-columns">
     <c:forEach var="profile" items="${results}">
         <div class="card ${profile.featured ? 'border-info' : ''}">

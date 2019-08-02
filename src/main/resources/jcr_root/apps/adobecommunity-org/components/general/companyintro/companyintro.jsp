@@ -2,8 +2,11 @@
 <sling:adaptTo adaptable="${slingRequest}" adaptTo="org.adobecommunity.site.models.UserProfileRequest" var="profileRequest"/>
 <c:set var="profile" value="${profileRequest.companyProfile}" />
 <c:set var="profileprops" value="${profile.resource.valueMap}" />
-<img src="${profileprops.logo}" class="p-5 mx-auto d-block" />
-<h1>${sling:encode(profile.name,'HTML')}</h1>
+
+<div class="jumbotron">
+    <img src="${profile.image}" class="img-fluid pb-2" />
+    <h1>${sling:encode(profile.name,'HTML')}</h1>
+</div>
 <hr/>
 <p>${sling:encode(profile.about,'HTML')}</p>
 <c:if test="${not empty profileprops.other}">

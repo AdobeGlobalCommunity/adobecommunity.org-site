@@ -32,7 +32,7 @@ public class ResetPasswordServlet extends SlingAllMethodsServlet {
 
 	private static final long serialVersionUID = -7394015241801119859L;
 
-	private static final Logger log = LoggerFactory.getLogger(JoinServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(ResetPasswordServlet.class);
 
 	@Reference
 	private ResourceResolverFactory factory;
@@ -54,7 +54,8 @@ public class ResetPasswordServlet extends SlingAllMethodsServlet {
 			JackrabbitSession session = (JackrabbitSession) resolver.adaptTo(Session.class);
 			final UserManager userManager = session.getUserManager();
 
-			if (userManager.getAuthorizable(request.getParameter("email")) != null) {
+			String id = request.getParameter("email");
+			if (userManager.getAuthorizable(id) != null) {
 
 				User user = (User) userManager.getAuthorizable(request.getParameter("email"));
 
@@ -83,7 +84,7 @@ public class ResetPasswordServlet extends SlingAllMethodsServlet {
 					response.sendRedirect(referer + "?err=invalid");
 				}
 			} else {
-				log.warn("Unable to find user {}", request.getResourceResolver().getUserID());
+				log.warn("Unable to find user {}", id);
 				response.sendRedirect(referer + "?err=invalid");
 			}
 		} catch (Exception e) {

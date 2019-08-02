@@ -2,45 +2,60 @@
 <sling:adaptTo adaptable="${slingRequest}" adaptTo="org.adobecommunity.site.models.UserProfileRequest" var="profileRequest"/>
 <c:set var="profile" value="${profileRequest.jobProfile}" />
 <c:set var="profileprops" value="${profile.resource.valueMap}" />
-<h1>${sling:encode(profile.name,'HTML')}</h1>
+
+<div class="jumbotron">
+    <img src="${profile.image}?s=100" class="float-left pb-2 pr-2" />
+    <h1>${sling:encode(profile.name,'HTML')}</h1>
+    <div style="clear:both"></div>
+</div>
 <hr/>
 <dl>
-    <dt>
-        Interested In
-    </dt>
-    <dd>
-        ${profile.interested}
-    </dd>
-    <dt>
-        Pay Expectation
-    </dt>
-    <dd>
-        $ ${profileprops.pay} per ${profile.period}
-    </dd>
-    <dt>
-        Location
-    </dt>
-    <dd>
-        ${sling:encode(profileprops.location,'HTML')} ${profileprops.relocation == 'yes' ? ' Open to relocation' : '.'}
-    </dd>
+    <c:if test="${not empty profile.interested}">
+        <dt>
+            Interested In
+        </dt>
+        <dd>
+            ${profile.interested}
+        </dd>
+    </c:if>
+    <c:if test="${not empty profileprops.pay}">
+        <dt>
+            Pay Expectation
+        </dt>
+        <dd>
+            ${profileprops.pay}
+        </dd>
+    </c:if>
+    <c:if test="${not empty profileprops.location}">
+        <dt>
+            Location
+        </dt>
+        <dd>
+            ${sling:encode(profileprops.location,'HTML')} ${profileprops.relocation == 'yes' ? ' Open to relocation' : '.'}
+        </dd>
+    </c:if>
     <dt>
         Available to work
     </dt>
     <dd>
          ${profile.availability}
     </dd>
-    <dt>
-        Authorized to work in the Unites States
-    </dt>
-    <dd>
-         ${profileprops.authorized}
-    </dd>
-    <dt>
-        Requires sponsorship for employment visa status
-    </dt>
-    <dd>
-         ${profileprops.status}
-    </dd>
+    <c:if test="${not empty profileprops.authorized}">
+        <dt>
+            Authorized to work in the Unites States
+        </dt>
+        <dd>
+             ${profileprops.authorized}
+        </dd>
+    </c:if>
+    <c:if test="${not empty profileprops.status}">
+        <dt>
+            Requires sponsorship for employment visa status
+        </dt>
+        <dd>
+             ${profileprops.status}
+        </dd>
+    </c:if>
 </dl>
 <hr/>
 <p>${sling:encode(profile.about,'HTML')}</p>
